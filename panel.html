@@ -3,102 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GHEZTORIX - Panel de Control</title>
+    <title>GHEZTORIX - Sistema Fiscal Avanzado</title>
     <style>
+        :root {
+            --primary: #163c8c;
+            --danger: #e74c3c;
+            --success: #2ecc71;
+            --dark: #2c3e50;
+            --light: #f4f6f9;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
-            background-color: #f4f6f9;
-            color: #333;
-        }
-        header {
-            background-color: #163c8c; /* El azul de tu logo */
-            color: white;
-            padding: 15px 20px;
+            background-color: var(--light);
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            height: 100vh;
         }
-        header h1 {
-            margin: 0;
-            font-size: 20px;
-        }
-        .logout-btn {
-            background-color: #e74c3c;
+        /* Menú Lateral */
+        .sidebar {
+            width: 260px;
+            background-color: var(--dark);
             color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .container {
-            padding: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .welcome-box {
-            background: white;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
+            box-sizing: border-box;
         }
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+        .sidebar h2 { margin-top: 0; font-size: 22px; text-align: center; border-bottom: 1px solid #4f5d73; padding-bottom: 15px; }
+        .menu-btn {
+            display: block; width: 100%; padding: 12px; background: none; border: none; color: #a5b1c2;
+            text-align: left; font-size: 16px; cursor: pointer; border-radius: 5px; margin-bottom: 5px;
         }
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-left: 5px solid #163c8c;
-        }
-        .card h3 {
-            margin-top: 0;
-            color: #666;
-            font-size: 14px;
-            text-transform: uppercase;
-        }
-        .card .number {
-            font-size: 28px;
-            font-weight: bold;
-            color: #163c8c;
-            margin: 10px 0 0 0;
-        }
+        .menu-btn.active, .menu-btn:hover { background-color: var(--primary); color: white; }
+        
+        /* Contenedor Principal */
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        header { background-color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .container { padding: 30px; }
+        .view-section { display: none; }
+        .view-section.active { display: block; }
+
+        /* Estilos de Componentes */
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .btn { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; color: white; font-weight: bold; }
+        .btn-primary { background-color: var(--primary); }
+        .btn-success { background-color: var(--success); }
+        .btn-danger { background-color: var(--danger); }
+        
+        /* Tablas */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: var(--primary); color: white; }
+        .actions-btns button { margin-right: 5px; padding: 5px 10px; cursor: pointer; }
+
+        /* Carpetas de clientes */
+        .folder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .folder-card { background: white; padding: 20px; text-align: center; border-radius: 8px; border: 1px solid #ddd; cursor: pointer; transition: 0.2s; }
+        .folder-card:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .folder-icon { font-size: 40px; color: #f1c40f; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>GHEZTORIX — Sistema de Gestión de Despachos</h1>
-        <a href="index.html" class="logout-btn">Cerrar Sesión</a>
-    </header>
-
-    <div class="container">
-        <div class="welcome-box">
-            <h2>Bienvenido al Panel de Control</h2>
-            <p>Identificado como: <strong>admin@gheztorixgmail.com</strong></p>
-        </div>
-
-        <!-- Vista rápida de métricas/datos del sistema -->
-        <div class="dashboard-grid">
-            <div class="card">
-                <h3>Despachos Pendientes</h3>
-                <p class="number">12</p>
-            </div>
-            <div class="card">
-                <h3>En Ruta</h3>
-                <p class="number">5</p>
-            </div>
-            <div class="card">
-                <h3>Entregados Hoy</h3>
-                <p class="number">24</p>
-            </div>
-        </div>
+    <!-- MENÚ LATERAL -->
+    <div class="sidebar">
+        <h2>GHEZTORIX</h2>
+        <button class="menu-btn active" onclick="switchView('clientes')">📂 Clientes y Carpetas</button>
+        <button class="menu-btn" onclick="switchView('documentos')">📄 Expediente Digital</button>
+        <button class="menu-btn" onclick="switchView('facturas')">🧾 Facturación CFDI</button>
+        <button class="menu-btn" onclick="switchView('graficas')">📊 Reportes y Gráficas</button>
     </div>
 
-</body>
-</html>
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="main-content">
+        <header>
+            <h3 id="page-title">Control de Clientes</h3>
+            <a href="index.html" class="btn btn-danger" style="text-decoration:none;">Cerrar Sesión</a>
+        </header>
+
+        <div class="container">
+            
+            <!-- 1. SECCIÓN CLIENTES (CRUD & CARPETAS) -->
+            <div id="sec-clientes" class="view-section active">
+                <div class="card">
+                    <h3>Registrar Nuevo Cliente</h3>
+                    <form id="client-form" onsubmit="saveClient(event)">
+                        <input type="hidden" id="client-id">
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                            <div class="form-group"><label>Razón Social / Nombre</label><input type="text" id="c-nombre" required></div>
+                            <div class="form-group"><label>RFC</label><input type="text" id="c-rfc" required></div>
+                            <div class="form-group"><label>Código Postal</label><input type="text" id="c-cp" required></div>
+                            <div class="form-group">
+                                <label>Régimen Fiscal</label>
+                                <select id="c-regimen">
+                                    <option value="601">601 - General de Ley Personas Morales</option>
+                                    <option value="605">605 - Sueldos y Salarios</option>
+                                    <option value="626">626 - Resico</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label>Actividades Económicas</label><input type="text" id="c-actividad"></div>
+                            <div class="form-group"><label>Correo Electrónico</label><input type="email" id="c-correo" required></div>
+                            <div class="form-group"><label>Teléfono</label><input type="text" id="c-telefono"></div>
+                            <div class="form-group"><label>Certificados (CSD / FIEL)</label><input type="file" id="c-cert"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="btn-guardar-cliente">Guardar Cliente</button>
+                    </form>
+                </div>
+
+                <h3>Carpetas de Clientes Activos</h3>
+                <div class="folder-grid" id="folder-container">
+                    <!-- Dinámico -->
+                </div>
+            </div>
+
+            <!-- 2. SECCIÓN DOCUMENTOS -->
+            <div id="sec-documentos" class="view-section">
+                <div class="card">
+                    <h3>Expediente de Documentos Obligatorios</h3>
+                    <div class="form-group">
+                        <label>Seleccionar Cliente</label>
+                        <select id="doc-client-select" onchange="loadClientDocs()"></select>
+                    </div>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:15px; margin-top:20px;">
+                        <div class="card" style="text-align:center;">
+                            <h4>Constancia Situación Fiscal</h4>
+                            <input type="file" id="file-csf" style="display:none" onchange="uploadDoc('csf')">
+                            <button class="btn btn-primary" onclick="document.getElementById('file-csf').click()">Subir / Actualizar</button>
+                            <p id="status-csf" style="color:gray; font-size:13px;">No cargado</p>
+                            <button class="btn btn-success" onclick="downloadDoc('Constancia_Fiscal')">📥 Descargar</button>
+                        </div>
+                        <div class="card" style="text-align:center;">
+                            <h4>Opinión del Cumplimiento</h4>
+                            <input type="file" id="file-opin" style="display:none" onchange="uploadDoc('opin')">
+                            <button class="btn btn-primary" onclick="document.getElementById('file-opin').click()">Subir / Actualizar</button>
+                            <p id="status-opin" style="color:gray; font-size:13px;">No cargado</p>
+                            <button class="btn btn-success" onclick="downloadDoc('Opinion_Cumplimiento')">📥 Descargar</button>
+                        </div>
+                        <div class="card" style="text-align:center;">
+                            <h4>Reportes Mensuales</h4>
+                            <input type="file" id="file-rep" style="display:none" onchange="uploadDoc('rep')">
+                            <button class="btn btn-primary" onclick="document.getElementById('file-rep').click()">Subir / Actualizar</button>
+                            <p id="status-rep" style="color:gray; font-size:13px;">No cargado</p>
+                            <button class="btn btn-success" onclick="downloadDoc('Reporte_Mensual')">📥 Descargar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. SECCIÓN FACTURACIÓN -->
+            <div id="sec-facturas" class="view-section">
+                <div class="card">
+                    <h3>Emisión de Factura Electrónica (CFDI 4.0)</h3>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                        <div class="form-group"><label>Cliente Emisor</label><input type="text" value="GHEZTORIX S.A." disabled></div>
+                        <div class="form-group"><label>Cliente Receptor (RFC)</label><input type="text" id="f-receptor" placeholder="XAXX010101000"></div>
+                        <div class="form-group"><label>Monto ($ MXN)</label><input type="number" id="f-monto" placeholder="0.00"></div>
+                        <div class="form-group">
+                            <label>Uso de CFDI</label>
+                            <select id="f-uso">
+                                <option value="G03">G03 - Gastos en general</option>
+                                <option value="P01">P01 - Por definir</option>
+                            </select>
