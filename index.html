@@ -135,3 +135,25 @@ function persist(){
 function renderStats(){
  sTotal.textContent = clientes.length;
 }
+<hr>
+
+<h3>🔐 Clientes del sistema</h3>
+
+<button onclick="mostrarRegistro()">➕ Nuevo Cliente</button>
+
+<button onclick="mostrarBusqueda()">🔍 Buscar Cliente</button>
+
+<!-- REGISTRO CLIENTE -->
+<div id="registroCliente" class="hidden">
+ <input id="cliente" placeholder="Nombre cliente">
+ <input id="rfc" placeholder="RFC">
+ <input id="passCliente" placeholder="Contraseña cliente">
+ <button onclick="guardarCliente()">Guardar cliente</button>
+</div>
+
+<!-- BUSQUEDA -->
+<div id="busquedaCliente" class="hidden">
+ <input id="buscarRFC" placeholder="RFC">
+ <input id="buscarPASS" type="password" placeholder="Contraseña">
+ <button onclick="buscarCliente()">Acceder</button>
+</div>
