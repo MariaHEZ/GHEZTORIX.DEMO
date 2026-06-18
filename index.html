@@ -1,66 +1,118 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
-<title>GHEZTORIX - Gestión de Despachos</title>
+<title>GHEZTORIX</title>
 
 <style>
 
 body{
-    font-family: Arial;
-    background:#eef2f3;
-    margin:0;
+font-family:Arial;
+background:#eef2f7;
+margin:0;
 }
+
 
 header{
-    background:#1f4e79;
-    color:white;
-    padding:20px;
-    text-align:center;
+
+background:#12395c;
+color:white;
+padding:20px;
+text-align:center;
+
 }
+
 
 .container{
-    width:90%;
-    margin:auto;
+
+width:90%;
+margin:auto;
+
 }
+
 
 .card{
-    background:white;
-    padding:20px;
-    margin:20px 0;
-    border-radius:10px;
-    box-shadow:0px 0px 10px #aaa;
+
+background:white;
+padding:20px;
+margin:20px;
+border-radius:15px;
+box-shadow:0 0 10px #999;
+
 }
 
 
-input, select, button{
-    width:100%;
-    padding:10px;
-    margin:5px 0;
+
+input,button,select{
+
+width:100%;
+padding:10px;
+margin:5px;
+
 }
+
 
 
 button{
-    background:#1f4e79;
-    color:white;
-    border:none;
-    cursor:pointer;
+
+background:#12395c;
+color:white;
+border:0;
+cursor:pointer;
+
 }
 
 
+
+.menu{
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+
+}
+
+
+
+.icon{
+
+padding:30px;
+background:#dbe9f7;
+text-align:center;
+border-radius:15px;
+cursor:pointer;
+
+}
+
+
+
 table{
-    width:100%;
-    border-collapse:collapse;
+
+width:100%;
+border-collapse:collapse;
+
 }
 
 
 td,th{
-    border:1px solid #ccc;
-    padding:8px;
+
+border:1px solid #ccc;
+padding:8px;
+
 }
 
 
+.oculto{
+
+display:none;
+
+}
+
+
+
 </style>
+
 
 </head>
 
@@ -71,7 +123,8 @@ td,th{
 <header>
 
 <h1>GHEZTORIX</h1>
-<p>Sistema Digital para la Gestión de Despachos</p>
+
+<p>Sistema Digital para Gestión de Despachos</p>
 
 </header>
 
@@ -81,78 +134,32 @@ td,th{
 
 
 
-<!-- REGISTRO USUARIOS -->
+<!-- LOGIN -->
 
-<div class="card">
-
-<h2>Registro de Usuarios</h2>
+<div id="login" class="card">
 
 
-<form id="formUsuario">
+<h2>Inicio de sesión</h2>
 
 
-<input id="nombreUsuario" 
-placeholder="Nombre completo">
+<input id="rfcLogin"
+placeholder="RFC">
 
 
-<input id="correoUsuario"
-placeholder="Correo electrónico">
-
-
-<select id="tipoUsuario">
-
-<option value="">
-Seleccione tipo usuario
-</option>
-
-<option>
-Administrador
-</option>
-
-<option>
-Contador
-</option>
-
-<option>
-Auxiliar
-</option>
-
-</select>
-
-
-<input id="passwordUsuario"
+<input id="passLogin"
 type="password"
 placeholder="Contraseña">
 
 
-<button type="submit">
-Registrar Usuario
+
+<button onclick="login()">
+Ingresar
 </button>
 
 
-</form>
-
-
-<table>
-
-<thead>
-
-<tr>
-<th>Nombre</th>
-<th>Correo</th>
-<th>Tipo</th>
-</tr>
-
-</thead>
-
-
-<tbody id="tablaUsuarios">
-
-</tbody>
-
-
-</table>
-
+<button onclick="mostrarRegistro()">
+Nuevo Cliente
+</button>
 
 
 </div>
@@ -161,81 +168,33 @@ Registrar Usuario
 
 
 
-<!-- CLIENTES -->
+
+<!-- REGISTRO -->
 
 
-<div class="card">
+<div id="registro" class="card oculto">
 
 
-<h2>Gestión de Clientes</h2>
+<h2>Registrar Cliente</h2>
 
 
-<input id="buscarCliente"
-placeholder="Buscar cliente..."
-onkeyup="buscarCliente()">
+<input id="nombre">
 
-
-
-<form id="formCliente">
-
-
-<input id="clienteNombre"
-placeholder="Nombre cliente">
-
-
-<input id="rfc"
+<input id="nuevoRFC"
 placeholder="RFC">
 
+<input id="correo">
 
-<input id="telefono"
-placeholder="Teléfono">
-
-
-<input id="correoCliente"
-placeholder="Correo">
+<input id="password"
+placeholder="Contraseña">
 
 
-<input id="documentacion"
-placeholder="Documento asociado">
 
-
-<button>
+<button onclick="registrar()">
 Guardar Cliente
 </button>
 
 
-</form>
-
-
-
-<table>
-
-
-<thead>
-
-<tr>
-
-<th>Nombre</th>
-<th>RFC</th>
-<th>Teléfono</th>
-<th>Correo</th>
-<th>Documento</th>
-
-</tr>
-
-
-</thead>
-
-
-<tbody id="tablaClientes">
-
-
-</tbody>
-
-
-</table>
-
-
 </div>
 
 
@@ -243,72 +202,134 @@ Guardar Cliente
 
 
 
-<!-- DOCUMENTOS -->
+<!-- PANEL -->
 
 
-<div class="card">
-
-
-<h2>Control Documental</h2>
+<div id="panel" class="oculto">
 
 
 
-<form id="formDocumento">
-
-
-<input id="nombreDocumento"
-placeholder="Nombre documento">
-
-
-<select id="tipoDocumento">
-
-
-<option>
-Fiscal
-</option>
-
-<option>
-Administrativo
-</option>
-
-
-</select>
-
-
-<input type="date" id="fechaDocumento">
+<h2>
+Bienvenido:
+<span id="clienteActivo"></span>
+</h2>
 
 
 
-<button>
-Registrar Documento
+
+<div class="menu">
+
+
+
+<div class="icon"
+onclick="abrir('documentos')">
+
+📄
+Documentos Fiscales
+
+</div>
+
+
+
+
+<div class="icon"
+onclick="abrir('facturas')">
+
+🧾
+Facturación
+
+</div>
+
+
+
+<div class="icon"
+onclick="abrir('declaraciones')">
+
+📊
+Declaraciones
+
+</div>
+
+
+
+
+<div class="icon"
+onclick="abrir('impuestos')">
+
+💰
+Impuestos
+
+</div>
+
+
+
+
+<div class="icon"
+onclick="abrir('cuentas')">
+
+🏦
+Estados de cuenta
+
+</div>
+
+
+
+<div class="icon"
+onclick="abrir('reportes')">
+
+📅
+Reportes
+
+</div>
+
+
+
+</div>
+
+
+
+<br>
+
+
+<button onclick="cerrarSesion()">
+Cerrar Sesión
 </button>
 
 
-</form>
+
+</div>
 
 
+
+
+
+
+
+
+
+<!-- MODULOS -->
+
+
+
+<div id="modulos" class="card oculto">
+
+
+<h2 id="titulo"></h2>
+
+
+<input id="dato"
+placeholder="Agregar información">
+
+
+<button onclick="guardarDato()">
+Guardar
+</button>
 
 
 <table>
 
 
-<thead>
-
-<tr>
-
-<th>Documento</th>
-<th>Tipo</th>
-<th>Fecha</th>
-
-
-</tr>
-
-
-</thead>
-
-
-<tbody id="tablaDocumentos">
-
+<tbody id="tabla">
 
 </tbody>
 
@@ -316,12 +337,15 @@ Registrar Documento
 </table>
 
 
-</div>
-
-
-
 
 </div>
+
+
+
+
+
+</div>
+
 
 
 
@@ -332,113 +356,30 @@ Registrar Documento
 <script>
 
 
-// VARIABLES
+// BASE DE DATOS LOCAL
 
-let usuarios=[];
-let clientes=[];
-let documentos=[];
 
+let clientes =
+JSON.parse(localStorage.getItem("clientes")) || [];
 
 
 
-// REGISTRO USUARIOS
+let usuarioActual=null;
 
 
-document
-.getElementById("formUsuario")
-.addEventListener("submit",function(e){
+let modulo="";
 
 
-e.preventDefault();
 
 
 
-let nombre=
-document.getElementById("nombreUsuario").value;
 
+function mostrarRegistro(){
 
-let correo=
-document.getElementById("correoUsuario").value;
 
+login.style.display="none";
 
-let tipo=
-document.getElementById("tipoUsuario").value;
-
-
-let pass=
-document.getElementById("passwordUsuario").value;
-
-
-
-if(nombre=="" || correo=="" || tipo=="" || pass==""){
-
-alert("Complete todos los campos");
-
-return;
-
-}
-
-
-
-usuarios.push({
-
-nombre,
-correo,
-tipo
-
-});
-
-
-
-mostrarUsuarios();
-
-
-
-alert("Usuario registrado correctamente");
-
-
-
-this.reset();
-
-
-
-});
-
-
-
-
-
-function mostrarUsuarios(){
-
-
-let tabla=
-document.getElementById("tablaUsuarios");
-
-
-tabla.innerHTML="";
-
-
-
-usuarios.forEach(u=>{
-
-
-tabla.innerHTML += `
-
-<tr>
-
-<td>${u.nombre}</td>
-
-<td>${u.correo}</td>
-
-<td>${u.tipo}</td>
-
-
-</tr>
-
-`;
-
-
-});
+registro.style.display="block";
 
 
 }
@@ -448,56 +389,25 @@ tabla.innerHTML += `
 
 
 
-
-// CLIENTES
-
-
-
-document
-.getElementById("formCliente")
-.addEventListener("submit",function(e){
-
-
-e.preventDefault();
+function registrar(){
 
 
 
 let cliente={
 
-nombre:
-clienteNombre.value,
 
+nombre:nombre.value,
 
-rfc:
-rfc.value,
+rfc:nuevoRFC.value,
 
+correo:correo.value,
 
-telefono:
-telefono.value,
+password:password.value,
 
-
-correo:
-correoCliente.value,
-
-
-documento:
-documentacion.value
+datos:{}
 
 
 };
-
-
-
-
-if(cliente.nombre=="" ||
-cliente.rfc==""){
-
-
-alert("Nombre y RFC son obligatorios");
-
-return;
-
-}
 
 
 
@@ -506,59 +416,21 @@ clientes.push(cliente);
 
 
 
-mostrarClientes();
+localStorage.setItem(
+"clientes",
+JSON.stringify(clientes)
+);
 
 
 
-alert("Cliente agregado");
+alert("Cliente registrado");
 
 
 
-this.reset();
+registro.style.display="none";
 
+login.style.display="block";
 
-
-});
-
-
-
-
-
-function mostrarClientes(lista=clientes){
-
-
-tablaClientes.innerHTML="";
-
-
-
-lista.forEach(c=>{
-
-
-tablaClientes.innerHTML +=`
-
-
-<tr>
-
-<td>${c.nombre}</td>
-
-<td>${c.rfc}</td>
-
-<td>${c.telefono}</td>
-
-<td>${c.correo}</td>
-
-<td>${c.documento}</td>
-
-
-</tr>
-
-
-
-`;
-
-
-
-});
 
 
 }
@@ -566,28 +438,57 @@ tablaClientes.innerHTML +=`
 
 
 
-// BUSQUEDA
-
-
-function buscarCliente(){
-
-
-let texto=
-buscarCliente.value.toLowerCase();
 
 
 
-let resultado=
-clientes.filter(c=>
+function login(){
 
-c.nombre.toLowerCase()
-.includes(texto)
+
+
+let rfc=rfcLogin.value;
+
+
+let pass=passLogin.value;
+
+
+
+
+let encontrado =
+clientes.find(c=>
+
+c.rfc==rfc &&
+c.password==pass
 
 );
 
 
 
-mostrarClientes(resultado);
+
+
+if(!encontrado){
+
+
+alert("Datos incorrectos");
+
+return;
+
+}
+
+
+
+
+usuarioActual=encontrado;
+
+
+
+login.style.display="none";
+
+
+panel.style.display="block";
+
+
+clienteActivo.innerHTML=
+encontrado.nombre;
 
 
 
@@ -598,91 +499,219 @@ mostrarClientes(resultado);
 
 
 
-// DOCUMENTOS
+
+
+function abrir(nombreModulo){
 
 
 
-
-document
-.getElementById("formDocumento")
-.addEventListener("submit",function(e){
-
-
-e.preventDefault();
+modulo=nombreModulo;
 
 
 
-let doc={
-
-nombre:
-nombreDocumento.value,
+modulos.style.display="block";
 
 
-tipo:
-tipoDocumento.value,
-
-
-fecha:
-fechaDocumento.value
-
-
-};
+titulo.innerHTML=nombreModulo.toUpperCase();
 
 
 
-documentos.push(doc);
+mostrarDatos();
 
 
-
-mostrarDocumentos();
-
-
-
-alert("Documento guardado");
-
-
-
-this.reset();
-
-
-});
+}
 
 
 
 
 
-function mostrarDocumentos(){
+
+function guardarDato(){
 
 
-tablaDocumentos.innerHTML="";
+
+if(!usuarioActual.datos[modulo]){
 
 
-documentos.forEach(d=>{
+usuarioActual.datos[modulo]=[];
+
+}
 
 
-tablaDocumentos.innerHTML+=`
+
+
+usuarioActual.datos[modulo]
+.push(dato.value);
+
+
+
+
+
+localStorage.setItem(
+"clientes",
+JSON.stringify(clientes)
+);
+
+
+
+dato.value="";
+
+mostrarDatos();
+
+
+}
+
+
+
+
+
+
+
+function mostrarDatos(){
+
+
+tabla.innerHTML="";
+
+
+
+let datos=
+usuarioActual.datos[modulo] || [];
+
+
+
+datos.forEach((d,i)=>{
+
+
+tabla.innerHTML+=`
 
 <tr>
 
-<td>${d.nombre}</td>
+<td>${d}</td>
 
-<td>${d.tipo}</td>
+<td>
 
-<td>${d.fecha}</td>
+<button onclick="editar(${i})">
+Editar
+</button>
 
+
+<button onclick="eliminar(${i})">
+Eliminar
+</button>
+
+
+</td>
 
 </tr>
-
 
 `;
 
 
+
 });
 
 
 }
 
 
+
+
+
+
+
+
+
+function editar(i){
+
+
+
+let datos=
+usuarioActual.datos[modulo];
+
+
+
+let nuevo=
+prompt(
+"Modificar:",
+datos[i]
+);
+
+
+
+if(nuevo){
+
+
+datos[i]=nuevo;
+
+
+localStorage.setItem(
+"clientes",
+JSON.stringify(clientes)
+);
+
+
+
+mostrarDatos();
+
+
+}
+
+
+}
+
+
+
+
+
+
+function eliminar(i){
+
+
+usuarioActual.datos[modulo]
+.splice(i,1);
+
+
+
+localStorage.setItem(
+"clientes",
+JSON.stringify(clientes)
+);
+
+
+
+mostrarDatos();
+
+
+}
+
+
+
+
+
+
+
+
+function cerrarSesion(){
+
+
+usuarioActual=null;
+
+
+panel.style.display="none";
+
+modulos.style.display="none";
+
+login.style.display="block";
+
+
+
+alert(
+"Sesión cerrada. Información guardada."
+);
+
+
+
+}
 
 
 
