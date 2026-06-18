@@ -7,13 +7,21 @@ let moduloActivo = null;
 
 // ================= LOGIN =================
 function login(){
- if(usuario.value===USER && password.value===PASS){
-  loginScreen.classList.add('hidden');
-  dashboard.classList.remove('hidden');
-  renderStats();
+
+ const user = document.getElementById('usuario').value.trim();
+ const pass = document.getElementById('password').value.trim();
+
+ if(user === 'admin@gheztorix.com' && pass === '12345'){
+  
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('dashboard').classList.remove('hidden');
+
+  document.getElementById('error').style.display='none';
+
  } else {
   document.getElementById('error').style.display='block';
  }
+
 }
 
 // ================= LOGOUT =================
