@@ -1,178 +1,246 @@
-const USER = 'admin@gheztorix.com';
-const PASS = '12345';
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>GHEZTORIX PRO</title>
 
-// ================= BASE DE DATOS =================
-let clientes = JSON.parse(localStorage.getItem('clientes_gz')) || [];
+<style>
+body{font-family:Arial;margin:0;background:#eef3f7}
+.hidden{display:none}
+header{background:#0f3a5a;color:#fff;padding:15px;text-align:center}
+.container{width:90%;margin:auto}
+.card{background:#fff;padding:15px;margin:15px;border-radius:10px;box-shadow:0 0 10px #aaa}
+input,button{width:100%;padding:10px;margin:5px 0}
+button{background:#0f3a5a;color:#fff;border:none;cursor:pointer}
+.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.icon{background:#dbe9f7;padding:20px;text-align:center;cursor:pointer;border-radius:10px}
+table{width:100%;border-collapse:collapse}
+td,th{border:1px solid #ccc;padding:8px}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>GHEZTORIX PRO</h1>
+</header>
+
+<div class="container">
+
+<!-- LOGIN -->
+<div id="loginScreen" class="card">
+<h2>Login</h2>
+<input id="usuario" placeholder="Correo">
+<input id="password" type="password" placeholder="Contraseña">
+<button onclick="login()">Ingresar</button>
+<div id="error" style="display:none;color:red">Error de acceso</div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="card hidden">
+
+<h2>Panel Principal</h2>
+<button onclick="logout()">Cerrar sesión</button>
+
+<h3>Clientes: <span id="sTotal">0</span></h3>
+
+<h3>Registrar cliente</h3>
+<input id="cliente" placeholder="Nombre">
+<input id="rfc" placeholder="RFC">
+<input id="passCliente" placeholder="Contraseña cliente">
+<button onclick="guardarCliente()">Guardar</button>
+
+<h3>Buscar cliente</h3>
+<input id="buscarRFC" placeholder="RFC">
+<input id="buscarPASS" placeholder="Contraseña">
+<button onclick="buscarCliente()">Acceder</button>
+
+</div>
+
+<!-- CLIENTE PANEL -->
+<div id="clientePanel" class="card hidden">
+
+<h2 id="clienteNombre"></h2>
+
+<div class="menu">
+
+<div class="icon" onclick="abrirModulo('documentos')">📄 Documentos</div>
+<div class="icon" onclick="abrirModulo('facturas')">🧾 Facturas</div>
+<div class="icon" onclick="abrirModulo('declaraciones')">📊 Declaraciones</div>
+<div class="icon" onclick="abrirModulo('impuestos')">💰 Impuestos</div>
+<div class="icon" onclick="abrirModulo('cuentas')">🏦 Cuentas</div>
+<div class="icon" onclick="abrirModulo('reportes')">📅 Reportes</div>
+
+</div>
+
+<button onclick="cerrarCliente()">Cerrar cliente</button>
+
+</div>
+
+<!-- CRUD -->
+<div id="crud" class="card hidden">
+
+<h2 id="tituloModulo"></h2>
+
+<input id="registro" placeholder="Agregar registro">
+<button onclick="guardarModulo()">Agregar</button>
+
+<table>
+<tbody id="tabla"></tbody>
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+// ================= LOGIN ADMIN =================
+const USER="admin@gheztorix.com";
+const PASS="12345";
+
+// ================= DATA =================
+let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 let clienteActivo = null;
 let moduloActivo = null;
 
 // ================= LOGIN =================
 function login(){
 
- // leer inputs correctamente (IMPORTANTE)
- const correo = document.getElementById('usuario').value.trim();
- const password = document.getElementById('password').value.trim();
+const u=document.getElementById("usuario").value.trim();
+const p=document.getElementById("password").value.trim();
 
- if(correo === USER && password === PASS){
-
-  document.getElementById('loginScreen').classList.add('hidden');
-  document.getElementById('dashboard').classList.remove('hidden');
-
-  document.getElementById('error').style.display = 'none';
-
-  renderStats();
-
- } else {
-
-  document.getElementById('error').style.display = 'block';
-
- }
+if(u===USER && p===PASS){
+document.getElementById("loginScreen").classList.add("hidden");
+document.getElementById("dashboard").classList.remove("hidden");
+document.getElementById("error").style.display="none";
+renderStats();
+}else{
+document.getElementById("error").style.display="block";
+}
 
 }
 
 // ================= LOGOUT =================
 function logout(){
-
- document.getElementById('dashboard').classList.add('hidden');
- document.getElementById('loginScreen').classList.remove('hidden');
-
+location.reload();
 }
 
-// ================= GUARDAR CLIENTE =================
+// ================= CLIENTES =================
 function guardarCliente(){
 
- const c = {
-  id: Date.now(),
-  nombre: document.getElementById('cliente').value.trim(),
-  rfc: document.getElementById('rfc').value.trim(),
-  pass: document.getElementById('passCliente').value.trim(),
-  datos:{
-   documentos:[],
-   facturas:[],
-   declaraciones:[],
-   impuestos:[],
-   cuentas:[],
-   reportes:[]
-  }
- };
+let c={
+id:Date.now(),
+nombre:cliente.value,
+rfc:rfc.value,
+pass:passCliente.value,
+datos:{
+documentos:[],
+facturas:[],
+declaraciones:[],
+impuestos:[],
+cuentas:[],
+reportes:[]
+}
+};
 
- if(!c.nombre || !c.rfc || !c.pass){
-  alert("Completa todos los campos");
-  return;
- }
+clientes.push(c);
+persist();
+renderStats();
+alert("Cliente guardado");
 
- clientes.push(c);
- persist();
-
- alert("Cliente registrado");
-
- limpiarCliente();
- renderStats();
+cliente.value="";
+rfc.value="";
+passCliente.value="";
 }
 
-// ================= LIMPIAR =================
-function limpiarCliente(){
- document.getElementById('cliente').value = '';
- document.getElementById('rfc').value = '';
- document.getElementById('passCliente').value = '';
-}
-
-// ================= BUSCAR CLIENTE =================
 function buscarCliente(){
 
- const rfc = document.getElementById('buscarRFC').value.trim();
- const pass = document.getElementById('buscarPASS').value.trim();
+let r = clientes.find(c =>
+c.rfc===buscarRFC.value &&
+c.pass===buscarPASS.value
+);
 
- const r = clientes.find(c => c.rfc === rfc && c.pass === pass);
+if(!r){alert("No encontrado");return;}
 
- if(!r){
-  alert("Cliente no encontrado");
-  return;
- }
+clienteActivo=r;
 
- clienteActivo = r;
+document.getElementById("dashboard").classList.add("hidden");
+document.getElementById("clientePanel").classList.remove("hidden");
 
- alert("Accediendo a: " + clienteActivo.nombre);
+document.getElementById("clienteNombre").innerText=r.nombre;
+
 }
 
-// ================= ABRIR MÓDULO =================
+// ================= MODULOS =================
 function abrirModulo(m){
+moduloActivo=m;
+document.getElementById("crud").classList.remove("hidden");
 
- moduloActivo = m;
+let lista=clienteActivo.datos[m]||[];
 
- const lista = clienteActivo.datos[m] || [];
+tabla.innerHTML="";
 
- const tabla = document.getElementById('tabla');
- tabla.innerHTML = '';
-
- lista.forEach((x,i)=>{
-
-  tabla.innerHTML += `
-  <tr>
-   <td>${x}</td>
-   <td>
-    <button onclick="editar(${i})">Editar</button>
-    <button onclick="eliminar(${i})">Eliminar</button>
-   </td>
-  </tr>
-  `;
-
- });
-
+lista.forEach((x,i)=>{
+tabla.innerHTML+=`
+<tr>
+<td>${x}</td>
+<td>
+<button onclick="editar(${i})">Editar</button>
+<button onclick="eliminar(${i})">Eliminar</button>
+</td>
+</tr>`;
+});
 }
 
-// ================= AGREGAR DATO =================
 function guardarModulo(){
 
- const input = document.getElementById('registro');
-
- if(!clienteActivo.datos[moduloActivo]){
-  clienteActivo.datos[moduloActivo] = [];
- }
-
- clienteActivo.datos[moduloActivo].push(input.value);
-
- persist();
-
- abrirModulo(moduloActivo);
-
- input.value = '';
+if(!clienteActivo.datos[moduloActivo]){
+clienteActivo.datos[moduloActivo]=[];
 }
 
-// ================= EDITAR =================
+clienteActivo.datos[moduloActivo].push(registro.value);
+
+persist();
+abrirModulo(moduloActivo);
+
+registro.value="";
+}
+
 function editar(i){
-
- let nuevo = prompt("Editar registro:");
-
- if(nuevo){
-
-  clienteActivo.datos[moduloActivo][i] = nuevo;
-
-  persist();
-
-  abrirModulo(moduloActivo);
-
- }
-
+let n=prompt("Editar:");
+if(n){
+clienteActivo.datos[moduloActivo][i]=n;
+persist();
+abrirModulo(moduloActivo);
+}
 }
 
-// ================= ELIMINAR =================
 function eliminar(i){
-
- clienteActivo.datos[moduloActivo].splice(i,1);
-
- persist();
-
- abrirModulo(moduloActivo);
-
+clienteActivo.datos[moduloActivo].splice(i,1);
+persist();
+abrirModulo(moduloActivo);
 }
 
-// ================= GUARDAR EN LOCALSTORAGE =================
+// ================= LOCAL STORAGE =================
 function persist(){
- localStorage.setItem('clientes_gz', JSON.stringify(clientes));
+localStorage.setItem("clientes",JSON.stringify(clientes));
 }
 
-// ================= ESTADÍSTICAS =================
+// ================= STATS =================
 function renderStats(){
- document.getElementById('sTotal').textContent = clientes.length;
+document.getElementById("sTotal").innerText=clientes.length;
 }
+
+// ================= CLIENTE CLOSE =================
+function cerrarCliente(){
+document.getElementById("clientePanel").classList.add("hidden");
+document.getElementById("crud").classList.add("hidden");
+document.getElementById("dashboard").classList.remove("hidden");
+clienteActivo=null;
+}
+
+</script>
+
+</body>
+</html>
