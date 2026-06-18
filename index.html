@@ -2,156 +2,693 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GHEZTORIX - Sistema Digital para la Gestión de Despachos</title>
+<title>GHEZTORIX - Gestión de Despachos</title>
+
 <style>
-body{font-family:Segoe UI,sans-serif;background:#f4f6f9;margin:0}
-.hidden{display:none!important}
-.login{max-width:520px;margin:25px auto;background:#fff;padding:25px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
-.logo{text-align:center}.logo h1{color:#163c8c;margin:0;font-size:42px}
-.logo p{color:#666}
-img.hero{width:100%;border-radius:10px}
-input,select{width:100%;padding:10px;margin:6px 0 12px;border:1px solid #ccc;border-radius:6px;box-sizing:border-box}
-button{padding:10px 14px;border:none;border-radius:6px;cursor:pointer;background:#163c8c;color:#fff}
-main{max-width:1200px;margin:20px auto;background:#fff;padding:20px;border-radius:12px}
-header{display:flex;justify-content:space-between;align-items:center}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.card{background:#eef3ff;padding:15px;border-radius:8px;text-align:center}
-table{width:100%;border-collapse:collapse;margin-top:10px}
-th,td{border:1px solid #ddd;padding:8px}
-th{background:#163c8c;color:#fff}
-.actions button{margin-right:4px}
-.search{margin:10px 0}
+
+body{
+    font-family: Arial;
+    background:#eef2f3;
+    margin:0;
+}
+
+header{
+    background:#1f4e79;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    width:90%;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin:20px 0;
+    border-radius:10px;
+    box-shadow:0px 0px 10px #aaa;
+}
+
+
+input, select, button{
+    width:100%;
+    padding:10px;
+    margin:5px 0;
+}
+
+
+button{
+    background:#1f4e79;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+
+td,th{
+    border:1px solid #ccc;
+    padding:8px;
+}
+
+
 </style>
+
 </head>
+
+
 <body>
 
-<div id="loginScreen" class="login">
-<div class="logo">
+
+<header>
+
 <h1>GHEZTORIX</h1>
 <p>Sistema Digital para la Gestión de Despachos</p>
-</div>
-<img class="hero" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200" alt="Despacho">
-<h2>Inicio de Sesión</h2>
-<div id="error" style="display:none;color:red">Credenciales incorrectas</div>
-<input id="usuario" placeholder="admin@gheztorix.com">
-<input id="password" type="password" placeholder="12345">
-<a href="#" onclick="alert('Contacte al administrador para recuperar su contraseña.');return false;">¿Olvidó su contraseña?</a><br><br>
-<a href="panel.html"><button onclick="login()">Ingresar</button></a>
-</div>
 
-<main id="dashboard" class="hidden">
-<header>
-<div>
-<h1>Panel de Control GHEZTORIX</h1>
-</div>
-<div>
-<button onclick="logout()" style="background:#c62828">Cerrar Sesión</button>
-</div>
 </header>
 
-<h2>Estadísticas</h2>
-<div class="stats">
-<div class="card"><h3 id="sTotal">0</h3><div>Clientes</div></div>
-<div class="card"><h3 id="sAct">0</h3><div>Actualizadas</div></div>
-<div class="card"><h3 id="sPen">0</h3><div>Pendientes</div></div>
-<div class="card"><h3 id="sVen">0</h3><div>Por vencer</div></div>
-</div>
 
-<h2>Registrar Expediente</h2>
-<input id="cliente" placeholder="Cliente o empresa">
-<select id="documento">
-<option>Constancia de Situación Fiscal</option>
-<option>Opinión de Cumplimiento</option>
-<option>Obligaciones Fiscales</option>
-<option>Facturas Electrónicas</option>
-</select>
-<input id="fecha" type="date">
-<select id="estado">
-<option value="Actualizada">Actualizada</option>
-<option value="Pendiente">Pendiente</option>
-<option value="Próxima a Vencer">Próxima a Vencer</option>
-<option value="Pagada">Pagada</option>
-</select>
-<input id="archivo" type="file">
-<button onclick="guardar()">Guardar Expediente</button>
 
-<div class="search">
-<input id="buscar" placeholder="Buscar cliente..." onkeyup="render()">
-</div>
+<div class="container">
+
+
+
+<!-- REGISTRO USUARIOS -->
+
+<div class="card">
+
+<h2>Registro de Usuarios</h2>
+
+
+<form id="formUsuario">
+
+
+<input id="nombreUsuario" 
+placeholder="Nombre completo">
+
+
+<input id="correoUsuario"
+placeholder="Correo electrónico">
+
+
+<select id="tipoUsuario">
+
+<option value="">
+Seleccione tipo usuario
+</option>
+
+<option>
+Administrador
+</option>
+
+<option>
+Contador
+</option>
+
+<option>
+Auxiliar
+</option>
+
+</select>
+
+
+<input id="passwordUsuario"
+type="password"
+placeholder="Contraseña">
+
+
+<button type="submit">
+Registrar Usuario
+</button>
+
+
+</form>
+
 
 <table>
-<thead><tr><th>ID</th><th>Cliente</th><th>Documento</th><th>Fecha</th><th>Estado</th><th>Archivo</th><th>Acciones</th></tr></thead>
-<tbody id="tabla"></tbody>
+
+<thead>
+
+<tr>
+<th>Nombre</th>
+<th>Correo</th>
+<th>Tipo</th>
+</tr>
+
+</thead>
+
+
+<tbody id="tablaUsuarios">
+
+</tbody>
+
+
 </table>
-</main>
+
+
+
+</div>
+
+
+
+
+
+<!-- CLIENTES -->
+
+
+<div class="card">
+
+
+<h2>Gestión de Clientes</h2>
+
+
+<input id="buscarCliente"
+placeholder="Buscar cliente..."
+onkeyup="buscarCliente()">
+
+
+
+<form id="formCliente">
+
+
+<input id="clienteNombre"
+placeholder="Nombre cliente">
+
+
+<input id="rfc"
+placeholder="RFC">
+
+
+<input id="telefono"
+placeholder="Teléfono">
+
+
+<input id="correoCliente"
+placeholder="Correo">
+
+
+<input id="documentacion"
+placeholder="Documento asociado">
+
+
+<button>
+Guardar Cliente
+</button>
+
+
+</form>
+
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Nombre</th>
+<th>RFC</th>
+<th>Teléfono</th>
+<th>Correo</th>
+<th>Documento</th>
+
+</tr>
+
+
+</thead>
+
+
+<tbody id="tablaClientes">
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+
+
+
+
+<!-- DOCUMENTOS -->
+
+
+<div class="card">
+
+
+<h2>Control Documental</h2>
+
+
+
+<form id="formDocumento">
+
+
+<input id="nombreDocumento"
+placeholder="Nombre documento">
+
+
+<select id="tipoDocumento">
+
+
+<option>
+Fiscal
+</option>
+
+<option>
+Administrativo
+</option>
+
+
+</select>
+
+
+<input type="date" id="fechaDocumento">
+
+
+
+<button>
+Registrar Documento
+</button>
+
+
+</form>
+
+
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Documento</th>
+<th>Tipo</th>
+<th>Fecha</th>
+
+
+</tr>
+
+
+</thead>
+
+
+<tbody id="tablaDocumentos">
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
 
 <script>
-const USER='admin@gheztorix.com', PASS='12345';
-let datos=JSON.parse(localStorage.getItem('gheztorix_datos')||'[]');
 
-function login(){
- if(document.getElementById('usuario').value===USER && document.getElementById('password').value===PASS){
-  loginScreen.classList.add('hidden');
-  dashboard.classList.remove('hidden');
-  render();
- } else document.getElementById('error').style.display='block';
+
+// VARIABLES
+
+let usuarios=[];
+let clientes=[];
+let documentos=[];
+
+
+
+
+// REGISTRO USUARIOS
+
+
+document
+.getElementById("formUsuario")
+.addEventListener("submit",function(e){
+
+
+e.preventDefault();
+
+
+
+let nombre=
+document.getElementById("nombreUsuario").value;
+
+
+let correo=
+document.getElementById("correoUsuario").value;
+
+
+let tipo=
+document.getElementById("tipoUsuario").value;
+
+
+let pass=
+document.getElementById("passwordUsuario").value;
+
+
+
+if(nombre=="" || correo=="" || tipo=="" || pass==""){
+
+alert("Complete todos los campos");
+
+return;
+
 }
-function logout(){
- dashboard.classList.add('hidden');
- loginScreen.classList.remove('hidden');
+
+
+
+usuarios.push({
+
+nombre,
+correo,
+tipo
+
+});
+
+
+
+mostrarUsuarios();
+
+
+
+alert("Usuario registrado correctamente");
+
+
+
+this.reset();
+
+
+
+});
+
+
+
+
+
+function mostrarUsuarios(){
+
+
+let tabla=
+document.getElementById("tablaUsuarios");
+
+
+tabla.innerHTML="";
+
+
+
+usuarios.forEach(u=>{
+
+
+tabla.innerHTML += `
+
+<tr>
+
+<td>${u.nombre}</td>
+
+<td>${u.correo}</td>
+
+<td>${u.tipo}</td>
+
+
+</tr>
+
+`;
+
+
+});
+
+
 }
-function guardar(){
- const c=cliente.value.trim();
- if(!c) return alert('Capture un cliente');
- const item={
- id:Date.now(),
- cliente:c,
- documento:documento.value,
- fecha:fecha.value,
- estado:estado.value,
- archivo:archivo.files[0]?archivo.files[0].name:'Sin archivo'
- };
- datos.push(item);
- persist();
- render();
- cliente.value=''; fecha.value='';
+
+
+
+
+
+
+
+// CLIENTES
+
+
+
+document
+.getElementById("formCliente")
+.addEventListener("submit",function(e){
+
+
+e.preventDefault();
+
+
+
+let cliente={
+
+nombre:
+clienteNombre.value,
+
+
+rfc:
+rfc.value,
+
+
+telefono:
+telefono.value,
+
+
+correo:
+correoCliente.value,
+
+
+documento:
+documentacion.value
+
+
+};
+
+
+
+
+if(cliente.nombre=="" ||
+cliente.rfc==""){
+
+
+alert("Nombre y RFC son obligatorios");
+
+return;
+
 }
-function persist(){
- localStorage.setItem('gheztorix_datos',JSON.stringify(datos));
+
+
+
+
+clientes.push(cliente);
+
+
+
+mostrarClientes();
+
+
+
+alert("Cliente agregado");
+
+
+
+this.reset();
+
+
+
+});
+
+
+
+
+
+function mostrarClientes(lista=clientes){
+
+
+tablaClientes.innerHTML="";
+
+
+
+lista.forEach(c=>{
+
+
+tablaClientes.innerHTML +=`
+
+
+<tr>
+
+<td>${c.nombre}</td>
+
+<td>${c.rfc}</td>
+
+<td>${c.telefono}</td>
+
+<td>${c.correo}</td>
+
+<td>${c.documento}</td>
+
+
+</tr>
+
+
+
+`;
+
+
+
+});
+
+
 }
-function eliminar(id){
- if(confirm('¿Eliminar registro?')){
-  datos=datos.filter(x=>x.id!==id);
-  persist(); render();
- }
+
+
+
+
+// BUSQUEDA
+
+
+function buscarCliente(){
+
+
+let texto=
+buscarCliente.value.toLowerCase();
+
+
+
+let resultado=
+clientes.filter(c=>
+
+c.nombre.toLowerCase()
+.includes(texto)
+
+);
+
+
+
+mostrarClientes(resultado);
+
+
+
 }
-function editar(id){
- const r=datos.find(x=>x.id===id);
- const n=prompt('Nuevo nombre del cliente',r.cliente);
- if(n){r.cliente=n; persist(); render();}
+
+
+
+
+
+
+// DOCUMENTOS
+
+
+
+
+document
+.getElementById("formDocumento")
+.addEventListener("submit",function(e){
+
+
+e.preventDefault();
+
+
+
+let doc={
+
+nombre:
+nombreDocumento.value,
+
+
+tipo:
+tipoDocumento.value,
+
+
+fecha:
+fechaDocumento.value
+
+
+};
+
+
+
+documentos.push(doc);
+
+
+
+mostrarDocumentos();
+
+
+
+alert("Documento guardado");
+
+
+
+this.reset();
+
+
+});
+
+
+
+
+
+function mostrarDocumentos(){
+
+
+tablaDocumentos.innerHTML="";
+
+
+documentos.forEach(d=>{
+
+
+tablaDocumentos.innerHTML+=`
+
+<tr>
+
+<td>${d.nombre}</td>
+
+<td>${d.tipo}</td>
+
+<td>${d.fecha}</td>
+
+
+</tr>
+
+
+`;
+
+
+});
+
+
 }
-function render(){
- const q=(buscar.value||'').toLowerCase();
- tabla.innerHTML='';
- datos.filter(x=>x.cliente.toLowerCase().includes(q)).forEach(r=>{
-  tabla.innerHTML+=`<tr>
-  <td>${r.id}</td>
-  <td>${r.cliente}</td>
-  <td>${r.documento}</td>
-  <td>${r.fecha}</td>
-  <td>${r.estado}</td>
-  <td>${r.archivo}</td>
-  <td class="actions">
-  <button onclick="editar(${r.id})">Editar</button>
-  <button onclick="eliminar(${r.id})" style="background:#c62828">Eliminar</button>
-  </td></tr>`;
- });
- sTotal.textContent=datos.length;
- sAct.textContent=datos.filter(x=>x.estado==='Actualizada').length;
- sPen.textContent=datos.filter(x=>x.estado==='Pendiente').length;
- sVen.textContent=datos.filter(x=>x.estado==='Próxima a Vencer').length;
-}
+
+
+
+
+
 </script>
+
+
 </body>
+
 </html>
