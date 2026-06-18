@@ -1,4 +1,5 @@
-const USER='admin@gheztorix.com', PASS='12345';
+const USER = 'admin@gheztorix.com';
+const PASS = '12345';
 
 // ================= BASE DE DATOS =================
 let clientes = JSON.parse(localStorage.getItem('clientes_gz')) || [];
@@ -8,26 +9,33 @@ let moduloActivo = null;
 // ================= LOGIN =================
 function login(){
 
- const user = document.getElementById('usuario').value.trim();
- const pass = document.getElementById('password').value.trim();
+ // leer inputs correctamente (IMPORTANTE)
+ const correo = document.getElementById('usuario').value.trim();
+ const password = document.getElementById('password').value.trim();
 
- if(user === 'admin@gheztorix.com' && pass === '12345'){
-  
+ if(correo === USER && password === PASS){
+
   document.getElementById('loginScreen').classList.add('hidden');
   document.getElementById('dashboard').classList.remove('hidden');
 
-  document.getElementById('error').style.display='none';
+  document.getElementById('error').style.display = 'none';
+
+  renderStats();
 
  } else {
-  document.getElementById('error').style.display='block';
+
+  document.getElementById('error').style.display = 'block';
+
  }
 
 }
 
 // ================= LOGOUT =================
 function logout(){
- dashboard.classList.add('hidden');
- loginScreen.classList.remove('hidden');
+
+ document.getElementById('dashboard').classList.add('hidden');
+ document.getElementById('loginScreen').classList.remove('hidden');
+
 }
 
 // ================= GUARDAR CLIENTE =================
@@ -35,9 +43,9 @@ function guardarCliente(){
 
  const c = {
   id: Date.now(),
-  nombre: cliente.value,
-  rfc: rfc.value,
-  pass: passCliente.value,
+  nombre: document.getElementById('cliente').value.trim(),
+  rfc: document.getElementById('rfc').value.trim(),
+  pass: document.getElementById('passCliente').value.trim(),
   datos:{
    documentos:[],
    facturas:[],
@@ -48,25 +56,34 @@ function guardarCliente(){
   }
  };
 
+ if(!c.nombre || !c.rfc || !c.pass){
+  alert("Completa todos los campos");
+  return;
+ }
+
  clientes.push(c);
  persist();
+
  alert("Cliente registrado");
+
  limpiarCliente();
+ renderStats();
 }
 
 // ================= LIMPIAR =================
 function limpiarCliente(){
- cliente.value='';
- rfc.value='';
- passCliente.value='';
+ document.getElementById('cliente').value = '';
+ document.getElementById('rfc').value = '';
+ document.getElementById('passCliente').value = '';
 }
 
 // ================= BUSCAR CLIENTE =================
 function buscarCliente(){
 
- const r = clientes.find(c =>
-  c.rfc === buscarRFC.value && c.pass === buscarPASS.value
- );
+ const rfc = document.getElementById('buscarRFC').value.trim();
+ const pass = document.getElementById('buscarPASS').value.trim();
+
+ const r = clientes.find(c => c.rfc === rfc && c.pass === pass);
 
  if(!r){
   alert("Cliente no encontrado");
@@ -74,23 +91,22 @@ function buscarCliente(){
  }
 
  clienteActivo = r;
- abrirPanelCliente();
-}
 
-// ================= PANEL CLIENTE =================
-function abrirPanelCliente(){
  alert("Accediendo a: " + clienteActivo.nombre);
 }
 
-// ================= ABRIR MODULOS =================
+// ================= ABRIR MÓDULO =================
 function abrirModulo(m){
+
  moduloActivo = m;
 
  const lista = clienteActivo.datos[m] || [];
 
+ const tabla = document.getElementById('tabla');
  tabla.innerHTML = '';
 
  lista.forEach((x,i)=>{
+
   tabla.innerHTML += `
   <tr>
    <td>${x}</td>
@@ -98,70 +114,65 @@ function abrirModulo(m){
     <button onclick="editar(${i})">Editar</button>
     <button onclick="eliminar(${i})">Eliminar</button>
    </td>
-  </tr>`;
+  </tr>
+  `;
+
  });
+
 }
 
 // ================= AGREGAR DATO =================
 function guardarModulo(){
 
+ const input = document.getElementById('registro');
+
  if(!clienteActivo.datos[moduloActivo]){
-  clienteActivo.datos[moduloActivo]=[];
+  clienteActivo.datos[moduloActivo] = [];
  }
 
- clienteActivo.datos[moduloActivo].push(registro.value);
+ clienteActivo.datos[moduloActivo].push(input.value);
 
  persist();
+
  abrirModulo(moduloActivo);
 
- registro.value='';
+ input.value = '';
 }
 
 // ================= EDITAR =================
 function editar(i){
- let v = prompt("Editar registro:");
- if(v){
-  clienteActivo.datos[moduloActivo][i]=v;
+
+ let nuevo = prompt("Editar registro:");
+
+ if(nuevo){
+
+  clienteActivo.datos[moduloActivo][i] = nuevo;
+
   persist();
+
   abrirModulo(moduloActivo);
+
  }
+
 }
 
 // ================= ELIMINAR =================
 function eliminar(i){
+
  clienteActivo.datos[moduloActivo].splice(i,1);
+
  persist();
+
  abrirModulo(moduloActivo);
+
 }
 
-// ================= GUARDAR LOCAL =================
+// ================= GUARDAR EN LOCALSTORAGE =================
 function persist(){
  localStorage.setItem('clientes_gz', JSON.stringify(clientes));
 }
 
-// ================= ESTADISTICAS =================
+// ================= ESTADÍSTICAS =================
 function renderStats(){
- sTotal.textContent = clientes.length;
+ document.getElementById('sTotal').textContent = clientes.length;
 }
-<hr>
-
-<h3>🔐 Clientes del sistema</h3>
-
-<button onclick="mostrarRegistro()">➕ Nuevo Cliente</button>
-
-<button onclick="mostrarBusqueda()">🔍 Buscar Cliente</button>
-
-<!-- REGISTRO CLIENTE -->
-<div id="registroCliente" class="hidden">
- <input id="cliente" placeholder="Nombre cliente">
- <input id="rfc" placeholder="RFC">
- <input id="passCliente" placeholder="Contraseña cliente">
- <button onclick="guardarCliente()">Guardar cliente</button>
-</div>
-
-<!-- BUSQUEDA -->
-<div id="busquedaCliente" class="hidden">
- <input id="buscarRFC" placeholder="RFC">
- <input id="buscarPASS" type="password" placeholder="Contraseña">
- <button onclick="buscarCliente()">Acceder</button>
-</div>
