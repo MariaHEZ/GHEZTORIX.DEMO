@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GHEZTORIX - Sistema Digital para la Gestión de Despachos</title>
 <style>
-body { display:flex; margin:0; font-family:Segoe UI,sans-serif; background:#f4f6f9; }
+body { display:flex; flex-direction:column; margin:0; font-family:Segoe UI,sans-serif; background:#f4f6f9; }
 .hidden { display:none!important }
 
 /* LOGIN */
@@ -41,6 +41,23 @@ table { width:100%; border-collapse:collapse; margin-top:10px; }
 th,td { padding:10px; border-bottom:1px solid #ddd; }
 tr:nth-child(even){background:#f9f9f9;}
 .actions button { margin-right:6px; }
+
+/* 📱 RESPONSIVO */
+@media (min-width: 1024px) {
+  body { flex-direction:row; }
+}
+@media (max-width: 768px) {
+  .sidebar { width:100%; min-height:auto; display:flex; flex-direction:row; overflow-x:auto; }
+  .sidebar ul { display:flex; flex-direction:row; gap:10px; }
+  .sidebar li { flex:1; text-align:center; }
+  .content { padding:10px; }
+  .stats { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width: 480px) {
+  .stats { grid-template-columns:1fr; }
+  table, th, td { font-size:14px; }
+  button { padding:8px; font-size:14px; }
+}
 </style>
 </head>
 <body>
@@ -58,7 +75,7 @@ tr:nth-child(even){background:#f9f9f9;}
   <button onclick="login()">Ingresar</button>
 </div>
 
-<!-- NUEVA ESTRUCTURA -->
+<!-- Sidebar + contenido -->
 <div class="sidebar hidden" id="sidebar">
   <h2>GHEZTORIX</h2>
   <ul>
@@ -155,24 +172,4 @@ function registrarCliente(){
  if(!rfc.value||!clave.value) return alert('RFC y contraseña requeridos');
  clientes.push({rfc:rfc.value,nombre:nombre.value,clave:clave.value});
  persist(); renderClientes();
- rfc.value='';clave.value='';nombre.value='';
-}
-function renderClientes(){
- const q=(buscarCliente.value||'').toLowerCase();
- tablaClientes.innerHTML='';
- clientes.filter(c=>c.rfc.toLowerCase().includes(q)).forEach(c=>{
-  tablaClientes.innerHTML+=`<tr>
-  <td>${c.rfc}</td><td>${c.nombre}</td>
-  <td class="actions">
-   <button onclick="editarCliente('${c.rfc}')">✏️</button>
-   <button onclick="eliminarCliente('${c.rfc}')" style="background:#c62828">🗑️</button>
-  </td></tr>`;
- });
- sTotal.textContent=clientes.length;
-}
-function editarCliente(rfc){
- const c=clientes.find(x=>x.rfc===rfc);
- const n=prompt('Nuevo nombre',c.nombre);
- if(n){c.nombre=n; persist(); renderClientes();}
-}
-function
+ rfc.value='';clave
