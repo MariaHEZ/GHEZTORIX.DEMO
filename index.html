@@ -41,138 +41,22 @@ table { width:100%; border-collapse:collapse; margin-top:10px; }
 th,td { padding:10px; border-bottom:1px solid #ddd; }
 tr:nth-child(even){background:#f9f9f9;}
 .actions button { margin-right:6px; }
+
+/* 📱 RESPONSIVO */
+@media (max-width: 768px) {
+  body { flex-direction:column; }
+  .sidebar { width:100%; min-height:auto; display:flex; flex-direction:row; overflow-x:auto; }
+  .sidebar ul { display:flex; flex-direction:row; gap:10px; }
+  .sidebar li { flex:1; text-align:center; }
+  .content { padding:10px; }
+  .stats { grid-template-columns:repeat(2,1fr); }
+}
+
+@media (max-width: 480px) {
+  .stats { grid-template-columns:1fr; }
+  table, th, td { font-size:14px; }
+  button { padding:8px; font-size:14px; }
+}
 </style>
 </head>
 <body>
-
-<!-- Pantalla de login -->
-<div id="loginScreen" class="login">
-  <div class="logo">
-    <h1>GHEZTORIX</h1>
-    <p>Sistema Digital para la Gestión de Despachos</p>
-  </div>
-  <h2>Inicio de Sesión</h2>
-  <div id="error" style="display:none;color:red">Credenciales incorrectas</div>
-  <input id="usuario" placeholder="admin@gheztorix.com">
-  <input id="password" type="password" placeholder="12345">
-  <button onclick="login()">Ingresar</button>
-</div>
-
-<!-- NUEVA ESTRUCTURA -->
-<div class="sidebar hidden" id="sidebar">
-  <h2>GHEZTORIX</h2>
-  <ul>
-    <li onclick="mostrar('clientes')">👤 Clientes</li>
-    <li onclick="mostrar('documentos')">📄 Documentos</li>
-    <li onclick="mostrar('facturacion')">💰 Facturación</li>
-    <li onclick="mostrar('declaraciones')">📊 Declaraciones</li>
-    <li onclick="mostrar('impuestos')">🧾 Impuestos</li>
-    <li onclick="mostrar('estados')">🏦 Estados de Cuenta</li>
-    <li onclick="mostrar('reportes')">📈 Reportes</li>
-  </ul>
-  <button class="logout" onclick="logout()">Cerrar Sesión</button>
-</div>
-
-<div class="content hidden" id="dashboard">
-  <header>
-    <h1>Panel de Control</h1>
-  </header>
-
-  <!-- Dashboard con estadísticas -->
-  <div class="stats">
-    <div class="card verde"><h3 id="sAct">0</h3><p>Actualizadas</p></div>
-    <div class="card rojo"><h3 id="sVen">0</h3><p>Vencidas</p></div>
-    <div class="card amarillo"><h3 id="sPen">0</h3><p>Pendientes</p></div>
-    <div class="card azul"><h3 id="sTotal">0</h3><p>Total Clientes</p></div>
-  </div>
-
-  <!-- Secciones -->
-  <section id="clientes" class="hidden">
-    <h2>Gestión de Clientes</h2>
-    <input id="rfc" placeholder="RFC">
-    <input id="clave" type="password" placeholder="Contraseña">
-    <input id="nombre" placeholder="Nombre del Cliente">
-    <button onclick="registrarCliente()">Registrar Cliente</button>
-    <input id="buscarCliente" placeholder="Buscar por RFC..." onkeyup="renderClientes()">
-    <table>
-      <thead><tr><th>RFC</th><th>Nombre</th><th>Acciones</th></tr></thead>
-      <tbody id="tablaClientes"></tbody>
-    </table>
-  </section>
-
-  <section id="documentos" class="hidden">
-    <h2>Documentos</h2>
-    <input id="docCliente" placeholder="RFC del Cliente">
-    <select id="tipoDoc">
-      <option>Constancia de Situación Fiscal</option>
-      <option>Opinión de Cumplimiento</option>
-    </select>
-    <input id="docFecha" type="date">
-    <button onclick="guardarDocumento()">Agregar Documento</button>
-    <table>
-      <thead><tr><th>Cliente</th><th>Tipo</th><th>Fecha</th><th>Acciones</th></tr></thead>
-      <tbody id="tablaDocs"></tbody>
-    </table>
-  </section>
-
-  <section id="facturacion" class="hidden">
-    <h2>Facturación</h2>
-    <input id="facCliente" placeholder="RFC del Cliente">
-    <input id="facMonto" type="number" placeholder="Monto">
-    <button onclick="emitirFactura()">Emitir Factura</button>
-    <table>
-      <thead><tr><th>Cliente</th><th>Monto</th><th>Acciones</th></tr></thead>
-      <tbody id="tablaFac"></tbody>
-    </table>
-  </section>
-</div>
-
-<script>
-const USER='admin@gheztorix.com', PASS='12345';
-let clientes=JSON.parse(localStorage.getItem('clientes')||'[]');
-let documentos=JSON.parse(localStorage.getItem('documentos')||'[]');
-let facturas=JSON.parse(localStorage.getItem('facturas')||'[]');
-
-function login(){
- if(usuario.value===USER && password.value===PASS){
-  loginScreen.classList.add('hidden');
-  sidebar.classList.remove('hidden');
-  dashboard.classList.remove('hidden');
-  renderClientes(); renderDocs(); renderFac();
- } else error.style.display='block';
-}
-function logout(){
- dashboard.classList.add('hidden');
- sidebar.classList.add('hidden');
- loginScreen.classList.remove('hidden');
- persist();
-}
-function mostrar(id){
- document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
- document.getElementById(id).classList.remove('hidden');
-}
-function registrarCliente(){
- if(!rfc.value||!clave.value) return alert('RFC y contraseña requeridos');
- clientes.push({rfc:rfc.value,nombre:nombre.value,clave:clave.value});
- persist(); renderClientes();
- rfc.value='';clave.value='';nombre.value='';
-}
-function renderClientes(){
- const q=(buscarCliente.value||'').toLowerCase();
- tablaClientes.innerHTML='';
- clientes.filter(c=>c.rfc.toLowerCase().includes(q)).forEach(c=>{
-  tablaClientes.innerHTML+=`<tr>
-  <td>${c.rfc}</td><td>${c.nombre}</td>
-  <td class="actions">
-   <button onclick="editarCliente('${c.rfc}')">✏️</button>
-   <button onclick="eliminarCliente('${c.rfc}')" style="background:#c62828">🗑️</button>
-  </td></tr>`;
- });
- sTotal.textContent=clientes.length;
-}
-function editarCliente(rfc){
- const c=clientes.find(x=>x.rfc===rfc);
- const n=prompt('Nuevo nombre',c.nombre);
- if(n){c.nombre=n; persist(); renderClientes();}
-}
-function
