@@ -3,193 +3,593 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GHEZTORIX - Sistema Digital para la Gestión de Despachos</title>
+
+<title>GHEZTORIX PRO</title>
+
 <style>
-body{font-family:Segoe UI,sans-serif;background:#f4f6f9;margin:0}
-.hidden{display:none!important}
-.login{max-width:520px;margin:25px auto;background:#fff;padding:25px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
-.logo{text-align:center}.logo h1{color:#163c8c;margin:0;font-size:42px}
-.logo p{color:#666}
-button{padding:10px 14px;border:none;border-radius:6px;cursor:pointer;background:#163c8c;color:#fff;margin:4px}
-main{max-width:1200px;margin:20px auto;background:#fff;padding:20px;border-radius:12px}
-header{display:flex;justify-content:space-between;align-items:center}
-nav{margin:15px 0;display:flex;gap:10px;flex-wrap:wrap}
-nav button{background:#4a6cd1}
-section{margin-top:20px}
-table{width:100%;border-collapse:collapse;margin-top:10px}
-th,td{border:1px solid #ddd;padding:8px}
-th{background:#163c8c;color:#fff}
-.actions button{margin-right:4px}
+
+*{
+    box-sizing:border-box;
+    font-family:Segoe UI,Arial;
+}
+
+body{
+    margin:0;
+    background:#eef2f7;
+}
+
+
+/* LOGIN */
+
+#login{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+.card{
+    background:white;
+    width:380px;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 30px #999;
+}
+
+
+h1{
+    text-align:center;
+    color:#1d3557;
+}
+
+
+input,button,select{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+
+button{
+    background:#1d3557;
+    color:white;
+    cursor:pointer;
+}
+
+
+button:hover{
+    opacity:.8;
+}
+
+
+/* SISTEMA */
+
+#app{
+display:none;
+}
+
+
+header{
+background:#1d3557;
+color:white;
+padding:15px;
+display:flex;
+justify-content:space-between;
+}
+
+
+.menu{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+padding:20px;
+}
+
+
+.box{
+background:white;
+padding:25px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 5px 15px #ccc;
+}
+
+
+main{
+padding:20px;
+}
+
+
+table{
+width:100%;
+background:white;
+border-collapse:collapse;
+}
+
+
+td,th{
+padding:10px;
+border-bottom:1px solid #ddd;
+}
+
+
+
+.modal{
+
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#0008;
+justify-content:center;
+align-items:center;
+
+}
+
+
+.modal div{
+
+background:white;
+padding:25px;
+width:400px;
+border-radius:15px;
+
+}
+
+
 </style>
+
 </head>
+
+
 <body>
 
-<!-- Pantalla de login -->
-<div id="loginScreen" class="login">
-<div class="logo">
+
+<!-- LOGIN -->
+
+
+<section id="login">
+
+
+<div class="card">
+
 <h1>GHEZTORIX</h1>
-<p>Sistema Digital para la Gestión de Despachos</p>
-</div>
-<h2>Inicio de Sesión</h2>
-<div id="error" style="display:none;color:red">Credenciales incorrectas</div>
-<input id="usuario" placeholder="admin@gheztorix.com">
-<input id="password" type="password" placeholder="12345">
-<button onclick="login()">Ingresar</button>
+
+<input id="usuario" placeholder="Usuario">
+
+<input id="password" type="password" placeholder="Contraseña">
+
+
+<button onclick="login()">
+INICIAR SESIÓN
+</button>
+
+
+<p id="mensaje"></p>
+
+
 </div>
 
-<!-- Panel principal -->
-<main id="dashboard" class="hidden">
+</section>
+
+
+
+
+
+<!-- SISTEMA -->
+
+<section id="app">
+
+
 <header>
-<h1>Panel de Control GHEZTORIX</h1>
-<button onclick="logout()" style="background:#c62828">Cerrar Sesión</button>
+
+<b>GHEZTORIX PRO</b>
+
+<button onclick="salir()">
+Cerrar sesión
+</button>
+
 </header>
 
-<nav>
-<button onclick="mostrar('clientes')">👤 Clientes</button>
-<button onclick="mostrar('documentos')">📄 Documentos</button>
-<button onclick="mostrar('facturacion')">💰 Facturación</button>
-<button onclick="mostrar('declaraciones')">📊 Declaraciones</button>
-<button onclick="mostrar('impuestos')">🧾 Impuestos</button>
-<button onclick="mostrar('estados')">🏦 Estados de Cuenta</button>
-<button onclick="mostrar('reportes')">📈 Reportes</button>
-</nav>
 
-<!-- Sección clientes -->
-<section id="clientes" class="hidden">
-<h2>Gestión de Clientes</h2>
-<input id="rfc" placeholder="RFC">
-<input id="clave" type="password" placeholder="Contraseña">
-<input id="nombre" placeholder="Nombre del Cliente">
-<button onclick="registrarCliente()">Registrar Cliente</button>
-<input id="buscarCliente" placeholder="Buscar por RFC..." onkeyup="renderClientes()">
+
+<div class="menu">
+
+
+<div class="box">
+
+<h2 id="totalClientes">
+0
+</h2>
+
+Clientes
+
+</div>
+
+
+
+<div class="box">
+
+<h2>
+📁
+</h2>
+
+Documentos
+
+</div>
+
+
+
+<div class="box">
+
+<h2>
+🔎
+</h2>
+
+Búsqueda
+
+</div>
+
+
+
+<div class="box">
+
+<h2>
+📊
+</h2>
+
+Reportes
+
+</div>
+
+
+</div>
+
+
+
+<main>
+
+
+<button onclick="abrirModal()">
+➕ Nuevo Cliente
+</button>
+
+
+<h2>Clientes registrados</h2>
+
+
 <table>
-<thead><tr><th>RFC</th><th>Nombre</th><th>Acciones</th></tr></thead>
-<tbody id="tablaClientes"></tbody>
-</table>
-</section>
 
-<!-- Sección documentos -->
-<section id="documentos" class="hidden">
-<h2>Documentos</h2>
-<input id="docCliente" placeholder="RFC del Cliente">
-<select id="tipoDoc">
-<option>Constancia de Situación Fiscal</option>
-<option>Opinión de Cumplimiento</option>
-</select>
-<input id="docFecha" type="date">
-<button onclick="guardarDocumento()">Agregar Documento</button>
-<table>
-<thead><tr><th>Cliente</th><th>Tipo</th><th>Fecha</th><th>Acciones</th></tr></thead>
-<tbody id="tablaDocs"></tbody>
-</table>
-</section>
+<thead>
 
-<!-- Sección facturación -->
-<section id="facturacion" class="hidden">
-<h2>Facturación</h2>
-<input id="facCliente" placeholder="RFC del Cliente">
-<input id="facMonto" type="number" placeholder="Monto">
-<button onclick="emitirFactura()">Emitir Factura</button>
-<table>
-<thead><tr><th>Cliente</th><th>Monto</th><th>Acciones</th></tr></thead>
-<tbody id="tablaFac"></tbody>
-</table>
-</section>
+<tr>
 
-<!-- Más secciones (declaraciones, impuestos, estados, reportes) se pueden replicar con la misma lógica -->
+<th>Nombre</th>
+<th>RFC</th>
+<th>Correo</th>
+<th>Acciones</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="tabla">
+
+</tbody>
+
+
+</table>
+
 
 </main>
 
+
+</section>
+
+
+
+
+
+<!-- MODAL -->
+
+
+<div class="modal" id="modal">
+
+
+<div>
+
+<h2>Nuevo Cliente</h2>
+
+
+<input id="nombre" placeholder="Nombre">
+
+<input id="rfc" placeholder="RFC">
+
+<input id="correo" placeholder="Correo">
+
+<input id="actividad" placeholder="Actividad económica">
+
+<input id="clave" placeholder="Contraseña cliente">
+
+
+<button onclick="guardarCliente()">
+Guardar
+</button>
+
+
+<button onclick="cerrarModal()">
+Cancelar
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
 <script>
-const USER='admin@gheztorix.com', PASS='12345';
-let clientes=JSON.parse(localStorage.getItem('clientes')||'[]');
-let documentos=JSON.parse(localStorage.getItem('documentos')||'[]');
-let facturas=JSON.parse(localStorage.getItem('facturas')||'[]');
+
+
+const USER="admin@gheztorix.com";
+const PASS="12345";
+
+
+let clientes =
+JSON.parse(localStorage.getItem("clientes")) || [];
+
+
+
+
+// LOGIN
+
 
 function login(){
- if(usuario.value===USER && password.value===PASS){
-  loginScreen.classList.add('hidden');
-  dashboard.classList.remove('hidden');
-  renderClientes(); renderDocs(); renderFac();
- } else error.style.display='block';
+
+
+let u =
+document.getElementById("usuario").value;
+
+
+let p =
+document.getElementById("password").value;
+
+
+
+if(u==USER && p==PASS){
+
+
+document.getElementById("login").style.display="none";
+
+document.getElementById("app").style.display="block";
+
+
+mostrarClientes();
+
+
 }
-function logout(){
- dashboard.classList.add('hidden');
- loginScreen.classList.remove('hidden');
- persist();
+
+else{
+
+
+mensaje.innerHTML=
+"Usuario incorrecto";
+
+
 }
-function mostrar(id){
- document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
- document.getElementById(id).classList.remove('hidden');
+
+
 }
-function registrarCliente(){
- if(!rfc.value||!clave.value) return alert('RFC y contraseña requeridos');
- clientes.push({rfc:rfc.value,nombre:nombre.value,clave:clave.value});
- persist(); renderClientes();
- rfc.value='';clave.value='';nombre.value='';
+
+
+
+
+
+function salir(){
+
+location.reload();
+
 }
-function renderClientes(){
- const q=(buscarCliente.value||'').toLowerCase();
- tablaClientes.innerHTML='';
- clientes.filter(c=>c.rfc.toLowerCase().includes(q)).forEach(c=>{
-  tablaClientes.innerHTML+=`<tr>
-  <td>${c.rfc}</td><td>${c.nombre}</td>
-  <td class="actions">
-   <button onclick="editarCliente('${c.rfc}')">Editar</button>
-   <button onclick="eliminarCliente('${c.rfc}')" style="background:#c62828">Eliminar</button>
-  </td></tr>`;
- });
+
+
+
+
+// MODAL
+
+
+function abrirModal(){
+
+modal.style.display="flex";
+
 }
-function editarCliente(rfc){
- const c=clientes.find(x=>x.rfc===rfc);
- const n=prompt('Nuevo nombre',c.nombre);
- if(n){c.nombre=n; persist(); renderClientes();}
+
+
+function cerrarModal(){
+
+modal.style.display="none";
+
 }
-function eliminarCliente(rfc){
- if(confirm('¿Eliminar cliente?')){
-  clientes=clientes.filter(x=>x.rfc!==rfc);
-  persist(); renderClientes();
- }
+
+
+
+
+
+// GUARDAR CLIENTE
+
+
+
+function guardarCliente(){
+
+
+
+let cliente={
+
+id:Date.now(),
+
+nombre:nombre.value,
+
+rfc:rfc.value,
+
+correo:correo.value,
+
+actividad:actividad.value,
+
+clave:clave.value,
+
+documentos:[]
+
+};
+
+
+
+clientes.push(cliente);
+
+
+localStorage.setItem(
+"clientes",
+JSON.stringify(clientes)
+);
+
+
+
+cerrarModal();
+
+
+mostrarClientes();
+
+
 }
-function guardarDocumento(){
- documentos.push({cliente:docCliente.value,tipo:tipoDoc.value,fecha:docFecha.value});
- persist(); renderDocs();
- docCliente.value='';docFecha.value='';
+
+
+
+
+// MOSTRAR
+
+
+
+function mostrarClientes(){
+
+
+tabla.innerHTML="";
+
+
+clientes.forEach(c=>{
+
+
+tabla.innerHTML += `
+
+<tr>
+
+<td>${c.nombre}</td>
+
+<td>${c.rfc}</td>
+
+<td>${c.correo}</td>
+
+
+<td>
+
+<button onclick="verCliente(${c.id})">
+Ver
+</button>
+
+
+<button onclick="eliminar(${c.id})">
+Eliminar
+</button>
+
+
+</td>
+
+
+</tr>
+
+`;
+
+
+});
+
+
+
+totalClientes.innerHTML=clientes.length;
+
+
 }
-function renderDocs(){
- tablaDocs.innerHTML='';
- documentos.forEach(d=>{
-  tablaDocs.innerHTML+=`<tr>
-  <td>${d.cliente}</td><td>${d.tipo}</td><td>${d.fecha}</td>
-  <td><button onclick="eliminarDoc('${d.cliente}','${d.tipo}')">Eliminar</button></td></tr>`;
- });
+
+
+
+
+
+function eliminar(id){
+
+
+clientes =
+clientes.filter(c=>c.id!=id);
+
+
+localStorage.setItem(
+"clientes",
+JSON.stringify(clientes)
+);
+
+
+mostrarClientes();
+
 }
-function eliminarDoc(cliente,tipo){
- documentos=documentos.filter(x=>!(x.cliente===cliente && x.tipo===tipo));
- persist(); renderDocs();
+
+
+
+
+
+function verCliente(id){
+
+
+let c =
+clientes.find(x=>x.id==id);
+
+
+
+alert(
+
+`
+EXPEDIENTE DIGITAL
+
+Cliente:
+${c.nombre}
+
+RFC:
+${c.rfc}
+
+Correo:
+${c.correo}
+
+Actividad:
+${c. actividad}
+
+Documentos:
+${c.documentos.length}
+
+`
+
+);
+
+
 }
-function emitirFactura(){
- facturas.push({cliente:facCliente.value,monto:facMonto.value});
- persist(); renderFac();
- facCliente.value='';facMonto.value='';
-}
-function renderFac(){
- tablaFac.innerHTML='';
- facturas.forEach(f=>{
-  tablaFac.innerHTML+=`<tr>
-  <td>${f.cliente}</td><td>${f.monto}</td>
-  <td><button onclick="eliminarFac('${f.cliente}','${f.monto}')">Eliminar</button></td></tr>`;
- });
-}
-function eliminarFac(cliente,monto){
- facturas=facturas.filter(x=>!(x.cliente===cliente && x.monto==monto));
- persist(); renderFac();
-}
-function persist(){
- localStorage.setItem('clientes',JSON.stringify(clientes));
- localStorage.setItem('documentos',JSON.stringify(documentos));
- localStorage.setItem('facturas',JSON.stringify(facturas));
-}
+
+
+
 </script>
+
+
 </body>
 </html>
