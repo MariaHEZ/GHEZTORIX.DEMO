@@ -1,9 +1,39 @@
-<div id="login">
-  <input id="user" placeholder="Usuario">
-  <input id="pass" type="password" placeholder="Contraseña">
-  <button onclick="login()">Entrar</button>
-</div>
+<!-- Formulario de Login -->
+<form id="form-login">
+    <label for="usuario">Correo Electrónico o RFC:</label>
+    <input type="text" id="usuario" required placeholder="admin">
 
-<div id="app" class="hidden">
-  SISTEMA
-</div>
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" required placeholder="••••••">
+
+    <label for="perfil">Ingresar como:</label>
+    <select id="perfil" required>
+        <option value="usuario">Administrador</option>
+        <option value="cliente">Cliente</option>
+    </select>
+
+    <button type="submit">Ingresar</button>
+</form>
+
+<div id="error-box" class="error-message">Usuario o contraseña incorrectos.</div>
+
+<!-- Script de validación -->
+<script>
+    const formLogin = document.getElementById("form-login");
+    const errorBox = document.getElementById("error-box");
+
+    formLogin.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const usuario = document.getElementById("usuario").value;
+        const password = document.getElementById("password").value;
+        const perfil = document.getElementById("perfil").value;
+
+        if(perfil === "usuario" && usuario === "admin" && password === "1234"){
+            window.location.href = "panel.html"; // Panel administrador
+        } else if(perfil === "cliente" && usuario === "cliente" && password === "1234"){
+            window.location.href = "cliente.html"; // Panel cliente
+        } else {
+            errorBox.style.display = "block";
+        }
+    });
+</script>
