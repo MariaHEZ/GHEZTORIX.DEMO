@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Cliente</title>
+
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+<h2>Área del Cliente</h2>
+
+<p>Bienvenido a GHEZTORIX</p>
+
+<button onclick="logout()">Cerrar sesión</button>
+
+<script>
+function logout(){
+    localStorage.removeItem("sesion");
+    window.location.href="index.html";
+}
+</script>
+
+</body>
+</html>
