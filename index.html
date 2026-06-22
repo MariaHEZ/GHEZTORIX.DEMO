@@ -2,88 +2,108 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>GHEZTORIX PRO</title>
+<title>GHEZTORIX ERP</title>
 <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
 <!-- LOGIN -->
-<div id="login" class="login-container">
-  <div class="login-box">
-    <h2>GHEZTORIX PRO</h2>
-    <p>Acceso al sistema</p>
+<div id="loginScreen" class="center">
+  <div class="cardLogin">
+    <h2>GHEZTORIX ERP</h2>
 
-    <input type="text" id="usuario" placeholder="Correo">
-    <input type="password" id="password" placeholder="Contraseña">
+    <input id="user" placeholder="Usuario">
+    <input id="pass" type="password" placeholder="Contraseña">
 
     <button onclick="login()">Ingresar</button>
   </div>
 </div>
 
 <!-- DASHBOARD -->
-<div id="dashboard" class="hidden">
+<div id="app" class="hidden">
 
   <!-- SIDEBAR -->
-  <div class="sidebar">
-    <h2>GHEZTORIX</h2>
+  <aside class="sidebar">
+    <h2>ERP</h2>
 
-    <button onclick="showModule('home')">🏠 Inicio</button>
-    <button onclick="showModule('clientes')">👤 Clientes</button>
-    <button onclick="showModule('buscar')">🔎 Consultas</button>
-  </div>
+    <button onclick="openModule('home')">🏠 Inicio</button>
+    <button onclick="openModule('clientes')">👤 Clientes</button>
+    <button onclick="openModule('busqueda')">🔎 Buscar RFC</button>
+    <button onclick="logout()">🚪 Salir</button>
+  </aside>
 
   <!-- CONTENIDO -->
-  <div class="main">
+  <main class="main">
 
     <!-- HOME -->
-    <div id="home" class="module">
-      <h1>Dashboard</h1>
+    <section id="home" class="module">
+      <h1>Dashboard ERP</h1>
 
-      <div class="cards">
-        <div class="card">Clientes<br><span id="totalClientes">0</span></div>
-        <div class="card">Sistema activo</div>
-        <div class="card">LocalStorage</div>
+      <div class="grid">
+        <div class="box">Clientes: <span id="total"></span></div>
+        <div class="box">Sistema activo</div>
+        <div class="box">LocalStorage DB</div>
       </div>
-    </div>
+    </section>
 
     <!-- CLIENTES -->
-    <div id="clientes" class="module hidden">
+    <section id="clientes" class="module hidden">
+
       <h2>Registro de Clientes</h2>
 
       <div class="form">
-        <input type="text" id="nombre" placeholder="Nombre completo">
-        <input type="text" id="rfc" placeholder="RFC">
-        <input type="email" id="correo" placeholder="Correo">
 
-        <button onclick="addClient()">Guardar cliente</button>
+        <input id="razon" placeholder="Razón Social">
+        <input id="rfc" placeholder="RFC">
+        <input id="cp" placeholder="Código Postal">
+        <input id="regimen" placeholder="Régimen Fiscal">
+        <input id="correo" placeholder="Correo">
+        <input id="passCli" placeholder="Contraseña cliente">
+
+        <label>
+          Firma electrónica:
+          <select id="firma">
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+        </label>
+
+        <input id="actividad" placeholder="Actividad económica">
+
+        <button onclick="addClient()">Registrar Cliente</button>
       </div>
 
       <table>
         <thead>
           <tr>
-            <th>Nombre</th>
+            <th>Razón Social</th>
             <th>RFC</th>
             <th>Correo</th>
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody id="tablaClientes"></tbody>
+        <tbody id="table"></tbody>
       </table>
-    </div>
 
-    <!-- BUSCAR -->
-    <div id="buscar" class="module hidden">
-      <h2>Consulta por RFC</h2>
+    </section>
 
-      <input type="text" id="buscarRFC" placeholder="RFC">
-      <button onclick="searchClient()">Buscar</button>
+    <!-- BUSQUEDA -->
+    <section id="busqueda" class="module hidden">
 
-      <div id="resultado"></div>
-    </div>
+      <h2>Buscar Cliente por RFC</h2>
 
-  </div>
+      <input id="searchRfc" placeholder="RFC">
+      <button onclick="search()">Buscar</button>
+
+      <div id="result"></div>
+
+    </section>
+
+  </main>
+
 </div>
 
-<script src="script.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
