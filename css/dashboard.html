@@ -1,48 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Dashboard</title>
+let sesion = JSON.parse(localStorage.getItem("sesion"));
 
-<link rel="stylesheet" href="css/estilos.css">
-</head>
+if(!sesion){
+    window.location.href = "index.html";
+}
 
-<body>
-
-<header class="topbar">
-    <h2>GHEZTORIX - ADMIN</h2>
-    <button onclick="logout()">Cerrar sesión</button>
-</header>
-
-<div class="panel">
-
-    <h3>Registro de Clientes</h3>
-
-    <input id="nombre" placeholder="Nombre o Razón Social">
-    <input id="rfc" placeholder="RFC">
-    <input id="correo" placeholder="Correo">
-    <input id="passwordCliente" placeholder="Contraseña cliente">
-
-    <button onclick="guardarCliente()">Guardar Cliente</button>
-
-    <h3>Clientes</h3>
-
-    <table border="1" width="100%">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>RFC</th>
-                <th>Correo</th>
-                <th>Acción</th>
-            </tr>
-        </thead>
-
-        <tbody id="tabla"></tbody>
-    </table>
-
-</div>
-
-<script src="js/clientes.js"></script>
-
-</body>
-</html>
+// mostrar rol en pantalla
+document.getElementById("rolUsuario").innerText = sesion.rol;
