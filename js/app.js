@@ -1,106 +1,106 @@
-// =======================
-// LOGIN
-// =======================
-function login(){
+// ================= LOGIN / LOGOUT =================
 
-    const user = document.getElementById("usuario").value;
-    const pass = document.getElementById("password").value;
-
-    const usuarios = [
-        {u:"admin@gheztorix.com", p:"123456", rol:"admin"},
-        {u:"cliente1", p:"123456", rol:"cliente"}
-    ];
-
-    const ok = usuarios.find(x => x.u === user && x.p === pass);
-
-    if(ok){
-
-        localStorage.setItem("rol", ok.rol);
-        localStorage.setItem("sesion", "ok");
-
-        window.location.href = "dashboard.html";
-
-    }else{
-        document.getElementById("error").innerText =
-        "Datos incorrectos";
-    }
-}
-
-// =======================
-// LOGOUT
-// =======================
 function logout(){
-    localStorage.clear();
+    localStorage.removeItem("sesion");
+    localStorage.removeItem("rol");
     window.location.href = "index.html";
 }
 
-// =======================
-// DATOS
-// =======================
-let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+// ================= NAVEGACIÓN DE SECCIONES =================
 
-// =======================
-// GUARDAR CLIENTE
-// =======================
-function guardar(){
+function mostrar(id){
 
-    let c = {
-        nombre:document.getElementById("nombre").value,
-        rfc:document.getElementById("rfc").value,
-        correo:document.getElementById("correo").value
-    };
+    document.querySelectorAll(".seccion").forEach(sec => {
+        sec.classList.add("oculto");
+    });
 
-    clientes.push(c);
-    localStorage.setItem("clientes", JSON.stringify(clientes));
-
-    alert("Cliente guardado");
-
-    render();
+    document.getElementById(id).classList.remove("oculto");
 }
 
-// =======================
-// MOSTRAR CLIENTES
-// =======================
-function render(){
+// ================= BASE DE DATOS SIMULADA =================
 
-    let tabla = document.getElementById("tablaClientes");
-    if(!tabla) return;
+let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
+// ================= GUARDAR CLIENTE =================
+
+function guardar(){
+
+    const nombre = document.getElementById("nombre").value.trim();
+    const rfc = document.getElementById("rfc").value.trim();
+    const correo = document.getElementById("correo").value.trim();
+
+    if(!nombre || !rfc || !correo){
+        alert("Completa todos los campos");
+        return;
+    }
+
+    const nuevo = { nombre, rfc, correo };
+
+    clientes.push(nuevo);
+
+    localStorage.setItem("clientes", JSON.stringify(clientes));
+
+    document.getElementById("nombre").value = "";
+    document.getElementById("rfc").value = "";
+    document.getElementById("correo").value = "";
+
+    alert("Cliente guardado correctamente");
+
+    renderClientes();
+}
+
+// ================= MOSTRAR CLIENTES =================
+
+function renderClientes(){
+
+    const tabla = document.getElementById("tablaClientes");
     tabla.innerHTML = "";
 
-    clientes.forEach(c => {
+    clientes.forEach((c, index) => {
+
         tabla.innerHTML += `
         <tr>
             <td>${c.nombre}</td>
             <td>${c.rfc}</td>
             <td>${c.correo}</td>
-        </tr>`;
+            <td>
+                <button onclick="eliminar(${index})">Eliminar</button>
+            </td>
+        </tr>
+        `;
     });
 }
 
-// =======================
-// BUSCAR RFC
-// =======================
+// ================= ELIMINAR =================
+
+function eliminar(index){
+
+    clientes.splice(index,1);
+
+    localStorage.setItem("clientes", JSON.stringify(clientes));
+
+    renderClientes();
+}
+
+// ================= BUSCAR RFC =================
+
 function buscar(){
 
-    let rfc = document.getElementById("buscarRFC").value;
+    const rfc = document.getElementById("buscarRFC").value.trim();
 
-    let c = clientes.find(x => x.rfc === rfc);
+    const resultado = clientes.find(c => c.rfc === rfc);
 
-    document.getElementById("resultado").innerHTML =
-    c ? `<p>${c.nombre} - ${c.correo}</p>` : "No encontrado";
+    if(resultado){
+        document.getElementById("resultado").innerHTML =
+        `<p><b>${resultado.nombre}</b> - ${resultado.correo}</p>`;
+    }else{
+        document.getElementById("resultado").innerHTML =
+        "No encontrado";
+    }
 }
 
-// =======================
-// NAVEGACIÓN
-// =======================
-function mostrar(id){
+// ================= INICIAR =================
 
-    document.querySelectorAll(".seccion")
-    .forEach(s => s.classList.add("oculto"));
-
-    document.getElementById(id).classList.remove("oculto");
-}
-
-// init
-render();
+window.onload = function(){
+    renderClientes();
+};
