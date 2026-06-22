@@ -3,7 +3,6 @@ function login(){
     const user = document.getElementById("usuario").value.trim();
     const pass = document.getElementById("password").value.trim();
 
-    // USUARIO DE PRUEBA
     const adminUser = "admin@gheztorix.com";
     const adminPass = "123456";
 
@@ -12,7 +11,7 @@ function login(){
         localStorage.setItem("sesion","ok");
         localStorage.setItem("rol","admin");
 
-        window.location.href = "./dashboard.html";
+        window.location.href = "dashboard.html";
 
     }else{
 
