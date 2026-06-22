@@ -1,0 +1,46 @@
+body{
+  font-family: Arial;
+  background:#f2f2f2;
+  text-align:center;
+}
+
+.box{
+  width:300px;
+  margin:100px auto;
+  padding:20px;
+  background:white;
+  border-radius:10px;
+}
+
+input{
+  display:block;
+  width:90%;
+  margin:10px auto;
+  padding:10px;
+}
+
+button{
+  padding:10px;
+  margin:5px;
+  cursor:pointer;
+}
+
+#panel{
+  padding:20px;
+}
+
+.menu button{
+  background:#333;
+  color:white;
+}
+
+.hidden{
+  display:none;
+}
+
+.seccion{
+  margin-top:20px;
+  background:white;
+  padding:20px;
+  border-radius:10px;
+}
