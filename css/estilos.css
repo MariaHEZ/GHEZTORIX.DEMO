@@ -1,0 +1,44 @@
+body{
+    margin:0;
+    font-family:Segoe UI;
+    background:#0A3D62;
+}
+
+.login-container{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.login-box{
+    background:white;
+    padding:30px;
+    width:320px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.3);
+}
+
+input, select{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:#27AE60;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#219150;
+}
+
+#error{
+    color:red;
+}
