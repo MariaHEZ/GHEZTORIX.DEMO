@@ -1,81 +1,25 @@
-body{
-    margin:0;
-    font-family:Segoe UI;
-    background:#f4f6f9;
-}
-
-/* LOGIN */
-.login-container{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(120deg,#000,#1c1c1c,#2b2b2b);
-}
-
-.login-box{
-    background:rgba(255,255,255,0.08);
-    padding:30px;
-    border-radius:12px;
-    color:white;
-    text-align:center;
-    width:300px;
-    border:1px solid #d4af37;
-}
-
-input{
-    width:100%;
-    padding:10px;
-    margin:5px 0;
-}
-
-button{
-    width:100%;
-    padding:10px;
-    background:#d4af37;
-    border:none;
-    cursor:pointer;
-}
-
-/* HEADER */
-header{
-    background:#0d1b2a;
-    color:#d4af37;
-    padding:15px;
-    display:flex;
-    justify-content:space-between;
-}
-
-/* PANEL */
-.panel{
-    display:flex;
-    gap:10px;
-    padding:15px;
-}
-
-.card{
-    background:white;
-    padding:15px;
-    border-radius:10px;
-    cursor:pointer;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
-}
-
-.seccion{
-    padding:20px;
-}
-
 .oculto{
     display:none;
 }
 
-table{
-    width:100%;
-    background:white;
-    border-collapse:collapse;
+.panel{
+    display:flex;
+    gap:15px;
+    padding:20px;
 }
 
-th,td{
-    padding:10px;
-    border-bottom:1px solid #ccc;
+.card{
+    background:#000;
+    color:#d4af37;
+    padding:20px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+header{
+    background:#111;
+    color:#d4af37;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
 }
