@@ -3,38 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <title>GHEZTORIX Login</title>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<div class="background"></div>
-
 <div class="login-container">
 
-    <div class="login-card">
+    <div class="login-box">
+        <h1>💼 GHEZTORIX</h1>
+        <p>Sistema Digital de Gestión</p>
 
-        <!-- LOGO -->
-        <div class="logo">GHEZTORIX</div>
+        <input id="usuario" placeholder="Usuario o correo">
+        <input id="password" type="password" placeholder="Contraseña">
 
-        <div class="subtitle">
-            Sistema Digital para la Gestión de Despachos
-        </div>
-
-        <!-- FORM -->
-        <input type="text" id="usuario" placeholder="Usuario o correo">
-        <input type="password" id="password" placeholder="Contraseña">
-
-        <button onclick="login()">Ingresar</button>
+        <button onclick="login()">Iniciar sesión</button>
 
         <p id="error"></p>
-
     </div>
 
 </div>
 
-<script src="login.js"></script>
-
+<script src="js/app.js"></script>
 </body>
 </html>
