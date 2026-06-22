@@ -8,10 +8,21 @@
 <body>
 <header>INICIO DE SESIÓN</header>
 <div class="container">
+
+  <!-- Selector de perfil -->
+  <label for="perfil">Ingresar como:</label>
+  <select id="perfil">
+    <option value="usuario">Usuario (Administrador)</option>
+    <option value="cliente">Cliente</option>
+  </select>
+
+  <!-- Campos de acceso -->
   <input id="usuario" placeholder="Correo o RFC">
   <input id="password" type="password" placeholder="Contraseña">
+
   <button onclick="login()">Entrar</button>
 </div>
+
 <script src="js/auth.js"></script>
 </body>
 </html>
