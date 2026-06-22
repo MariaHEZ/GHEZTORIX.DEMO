@@ -9,7 +9,7 @@ function login() {
   if (perfil === "usuario") {
     if (usuario === adminUser && password === adminPass) {
       alert("Bienvenido Administrador");
-      window.location.href = "dashboard.html";
+     window.location.href = "panel.html";
     } else {
       alert("Credenciales inválidas para Usuario");
     }
