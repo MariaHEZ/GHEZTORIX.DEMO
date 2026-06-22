@@ -2,92 +2,179 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>GHEZTORIX LOGIN</title>
-
-<style>
-body{
-margin:0;
-font-family:Arial;
-background:#111827;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
-
-.login-box{
-background:#1E3A8A;
-padding:30px;
-border-radius:15px;
-width:300px;
-}
-
-input{
-width:100%;
-padding:10px;
-margin:10px 0;
-border:none;
-border-radius:8px;
-}
-
-button{
-width:100%;
-padding:10px;
-background:#10B981;
-border:none;
-color:white;
-border-radius:8px;
-cursor:pointer;
-}
-</style>
+<title>GHEZTORIX</title>
+<link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
 
-<div class="login-box">
-<h2>GHEZTORIX</h2>
+<header>GHEZTORIX - Plataforma de Gestión de Despachos</header>
 
-<input id="usuario" placeholder="Correo o usuario">
+<div class="container">
+
+<h2 class="gold">Bienvenido</h2>
+
+<p>Sistema digital contable profesional</p>
+
+<button onclick="location.href='login.html'">Entrar al sistema</button>
+
+</div>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Login GHEZTORIX</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<header>INICIO DE SESIÓN</header>
+
+<div class="container">
+
+<input id="usuario" placeholder="Correo o RFC">
 <input id="password" type="password" placeholder="Contraseña">
 
 <button onclick="login()">Entrar</button>
+
 </div>
 
-<script>
+<script src="js/auth.js"></script>
 
+</body>
+</html>
+body{
+margin:0;
+font-family:Arial;
+background:#0f172a;
+color:white;
+}
+
+header{
+background:#1E3A8A;
+padding:15px;
+text-align:center;
+font-weight:bold;
+}
+
+.container{
+padding:20px;
+}
+
+button{
+background:#10B981;
+border:none;
+padding:10px;
+margin:5px;
+border-radius:8px;
+color:white;
+cursor:pointer;
+}
+
+input{
+width:95%;
+padding:10px;
+margin:8px 0;
+border-radius:8px;
+border:none;
+}
+
+.card{
+background:#1f2937;
+padding:15px;
+margin:10px 0;
+border-radius:10px;
+}
+
+.gold{color:#F59E0B;}
+.blue{color:#3B82F6;}
+
+@media(max-width:768px){
+.container{padding:10px;}
+}
 const ADMIN_USER = "admin@gheztorix.com";
 const ADMIN_PASS = "12345";
 
 function login(){
 
-const u = document.getElementById("usuario").value;
-const p = document.getElementById("password").value;
+let u = document.getElementById("usuario").value.trim();
+let p = document.getElementById("password").value.trim();
 
+// ADMIN
 if(u === ADMIN_USER && p === ADMIN_PASS){
+localStorage.setItem("sesion", JSON.stringify({tipo:"admin"}));
+location.href="panel.html";
+return;
+}
 
-localStorage.setItem("sesion", JSON.stringify({tipo:"admin", user:u}));
-
-window.location.href = "panel.html";
-
-}else{
-
-// buscar cliente
+// CLIENTE
 let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
 let cliente = clientes.find(c => c.rfc === u && c.password === p);
 
 if(cliente){
-localStorage.setItem("sesion", JSON.stringify({tipo:"cliente", data:cliente}));
-window.location.href = "cliente.html";
+localStorage.setItem("sesion", JSON.stringify({
+tipo:"cliente",
+data:cliente
+}));
+
+location.href="cliente.html";
 }else{
 alert("Credenciales incorrectas");
 }
 
 }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel GHEZTORIX</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
 
+<body>
+
+<header>PANEL ADMIN</header>
+
+<div class="container">
+
+<button onclick="mostrarRegistro()">Registrar Cliente</button>
+<button onclick="listarClientes()">Ver Clientes</button>
+<button onclick="logout()">Cerrar sesión</button>
+
+<div id="panel"></div>
+
+</div>
+
+<script src="js/clientes.js"></script>
+
+<script>
+function logout(){
+localStorage.removeItem("sesion");
+location.href="login.html";
 }
 
+function mostrarRegistro(){
+document.getElementById("panel").innerHTML = `
+<h3>Registro de Cliente</h3>
+<input id="nombre" placeholder="Nombre o Razón Social">
+<input id="rfc" placeholder="RFC">
+<input id="regimen" placeholder="Régimen Fiscal">
+<input id="telefono" placeholder="Teléfono">
+<input id="correo" placeholder="Correo">
+<input id="password" placeholder="Contraseña">
+
+<button onclick="guardarCliente()">Guardar</button>
+`;
+}
+
+function listarClientes(){
+renderClientes();
+}
 </script>
 
 </body>
