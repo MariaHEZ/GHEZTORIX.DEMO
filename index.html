@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>GHEZTORIX PRO MAX</title>
+<title>GHEZTORIX </title>
 
 <style>
 body{
@@ -129,7 +129,7 @@ margin-top:20px;
 <div class="sidebar">
 <h2>GHEZTORIX</h2>
 
-<a onclick="show('dash')">📊 Dashboard</a>
+<a onclick="show('dash')">📊 Gestión</a>
 <a onclick="show('clientes')">👤 Clientes</a>
 <a onclick="toggleDark()">🌙 Modo</a>
 <a onclick="logout()">🚪 Salir</a>
@@ -139,12 +139,19 @@ margin-top:20px;
 
 <!-- DASH -->
 <div id="dash">
-<h1>Dashboard</h1>
+<h1>Gestión</h1>
 
 <div class="cards">
 <div class="card">
 <h3>Total Clientes</h3>
-<p id="total">0</p>
+<p id="total">21</p>
+</div>
+</div>
+
+<div class="cards">
+<div class="card">
+<h3>Reportes Pendientes</h3>
+<p id="total">2</p>
 </div>
 </div>
 
@@ -156,19 +163,104 @@ margin-top:20px;
 
 <h1>Clientes</h1>
 
-<input id="nombre" placeholder="Nombre">
-<input id="rfc" placeholder="RFC">
+<input class="input"
+id="Razón Social"
+placeholder="Razón Social">
+
+
+<input class="input" 
+id="RFC" 
+placeholder="RFC">
+
+
+<input class="input" 
+id="CODIGO POSTAL" 
+placeholder="Código Postal">
+
+
+<select id="Regimen">
+
+<option>
+601 - REGIMEN GENERAL DE LEY PERSONAS MORALES
+</option>
+
+<option>
+602 - RÉGIMEN SIMPLIFICADO DE LEY PERSONAS MORALES
+</option>
+
+<option>
+603 - PERSONAS MORALES CON FINES NO LUCRATIVOS
+</option>
+
+<option>
+605 - RÉGIMEN DE SUELDOS Y SALARIOS E INGRESOS ASIMILADOS A SALARIOS
+</option>
+
+<option>
+606 - RÉGIMEN DE ARRENDAMIENTO
+</option>
+
+<option>
+607 - RÉGIMEN DE ENAJENACIÓN O ADQUISICIÓN DE BIENES
+</option>
+
+<option>
+612 - RÉGIMEN DE LAS PERSONAS FÍSICAS CON ACTIVIDADES EMPRESARIALES Y PROFESIONALES
+</option>
+
+<option>
+616 - SIN OBLIGACIONES FISCALES
+</option>
+
+<option>
+621 - RÉGIMEN DE INCORPORACIÓN FISCAL
+</option>
+
+<option>
+625 - RÉGIMEN DE LAS ACTIVIDADES EMPRESARIALES CON INGRESOS A TRAVÉS DE PLATAFORMAS TECNOLÓGICAS
+</option>
+
+<option>
+626 - RÉGIMEN SIMPLIFICADO DE CONFIANZA
+</option>
+
+</select>
+
+
+<input class="input" 
+id="telefono"
+placeholder="Número Telefónico">
+
+
+<input class="input" 
+id="correo"
+placeholder="Correo Electrónico">
+
+
+<h3>Acceso Cliente</h3>
+
+
+<input class="input" 
+id="usuarioCliente" 
+placeholder="Usuario Cliente">
+
+
+
+<input class="input" 
+id="passCliente"
+placeholder="Contraseña Cliente">
 
 <button class="primary" onclick="add()">Agregar</button>
 
+  
 <input id="buscar" placeholder="Buscar..." onkeyup="render()">
 
 <table>
 <thead>
 <tr>
 <th>ID</th>
-<th>Nombre</th>
 <th>RFC</th>
+<th>RAZÓN SOCIAL</th>
 <th>Acciones</th>
 </tr>
 </thead>
