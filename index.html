@@ -2,54 +2,86 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>GHEZTORIX</title>
+<title>GHEZTORIX PRO</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <!-- LOGIN -->
-<div id="loginBox" class="box">
-  <h2>Iniciar Sesión</h2>
+<div id="login" class="login-container">
+  <div class="login-box">
+    <h2>GHEZTORIX PRO</h2>
+    <p>Acceso al sistema</p>
 
-  <input type="text" id="usuario" placeholder="Correo">
-  <input type="password" id="password" placeholder="Contraseña">
+    <input type="text" id="usuario" placeholder="Correo">
+    <input type="password" id="password" placeholder="Contraseña">
 
-  <button onclick="login()">Entrar</button>
+    <button onclick="login()">Ingresar</button>
+  </div>
 </div>
 
-<!-- PANEL -->
-<div id="panel" class="hidden">
+<!-- DASHBOARD -->
+<div id="dashboard" class="hidden">
 
-  <h1>GHEZTORIX - Panel Principal</h1>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>GHEZTORIX</h2>
 
-  <div class="menu">
-    <button onclick="mostrar('clientes')">Clientes</button>
-    <button onclick="mostrar('consultas')">Consultas</button>
+    <button onclick="showModule('home')">🏠 Inicio</button>
+    <button onclick="showModule('clientes')">👤 Clientes</button>
+    <button onclick="showModule('buscar')">🔎 Consultas</button>
   </div>
 
-  <!-- CLIENTES -->
-  <div id="clientes" class="seccion hidden">
-    <h2>Registro de Clientes</h2>
+  <!-- CONTENIDO -->
+  <div class="main">
 
-    <input type="text" id="nombre" placeholder="Nombre">
-    <input type="text" id="rfc" placeholder="RFC">
-    <input type="email" id="correo" placeholder="Correo">
+    <!-- HOME -->
+    <div id="home" class="module">
+      <h1>Dashboard</h1>
 
-    <button onclick="agregarCliente()">Guardar</button>
+      <div class="cards">
+        <div class="card">Clientes<br><span id="totalClientes">0</span></div>
+        <div class="card">Sistema activo</div>
+        <div class="card">LocalStorage</div>
+      </div>
+    </div>
 
-    <div id="listaClientes"></div>
+    <!-- CLIENTES -->
+    <div id="clientes" class="module hidden">
+      <h2>Registro de Clientes</h2>
+
+      <div class="form">
+        <input type="text" id="nombre" placeholder="Nombre completo">
+        <input type="text" id="rfc" placeholder="RFC">
+        <input type="email" id="correo" placeholder="Correo">
+
+        <button onclick="addClient()">Guardar cliente</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>RFC</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaClientes"></tbody>
+      </table>
+    </div>
+
+    <!-- BUSCAR -->
+    <div id="buscar" class="module hidden">
+      <h2>Consulta por RFC</h2>
+
+      <input type="text" id="buscarRFC" placeholder="RFC">
+      <button onclick="searchClient()">Buscar</button>
+
+      <div id="resultado"></div>
+    </div>
+
   </div>
-
-  <!-- CONSULTAS -->
-  <div id="consultas" class="seccion hidden">
-    <h2>Buscar Cliente</h2>
-
-    <input type="text" id="buscarRFC" placeholder="RFC">
-    <button onclick="buscarCliente()">Buscar</button>
-
-    <div id="resultado"></div>
-  </div>
-
 </div>
 
 <script src="script.js"></script>
