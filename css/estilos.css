@@ -1,44 +1,61 @@
 body{
     margin:0;
     font-family:Segoe UI;
-    background:#0A3D62;
+    background:#f4f6f9;
 }
 
-.login-container{
-    height:100vh;
+/* HEADER */
+.topbar{
+    background:#0a3d62;
+    color:white;
+    padding:15px;
     display:flex;
-    justify-content:center;
+    justify-content:space-between;
     align-items:center;
 }
 
-.login-box{
-    background:white;
-    padding:30px;
-    width:320px;
-    border-radius:12px;
-    text-align:center;
-    box-shadow:0 5px 15px rgba(0,0,0,.3);
-}
-
-input, select{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
-}
-
-button{
-    width:100%;
-    padding:10px;
-    background:#27AE60;
-    color:white;
+.topbar button{
+    background:#d4af37;
     border:none;
+    padding:8px 12px;
+    cursor:pointer;
+    color:black;
+    border-radius:5px;
+}
+
+/* DASHBOARD */
+.dashboard{
+    padding:20px;
+}
+
+/* PANELS */
+.panel{
+    display:none;
+}
+
+.panel h2{
+    color:#0a3d62;
+}
+
+/* CARDS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.card{
+    padding:20px;
+    border-radius:10px;
+    color:white;
+    font-weight:bold;
+    text-align:center;
     cursor:pointer;
 }
 
-button:hover{
-    background:#219150;
-}
-
-#error{
-    color:red;
-}
+/* COLORES */
+.blue{ background:#2980b9; }
+.green{ background:#27ae60; }
+.gold{ background:#d4af37; color:black; }
+.gray{ background:#7f8c8d; }
