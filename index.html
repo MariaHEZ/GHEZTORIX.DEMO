@@ -2,9 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GHEZTORIX - Login</title>
+<title>GHEZTORIX Login</title>
 
 <link rel="stylesheet" href="css/estilos.css">
 </head>
@@ -16,18 +14,14 @@
     <div class="login-box">
 
         <h1>GHEZTORIX</h1>
+        <p>Acceso al sistema</p>
 
-        <p>Sistema de Gestión de Despachos</p>
-
-        <input type="text" id="usuario" placeholder="Usuario">
-
+        <input type="text" id="usuario" placeholder="Usuario o correo">
         <input type="password" id="password" placeholder="Contraseña">
 
         <select id="rol">
-
             <option value="admin">Administrador</option>
             <option value="cliente">Cliente</option>
-
         </select>
 
         <button onclick="login()">Ingresar</button>
@@ -38,27 +32,7 @@
 
 </div>
 
-<script src="js/login.js"> <script>
-function login(){
+<script src="js/login.js"></script>
 
-    const usuario = document.getElementById("usuario").value;
-    const password = document.getElementById("password").value;
-
-    if(
-        (usuario === "admin" && password === "123456") ||
-        (usuario === "cliente1" && password === "123456")
-    ){
-
-        localStorage.setItem("sesion","ok");
-
-        window.location.href = "dashboard.html";
-
-    }else{
-
-        document.getElementById("error").innerText =
-        "Usuario o contraseña incorrectos";
-    }
-}
-</script>
 </body>
 </html>
