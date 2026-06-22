@@ -2,265 +2,70 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>GHEZTORIX - Panel Admin</title>
-
-<style>
-body{
-    margin:0;
-    font-family:Segoe UI;
-    background:#f4f6f9;
-}
-
-/* HEADER */
-header{
-    background:#000;
-    color:#d4af37;
-    padding:15px;
-    text-align:center;
-}
-
-/* PANEL ICONOS */
-.panel{
-    display:flex;
-    gap:15px;
-    padding:20px;
-    flex-wrap:wrap;
-}
-
-.card{
-    width:200px;
-    background:white;
-    padding:15px;
-    border-radius:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.card:hover{
-    transform:scale(1.05);
-    border:2px solid #d4af37;
-}
-
-/* SECCIONES */
-section{
-    padding:20px;
-}
-
-input{
-    width:100%;
-    padding:10px;
-    margin:5px 0;
-}
-
-button{
-    background:#d4af37;
-    border:none;
-    padding:10px;
-    cursor:pointer;
-    width:100%;
-    margin-top:10px;
-}
-
-/* TABLA */
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-}
-
-th,td{
-    padding:10px;
-    border-bottom:1px solid #ccc;
-}
-</style>
+<title>Dashboard GHEZTORIX</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
 <header>
-    <h2>GHEZTORIX - PANEL ADMIN</h2>
+    <h2>GHEZTORIX - PANEL PRINCIPAL</h2>
+    <button onclick="logout()">Cerrar sesión</button>
 </header>
 
-<!-- PANEL PRINCIPAL -->
 <div class="panel">
 
-    <div class="card" onclick="mostrar('registro')">
-        🧑‍💼 Registro de Clientes
-    </div>
-
-    <div class="card" onclick="mostrar('consulta')">
-        🔎 Consulta RFC
-    </div>
-
-    <div class="card" onclick="mostrar('lista')">
-        📋 Lista de Clientes
-    </div>
+    <div onclick="mostrar('clientes')" class="card">🧑‍💼 Clientes</div>
+    <div onclick="mostrar('consulta')" class="card">🔎 Consulta RFC</div>
+    <div onclick="mostrar('registro')" class="card">➕ Registro</div>
 
 </div>
 
+<!-- CLIENTES -->
+<section id="clientes" class="seccion">
+
+    <h3>Clientes Registrados</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>RFC</th>
+                <th>Correo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody id="tablaClientes"></tbody>
+    </table>
+
+</section>
+
 <!-- REGISTRO -->
-<section id="registro" style="display:none;">
-<h3>Registro de Clientes</h3>
+<section id="registro" class="seccion oculto">
 
-<input id="nombre" placeholder="Nombre / Razón Social">
-<input id="rfc" placeholder="RFC">
-<input id="correo" placeholder="Correo">
-<input id="telefono" placeholder="Teléfono">
+    <h3>Registrar Cliente</h3>
 
-<button onclick="guardarCliente()">Guardar</button>
+    <input id="nombre" placeholder="Nombre">
+    <input id="rfc" placeholder="RFC">
+    <input id="correo" placeholder="Correo">
 
-<p id="msg"></p>
+    <button onclick="guardar()">Guardar</button>
+
 </section>
 
 <!-- CONSULTA -->
-<section id="consulta" style="display:none;">
-<h3>Consulta por RFC</h3>
+<section id="consulta" class="seccion oculto">
 
-<input id="buscarRFC" placeholder="Ingrese RFC">
-<button onclick="buscarCliente()">Buscar</button>
+    <h3>Consulta por RFC</h3>
 
-<div id="resultado"></div>
+    <input id="buscarRFC" placeholder="RFC">
+    <button onclick="buscar()">Buscar</button>
+
+    <div id="resultado"></div>
+
 </section>
 
-<!-- LISTA -->
-<section id="lista" style="display:none;">
-<h3>Clientes Registrados</h3>
-
-<table>
-<thead>
-<tr>
-<th>Nombre</th>
-<th>RFC</th>
-<th>Correo</th>
-<th>Acciones</th>
-</tr>
-</thead>
-
-<tbody id="tabla"></tbody>
-</table>
-</section>
-
-<script>
-// =====================
-// BASE LOCAL (SIMULACIÓN)
-// =====================
-let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
-
-// =====================
-// MOSTRAR SECCIONES
-// =====================
-function mostrar(seccion){
-
-    document.querySelectorAll("section").forEach(s=>s.style.display="none");
-
-    document.getElementById(seccion).style.display="block";
-
-    render();
-}
-
-// =====================
-// GUARDAR CLIENTE
-// =====================
-function guardarCliente(){
-
-    let nombre = document.getElementById("nombre").value;
-    let rfc = document.getElementById("rfc").value;
-    let correo = document.getElementById("correo").value;
-    let telefono = document.getElementById("telefono").value;
-
-    if(!nombre || !rfc){
-        document.getElementById("msg").innerText = "Completa los campos obligatorios";
-        return;
-    }
-
-    clientes.push({
-        id: Date.now(),
-        nombre,
-        rfc,
-        correo,
-        telefono
-    });
-
-    localStorage.setItem("clientes", JSON.stringify(clientes));
-
-    document.getElementById("msg").innerText = "Cliente guardado";
-
-    document.querySelectorAll("input").forEach(i=>i.value="");
-
-    render();
-}
-
-// =====================
-// LISTAR CLIENTES
-// =====================
-function render(){
-
-    let tabla = document.getElementById("tabla");
-    tabla.innerHTML = "";
-
-    clientes.forEach(c=>{
-
-        tabla.innerHTML += `
-        <tr>
-            <td>${c.nombre}</td>
-            <td>${c.rfc}</td>
-            <td>${c.correo}</td>
-            <td>
-                <button onclick="editar(${c.id})">Editar</button>
-                <button onclick="eliminar(${c.id})">Eliminar</button>
-            </td>
-        </tr>`;
-    });
-}
-
-// =====================
-// BUSCAR POR RFC
-// =====================
-function buscarCliente(){
-
-    let rfc = document.getElementById("buscarRFC").value;
-
-    let c = clientes.find(x=>x.rfc === rfc);
-
-    document.getElementById("resultado").innerHTML =
-        c ? `
-        <p><b>Nombre:</b> ${c.nombre}</p>
-        <p><b>RFC:</b> ${c.rfc}</p>
-        <p><b>Correo:</b> ${c.correo}</p>
-        ` : "No encontrado";
-}
-
-// =====================
-// ELIMINAR
-// =====================
-function eliminar(id){
-
-    clientes = clientes.filter(c=>c.id !== id);
-
-    localStorage.setItem("clientes", JSON.stringify(clientes));
-
-    render();
-}
-
-// =====================
-// EDITAR
-// =====================
-function editar(id){
-
-    let c = clientes.find(x=>x.id === id);
-
-    document.getElementById("nombre").value = c.nombre;
-    document.getElementById("rfc").value = c.rfc;
-    document.getElementById("correo").value = c.correo;
-    document.getElementById("telefono").value = c.telefono;
-
-    eliminar(id);
-}
-
-// inicial
-mostrar("registro");
-</script>
-
+<script src="js/app.js"></script>
 </body>
 </html>
