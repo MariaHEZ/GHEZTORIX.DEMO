@@ -1,365 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHEZTORIX PRO</title>
+
+<style>
+*{box-sizing:border-box;font-family:Arial}
+body{margin:0;background:#eef2f7}
+
+/* LOGIN */
+#login{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.card{
+background:white;
+width:350px;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 20px #aaa;
+}
+
+input,button{
+width:100%;
+padding:10px;
+margin:8px 0;
+}
+
+button{
+background:#1d3557;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+/* APP */
+#app{display:none;padding:20px}
+
+header{
+display:flex;
+justify-content:space-between;
+background:#1d3557;
+color:white;
+padding:15px;
+}
+
+table{
+width:100%;
+background:white;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+td,th{
+padding:10px;
+border-bottom:1px solid #ddd;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:#0008;
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:white;
+padding:20px;
+width:300px;
+border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<section id="login">
+<div class="card">
+<h2>GHEZTORIX</h2>
+
+<input id="usuario" placeholder="Usuario">
+<input id="password" type="password" placeholder="Contraseña">
+
+<button onclick="login()">Iniciar sesión</button>
+
+<p id="mensaje"></p>
+</div>
+</section>
+
+<!-- APP -->
+<section id="app">
+
+<header>
+<b>GHEZTORIX PRO</b>
+<button onclick="salir()">Salir</button>
+</header>
+
+<h3>Total clientes: <span id="totalClientes">0</span></h3>
+
+<button onclick="abrirModal()">+ Nuevo Cliente</button>
+
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>RFC</th>
+<th>Correo</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody id="tabla"></tbody>
+</table>
+
+</section>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-content">
+
+<h3>Cliente</h3>
+
+<input id="nombre" placeholder="Nombre">
+<input id="rfc" placeholder="RFC">
+<input id="correo" placeholder="Correo">
+<input id="actividad" placeholder="Actividad">
+<input id="clave" placeholder="Clave">
+
+<button onclick="guardarCliente()">Guardar</button>
+<button onclick="cerrarModal()">Cancelar</button>
+
+</div>
+</div>
+
 <script>
 
+// ===== USUARIO =====
 const USER="admin@gheztorix.com";
 const PASS="12345";
 
-let clientes =
-JSON.parse(localStorage.getItem("clientes")) || [];
+// ===== VARIABLES =====
+let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+let clienteEditando = null;
 
-let clienteEditando=null;
+// ===== DOM =====
+const tabla = document.getElementById("tabla");
+const totalClientes = document.getElementById("totalClientes");
+const mensaje = document.getElementById("mensaje");
+const modal = document.getElementById("modal");
 
-
-// LOGIN
-
+// ===== LOGIN =====
 function login(){
+const u = document.getElementById("usuario").value.trim();
+const p = document.getElementById("password").value.trim();
 
-const usuario =
-document.getElementById("usuario").value.trim();
-
-const password =
-document.getElementById("password").value.trim();
-
-
-if(usuario===USER && password===PASS){
-
-
+if(u===USER && p===PASS){
 localStorage.setItem("sesion","activa");
-
-
 document.getElementById("login").style.display="none";
 document.getElementById("app").style.display="block";
-
-
 mostrarClientes();
-
-
 }else{
-
-document.getElementById("mensaje").innerHTML =
-"Usuario incorrecto";
-
+mensaje.innerHTML="Usuario incorrecto";
+}
 }
 
-}
-
-
-
+// ===== SESIÓN =====
 window.onload=function(){
-
 if(localStorage.getItem("sesion")=="activa"){
-
 document.getElementById("login").style.display="none";
 document.getElementById("app").style.display="block";
-
 mostrarClientes();
-
 }
-
 }
-
-
-
 
 function salir(){
-
 localStorage.removeItem("sesion");
-
 location.reload();
-
 }
 
-
-
-
-// MODAL
-
-
+// ===== MODAL =====
 function abrirModal(){
-
-document.getElementById("modal")
-.style.display="flex";
-
+modal.style.display="flex";
 }
-
 
 function cerrarModal(){
-
-document.getElementById("modal")
-.style.display="none";
-
-limpiarCampos();
-
+modal.style.display="none";
+limpiar();
 }
 
-
-
-function limpiarCampos(){
-
-document.getElementById("nombre").value="";
-document.getElementById("rfc").value="";
-document.getElementById("correo").value="";
-document.getElementById("actividad").value="";
-document.getElementById("clave").value="";
-
+function limpiar(){
+nombre.value="";
+rfc.value="";
+correo.value="";
+actividad.value="";
+clave.value="";
 clienteEditando=null;
-
 }
 
-
-
-// GUARDAR
-
-
+// ===== GUARDAR =====
 function guardarCliente(){
 
-let docsActuales = [];
-
-if(clienteEditando){
-let clienteExistente = clientes.find(c => c.id == clienteEditando);
-docsActuales = clienteExistente ? clienteExistente.documentos : [];
-}
-
-let nuevo = {
-
+let nuevo={
 id: clienteEditando || Date.now(),
-
-nombre: document.getElementById("nombre").value,
-
-rfc: document.getElementById("rfc").value.toUpperCase(),
-
-correo: document.getElementById("correo").value,
-
-actividad: document.getElementById("actividad").value,
-
-clave: document.getElementById("clave").value,
-
-documentos: docsActuales
-
+nombre: nombre.value,
+rfc: rfc.value.toUpperCase(),
+correo: correo.value,
+actividad: actividad.value,
+clave: clave.value,
+documentos:[]
 };
 
-
-
 if(clienteEditando){
-
-clientes = clientes.map(c =>
-c.id == clienteEditando ? nuevo : c
-);
-
+clientes = clientes.map(c => c.id==clienteEditando ? nuevo : c);
 }else{
-
-if(clientes.find(c => c.rfc == nuevo.rfc)){
+if(clientes.find(c=>c.rfc==nuevo.rfc)){
 alert("RFC ya registrado");
 return;
 }
-
 clientes.push(nuevo);
-
 }
-
-
 
 localStorage.setItem("clientes", JSON.stringify(clientes));
-
 cerrarModal();
 mostrarClientes();
-
 }
 
-
-
-
-
-
-
-
-// TABLA
-
-
+// ===== MOSTRAR =====
 function mostrarClientes(){
-
-
 tabla.innerHTML="";
 
-
 clientes.forEach(c=>{
-
-
 tabla.innerHTML += `
-
 <tr>
-
 <td>${c.nombre}</td>
-
 <td>${c.rfc}</td>
-
 <td>${c.correo}</td>
-
-
 <td>
-
-
-<button onclick="verCliente(${c.id})">
-👁 Ver
-</button>
-
-
-<button onclick="editar(${c.id})">
-✏ Editar
-</button>
-
-
-<button onclick="eliminar(${c.id})">
-🗑 Eliminar
-</button>
-
-
+<button onclick="editar(${c.id})">Editar</button>
+<button onclick="eliminar(${c.id})">Eliminar</button>
 </td>
-
-
-</tr>
-
-`;
-
+</tr>`;
 });
 
-
-totalClientes.innerHTML =
-clientes.length;
-
-
+totalClientes.innerHTML = clientes.length;
 }
 
-
-
-
-// EDITAR
-
-
+// ===== EDITAR =====
 function editar(id){
+let c = clientes.find(x=>x.id==id);
 
-let c =
-clientes.find(x=>x.id==id);
+clienteEditando=id;
 
-clienteEditando = id;
-
-
-document.getElementById("nombre").value = c.nombre;
-document.getElementById("rfc").value = c.rfc;
-document.getElementById("correo").value = c.correo;
-document.getElementById("actividad").value = c.actividad;
-document.getElementById("clave").value = c.clave;
+nombre.value=c.nombre;
+rfc.value=c.rfc;
+correo.value=c.correo;
+actividad.value=c.actividad;
+clave.value=c.clave;
 
 abrirModal();
-
 }
 
-
-
-// ELIMINAR
-
-
+// ===== ELIMINAR =====
 function eliminar(id){
-
-
 if(confirm("¿Eliminar cliente?")){
-
-
-clientes =
-clientes.filter(c=>c.id!=id);
-
-
-localStorage.setItem(
-"clientes",
-JSON.stringify(clientes)
-);
-
-
+clientes = clientes.filter(c=>c.id!=id);
+localStorage.setItem("clientes", JSON.stringify(clientes));
 mostrarClientes();
-
+}
 }
 
-
-}
-
-
-
-
-// BUSCAR RFC
-
-
-function buscarRFC(){
-
-
-let dato =
-prompt("Ingrese RFC");
-
-
-let c =
-clientes.find(
-x=>x.rfc==dato.toUpperCase()
-);
-
-
-if(c){
-
-verCliente(c.id);
-
-}else{
-
-alert("Cliente no encontrado");
-
-}
-
-
-}
-
-
-
-
-// EXPEDIENTE
-
-
-function verCliente(id){
-
-let c =
-clientes.find(x=>x.id==id);
-
-let listaDocs = "";
-
-if(!c.documentos){
-c.documentos = [];
-}
-
-if(c.documentos && c.documentos.length > 0){
-
-c.documentos.forEach((doc, index)=>{
-listaDocs += `📄 ${index+1}. ${doc}\n`;
-});
-
-}else{
-listaDocs = "Sin documentos";
-}
-
-alert(`
-
-📁 EXPEDIENTE DIGITAL GHEZTORIX
-
-Cliente:
-${c.nombre}
-
-RFC:
-${c.rfc}
-
-Correo:
-${c.correo}
-
-Actividad:
-${c.actividad}
-
-Documentos:
-${listaDocs}
-
-`);
-
-  }
 </script>
+
+</body>
+</html>
