@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GHEZTORIX  Dashboard</title>
+<title>GHEZTORIX PRO Dashboard</title>
 
 
 <style>
@@ -204,7 +204,7 @@ location="index.html";
 
 <div class="logo">
 
-GHEZTORIX 
+GHEZTORIX PRO
 
 </div>
 
@@ -308,7 +308,7 @@ Cerrar Sesión
 
 
 <h1>
-Bienvenido al sistema GHEZTORIX 
+Bienvenido al sistema GHEZTORIX PRO
 </h1>
 
 
@@ -410,108 +410,29 @@ Gestión de Clientes
 
 <h3>
 
-Registro de Cliente
+Nuevo Cliente
 
 </h3>
 
 
-<input class="input"
-id="razon"
-placeholder="Razón Social">
+<input id="nombre"
+placeholder="Nombre">
 
 
-<input class="input" 
-id="rfc" 
+<br><br>
+
+
+<input id="rfc"
 placeholder="RFC">
-
-
-<input class="input" 
-id="cp" 
-placeholder="Código Postal">
-
-
-<select id="regimen">
-
-<option>
-601 - REGIMEN GENERAL DE LEY PERSONAS MORALES
-</option>
-
-<option>
-602 - RÉGIMEN SIMPLIFICADO DE LEY PERSONAS MORALES
-</option>
-
-<option>
-603 - PERSONAS MORALES CON FINES NO LUCRATIVOS
-</option>
-
-<option>
-605 - RÉGIMEN DE SUELDOS Y SALARIOS E INGRESOS ASIMILADOS A SALARIOS
-</option>
-
-<option>
-606 - RÉGIMEN DE ARRENDAMIENTO
-</option>
-
-<option>
-607 - RÉGIMEN DE ENAJENACIÓN O ADQUISICIÓN DE BIENES
-</option>
-
-<option>
-612 - RÉGIMEN DE LAS PERSONAS FÍSICAS CON ACTIVIDADES EMPRESARIALES Y PROFESIONALES
-</option>
-
-<option>
-616 - SIN OBLIGACIONES FISCALES
-</option>
-
-<option>
-621 - RÉGIMEN DE INCORPORACIÓN FISCAL
-</option>
-
-<option>
-625 - RÉGIMEN DE LAS ACTIVIDADES EMPRESARIALES CON INGRESOS A TRAVÉS DE PLATAFORMAS TECNOLÓGICAS
-</option>
-
-<option>
-626 - RÉGIMEN SIMPLIFICADO DE CONFIANZA
-</option>
-
-</select>
-
-
-<input class="input" 
-id="telefono"
-placeholder="Número Telefónico">
-
-
-<input class="input" 
-id="correo"
-placeholder="Correo Electrónico">
-
-
-<h3>Acceso Cliente</h3>
-
-
-<input class="input" 
-id="usuarioCliente" 
-placeholder="Usuario Cliente">
-
-
-
-<input class="input" 
-id="passCliente"
-placeholder="Contraseña Cliente">
 
 
 
 <br><br>
 
 
-<button 
-class="btn-primary"
-onclick="crearCliente()">
+<button onclick="guardarCliente()">
 
-📁 Crear Carpeta Cliente
+Guardar
 
 </button>
 
@@ -535,13 +456,10 @@ Lista de Clientes
 
 
 <tr>
-<th>RFC</th>
 
 <th>Nombre</th>
 
-<th>correo</th>
-
-<th>telefono</th>
+<th>RFC</th>
 
 </tr>
 
@@ -590,10 +508,6 @@ Subir documentos fiscales de clientes.
 
 Generador de facturas electrónicas.
 
-<br><br>
-
-<input type="file">
-
 </div>
 
 </div>
@@ -634,15 +548,10 @@ Sistema de comentarios interno.
 
 Estadísticas del despacho.
 
-<br><br>
-
-<input type="file">
-
-</div>
-
 </div>
 
 
+</div>
 
 
 
@@ -724,14 +633,8 @@ document.getElementById("rfc").value;
 
 clientes.push({
 
-Razon social,
-RFC,
-Codigo postal,
-Regimen fiscal
-Numero telefonico,
-correo electronico,
-usuario cliente,
-contraseña cliente,
+nombre,
+rfc
 
 });
 
@@ -763,10 +666,8 @@ document.getElementById("tabla");
 tabla.innerHTML=
 `
 <tr>
-<th>RFC</th>
 <th>Nombre</th>
-<th>CORREO</th>
-<th>TELEFONO</th>
+<th>RFC</th>
 </tr>
 `;
 
@@ -778,10 +679,8 @@ clientes.forEach(c=>{
 tabla.innerHTML+=
 `
 <tr>
-<td>${c.RFC}</td>
-<td>${c.razon social}</td>
-<td>${c.correo}</td>
-<td>${c.telefono}</td>
+<td>${c.nombre}</td>
+<td>${c.rfc}</td>
 </tr>
 `;
 
@@ -823,4 +722,4 @@ location="index.html";
 
 </body>
 
-</html>
+</html
