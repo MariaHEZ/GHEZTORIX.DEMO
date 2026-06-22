@@ -1,218 +1,71 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>GHEZTORIX</title>
-<link rel="stylesheet" href="css/styles.css">
-</head>
+let usuarios = [
+  {
+    id: 1,
+    nombre: "Admin",
+    correo: "admin@gheztorix.com",
+    password: "12345",
+    rol: "admin"
+  }
+];
 
-<body>
-
-<header>GHEZTORIX - Plataforma de Gestión de Despachos</header>
-
-<div class="container">
-
-<h2 class="gold">Bienvenido</h2>
-
-<p>Sistema digital contable profesional</p>
-
-<button onclick="location.href='login.html'">Entrar al sistema</button>
-
-</div>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Login GHEZTORIX</title>
-<link rel="stylesheet" href="css/styles.css">
-</head>
-
-<body>
-
-<header>INICIO DE SESIÓN</header>
-
-<div class="container">
-
-<input id="usuario" placeholder="Correo o RFC">
-<input id="password" type="password" placeholder="Contraseña">
-
-<button onclick="login()">Entrar</button>
-
-</div>
-
-<script src="js/auth.js"></script>
-
-</body>
-</html>
-body{
-margin:0;
-font-family:Arial;
-background:#0f172a;
-color:white;
-}
-
-header{
-background:#1E3A8A;
-padding:15px;
-text-align:center;
-font-weight:bold;
-}
-
-.container{
-padding:20px;
-}
-
-button{
-background:#10B981;
-border:none;
-padding:10px;
-margin:5px;
-border-radius:8px;
-color:white;
-cursor:pointer;
-}
-
-input{
-width:95%;
-padding:10px;
-margin:8px 0;
-border-radius:8px;
-border:none;
-}
-
-.card{
-background:#1f2937;
-padding:15px;
-margin:10px 0;
-border-radius:10px;
-}
-
-.gold{color:#F59E0B;}
-.blue{color:#3B82F6;}
-
-@media(max-width:768px){
-.container{padding:10px;}
-}
-const ADMIN_USER = "admin@gheztorix.com";
-const ADMIN_PASS = "12345";
-
+let clientes = [
+  {
+    id: 1,
+    nombre: "Cliente Demo",
+    rfc: "ABC123",
+    password: "123",
+    documentos: [],
+    comentarios: []
+  }
+];
 function login(){
 
-let u = document.getElementById("usuario").value.trim();
-let p = document.getElementById("password").value.trim();
+let user = document.getElementById("usuario").value;
+let pass = document.getElementById("password").value;
 
 // ADMIN
-if(u === ADMIN_USER && p === ADMIN_PASS){
-localStorage.setItem("sesion", JSON.stringify({tipo:"admin"}));
+let admin = usuarios.find(u => u.correo === user && u.password === pass);
+
+if(admin){
+localStorage.setItem("sesion", JSON.stringify(admin));
 location.href="panel.html";
 return;
 }
 
 // CLIENTE
-let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
-
-let cliente = clientes.find(c => c.rfc === u && c.password === p);
+let cliente = clientes.find(c => c.rfc === user && c.password === pass);
 
 if(cliente){
 localStorage.setItem("sesion", JSON.stringify({
-tipo:"cliente",
+rol:"cliente",
 data:cliente
 }));
 
 location.href="cliente.html";
-}else{
+return;
+}
+
 alert("Credenciales incorrectas");
 }
+let sesion = JSON.parse(localStorage.getItem("sesion"));
 
-}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Panel GHEZTORIX</title>
-<link rel="stylesheet" href="css/styles.css">
-</head>
-
-<body>
-
-<header>PANEL ADMIN</header>
-
-<div class="container">
-
-<button onclick="mostrarRegistro()">Registrar Cliente</button>
-<button onclick="listarClientes()">Ver Clientes</button>
-<button onclick="logout()">Cerrar sesión</button>
-
-<div id="panel"></div>
-
-</div>
-
-<script src="js/clientes.js"></script>
-
-<script>
-function logout(){
-localStorage.removeItem("sesion");
+if(!sesion || sesion.rol !== "admin"){
 location.href="login.html";
-}
-
-function mostrarRegistro(){
-document.getElementById("panel").innerHTML = `
-<h3>Registro de Cliente</h3>
-<input id="nombre" placeholder="Nombre o Razón Social">
-<input id="rfc" placeholder="RFC">
-<input id="regimen" placeholder="Régimen Fiscal">
-<input id="telefono" placeholder="Teléfono">
-<input id="correo" placeholder="Correo">
-<input id="password" placeholder="Contraseña">
-
-<button onclick="guardarCliente()">Guardar</button>
-`;
-}
-
-function listarClientes(){
-renderClientes();
-}
-</script>
-
-</body>
-</html>
-let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
-
-function guardarCliente(){
-
-let cliente = {
-nombre:document.getElementById("nombre").value,
-rfc:document.getElementById("rfc").value,
-regimen:document.getElementById("regimen").value,
-telefono:document.getElementById("telefono").value,
-correo:document.getElementById("correo").value,
-password:document.getElementById("password").value,
-documentos:{
-constancia:"",
-opinion:"",
-facturas:[]
-}
-};
-
-clientes.push(cliente);
-localStorage.setItem("clientes", JSON.stringify(clientes));
-
-alert("Cliente registrado correctamente");
 }
 
 function renderClientes(){
 
-let html = "<h3>Clientes Registrados</h3>";
+let html = "";
 
 clientes.forEach((c,i)=>{
 html += `
 <div class="card">
-<b>${c.nombre}</b><br>
-RFC: ${c.rfc}<br>
-<button onclick="verCliente(${i})">Abrir</button>
+<b>${c.nombre}</b>
+
+<button onclick="editar(${i})">Editar</button>
+<button onclick="eliminar(${i})">Eliminar</button>
+<button onclick="verDocs(${i})">Documentos</button>
+<button onclick="verComentarios(${i})">Comentarios</button>
 </div>
 `;
 });
@@ -220,87 +73,115 @@ RFC: ${c.rfc}<br>
 document.getElementById("panel").innerHTML = html;
 }
 
-function verCliente(i){
-localStorage.setItem("clienteActivo", i);
-alert("Cliente abierto");
+function eliminar(i){
+clientes.splice(i,1);
+guardar();
+renderClientes();
 }
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Cliente GHEZTORIX</title>
-<link rel="stylesheet" href="css/styles.css">
-</head>
 
-<body>
+function editar(i){
 
-<header>PORTAL CLIENTE</header>
+let nuevo = prompt("Nuevo nombre:", clientes[i].nombre);
 
-<div class="container">
+if(nuevo){
+clientes[i].nombre = nuevo;
+guardar();
+renderClientes();
+}
+}
 
-<button onclick="logout()">Cerrar sesión</button>
+function guardar(){
+localStorage.setItem("clientes", JSON.stringify(clientes));
+}
+function subirDocumento(i){
 
-<div id="info"></div>
+let doc = prompt("Nombre del documento");
 
+clientes[i].documentos.push({
+nombre: doc,
+fecha: new Date().toLocaleString()
+});
+
+guardar();
+}
+
+function verDocs(i){
+
+let html = "<h3>Documentos</h3>";
+
+clientes[i].documentos.forEach((d,idx)=>{
+html += `
+<div class="card">
+${d.nombre} - ${d.fecha}
+<button onclick="descargarDoc('${d.nombre}')">Descargar</button>
 </div>
+`;
+});
 
-<script>
+document.getElementById("panel").innerHTML = html;
+}
+
+function descargarDoc(nombre){
+alert("Descargando: " + nombre);
+}
+function enviarComentario(){
 
 let sesion = JSON.parse(localStorage.getItem("sesion"));
 
-if(!sesion || sesion.tipo !== "cliente"){
-location.href="login.html";
+let texto = document.getElementById("comentario").value;
+
+sesion.data.comentarios.push({
+texto,
+respuesta:"",
+fecha:new Date().toLocaleString()
+});
+
+guardarCliente(sesion.data);
+
+alert("Comentario enviado");
 }
 
-document.getElementById("info").innerHTML = `
-<div class="card">
-<h3>${sesion.data.nombre}</h3>
-<p>RFC: ${sesion.data.rfc}</p>
-<p>Correo: ${sesion.data.correo}</p>
-</div>
-`;
+function guardarCliente(cliente){
 
-function logout(){
-localStorage.removeItem("sesion");
-location.href="login.html";
-}
-
-</script>
-
-</body>
-</html>
-function subirDocumento(rfc, tipo, archivo){
-
-let clientes = JSON.parse(localStorage.getItem("clientes"));
-
-let c = clientes.find(x => x.rfc === rfc);
-
-if(!c.documentos) c.documentos = {};
-
-c.documentos[tipo] = archivo;
+let index = clientes.findIndex(c => c.id === cliente.id);
+clientes[index] = cliente;
 
 localStorage.setItem("clientes", JSON.stringify(clientes));
 }
+function verComentarios(i){
 
-function generarFactura(cliente){
+let html = "<h3>Comentarios del cliente</h3>";
 
-let factura = {
-fecha:new Date(),
-monto:0,
-estado:"pendiente"
-};
+clientes[i].comentarios.forEach((c,idx)=>{
+html += `
+<div class="card">
+<b>Cliente:</b> ${c.texto}<br>
 
-console.log("Factura generada:", factura);
-}
+<b>Respuesta:</b> ${c.respuesta || "Sin respuesta"}
 
-document.addEventListener("keydown", function(e){
-
-if(e.ctrlKey && e.key === "r"){
-alert("Registro de cliente");
-}
-
-if(e.ctrlKey && e.key === "q"){
-location.href="login.html";
-}
-
+<br><br>
+<input id="resp${idx}" placeholder="Responder">
+<button onclick="responder(${i},${idx})">Enviar</button>
+</div>
+`;
 });
+
+document.getElementById("panel").innerHTML = html;
+}
+
+function responder(ci,co){
+
+let resp = document.getElementById("resp"+co).value;
+
+clientes[ci].comentarios[co].respuesta = resp;
+
+localStorage.setItem("clientes", JSON.stringify(clientes));
+
+alert("Respuesta enviada");
+}
+<div id="info"></div>
+
+<textarea id="comentario"></textarea>
+<button onclick="enviarComentario()">Enviar comentario</button>
+
+<div id="docs"></div>
