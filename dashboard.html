@@ -12,51 +12,91 @@
 <h3>Registrar Nuevo Cliente</h3>
 
 
-<input id="razon"
+<input class="input"
+id="razon"
 placeholder="Razón Social">
 
 
-<input id="rfc"
+<input class="input" 
+id="rfc" 
 placeholder="RFC">
 
 
-<input id="cp"
+<input class="input" 
+id="cp" 
 placeholder="Código Postal">
 
 
 <select id="regimen">
 
 <option>
-601 - General Personas Morales
+601 - REGIMEN GENERAL DE LEY PERSONAS MORALES
 </option>
 
 <option>
-605 - Sueldos y Salarios
+602 - RÉGIMEN SIMPLIFICADO DE LEY PERSONAS MORALES
 </option>
 
 <option>
-626 - RESICO
+603 - PERSONAS MORALES CON FINES NO LUCRATIVOS
+</option>
+
+<option>
+605 - RÉGIMEN DE SUELDOS Y SALARIOS E INGRESOS ASIMILADOS A SALARIOS
+</option>
+
+<option>
+606 - RÉGIMEN DE ARRENDAMIENTO
+</option>
+
+<option>
+607 - RÉGIMEN DE ENAJENACIÓN O ADQUISICIÓN DE BIENES
+</option>
+
+<option>
+612 - RÉGIMEN DE LAS PERSONAS FÍSICAS CON ACTIVIDADES EMPRESARIALES Y PROFESIONALES
+</option>
+
+<option>
+616 - SIN OBLIGACIONES FISCALES
+</option>
+
+<option>
+621 - RÉGIMEN DE INCORPORACIÓN FISCAL
+</option>
+
+<option>
+625 - RÉGIMEN DE LAS ACTIVIDADES EMPRESARIALES CON INGRESOS A TRAVÉS DE PLATAFORMAS TECNOLÓGICAS
+</option>
+
+<option>
+626 - RÉGIMEN SIMPLIFICADO DE CONFIANZA
 </option>
 
 </select>
 
 
-<input id="telefono"
+<input class="input" 
+id="telefono"
 placeholder="Número Telefónico">
 
 
-<input id="correo"
+<input class="input" 
+id="correo"
 placeholder="Correo Electrónico">
 
 
 <h3>Acceso Cliente</h3>
 
 
-<input id="usuarioCliente"
+<input class="input" 
+id="usuarioCliente" 
 placeholder="Usuario Cliente">
 
 
-<input id="passCliente"
+
+<input class="input" 
+id="passCliente"
 placeholder="Contraseña Cliente">
 
 
@@ -64,9 +104,11 @@ placeholder="Contraseña Cliente">
 <br><br>
 
 
-<button onclick="crearCliente()">
+<button 
+class="btn-primary"
+onclick="crearCliente()">
 
-Crear Carpeta Cliente
+📁 Crear Carpeta Cliente
 
 </button>
 
