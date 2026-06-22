@@ -9,14 +9,14 @@ function login() {
   if (perfil === "usuario") {
     if (usuario === adminUser && password === adminPass) {
       alert("Bienvenido Administrador");
-     window.location.href = "panel.html";
+      window.location.href = "panel.html"; // ✅ corregido
     } else {
       alert("Credenciales inválidas para Usuario");
     }
   } else if (perfil === "cliente") {
     if (usuario.length > 0 && password.length > 0) {
       alert("Bienvenido Cliente");
-      window.location.href = "cliente.html";
+      window.location.href = "cliente.html"; // ✅ ya existe
     } else {
       alert("Por favor ingresa tus datos");
     }
