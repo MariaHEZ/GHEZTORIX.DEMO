@@ -2,19 +2,313 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GHEZTORIX</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Segoe UI,sans-serif;
+    background:#f4f6f9;
+}
+
+header{
+    background:#111;
+    color:#d4af37;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.logout{
+    background:#d4af37;
+}
+
+.panel{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    padding:25px;
+}
+
+.card{
+    width:220px;
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+.card:hover{
+    border:2px solid #d4af37;
+}
+
+.seccion{
+    display:none;
+    padding:20px;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:10px;
+}
+
+th{
+    background:#d4af37;
+}
+
+</style>
 </head>
+
 <body>
 
-<h1>Dashboard funcionando ✔</h1>
+<header>
 
-<button onclick="logout()">Cerrar sesión</button>
+<div>
+<h2>💼 GHEZTORIX</h2>
+<span id="tipoUsuario"></span>
+</div>
+
+<button class="logout" onclick="cerrarSesion()">
+Cerrar Sesión
+</button>
+
+</header>
+
+<div class="panel" id="menuAdmin">
+
+<div class="card" onclick="mostrar('registro')">
+👥 Registro Clientes
+</div>
+
+<div class="card" onclick="mostrar('lista')">
+📋 Lista Clientes
+</div>
+
+<div class="card" onclick="mostrar('consulta')">
+🔎 Consulta RFC
+</div>
+
+<div class="card">
+📄 Documentos
+</div>
+
+<div class="card">
+🧾 Facturación
+</div>
+
+<div class="card">
+📊 Impuestos
+</div>
+
+</div>
+
+<div class="panel" id="menuCliente">
+
+<div class="card">
+📄 Mis Documentos
+</div>
+
+<div class="card">
+🧾 Mis Facturas
+</div>
+
+<div class="card">
+📊 Reportes
+</div>
+
+<div class="card">
+💬 Comentarios
+</div>
+
+</div>
+
+<section id="registro" class="seccion">
+
+<h3>Registrar Cliente</h3>
+
+<input id="nombre" placeholder="Nombre o Razón Social">
+
+<input id="rfc" placeholder="RFC">
+
+<input id="correo" placeholder="Correo">
+
+<button onclick="guardarCliente()">
+Guardar Cliente
+</button>
+
+</section>
+
+<section id="lista" class="seccion">
+
+<h3>Clientes Registrados</h3>
+
+<table>
+
+<thead>
+<tr>
+<th>Nombre</th>
+<th>RFC</th>
+<th>Correo</th>
+</tr>
+</thead>
+
+<tbody id="tablaClientes"></tbody>
+
+</table>
+
+</section>
+
+<section id="consulta" class="seccion">
+
+<h3>Buscar RFC</h3>
+
+<input id="buscarRFC" placeholder="RFC">
+
+<button onclick="buscarRFC()">
+Buscar
+</button>
+
+<div id="resultado"></div>
+
+</section>
 
 <script>
-function logout(){
-    localStorage.clear();
-    window.location.href = "index.html";
+
+const rol = localStorage.getItem("rol");
+
+if(!rol){
+    window.location.href="index.html";
 }
+
+if(rol === "admin"){
+
+    document.getElementById("tipoUsuario").innerText =
+    "Administrador";
+
+    document.getElementById("menuCliente").style.display =
+    "none";
+
+}else{
+
+    document.getElementById("tipoUsuario").innerText =
+    "Cliente";
+
+    document.getElementById("menuAdmin").style.display =
+    "none";
+}
+
+function cerrarSesion(){
+
+    localStorage.clear();
+
+    window.location.href="index.html";
+}
+
+function mostrar(id){
+
+    document.querySelectorAll(".seccion").forEach(sec=>{
+
+        sec.style.display="none";
+
+    });
+
+    document.getElementById(id).style.display="block";
+}
+
+let clientes =
+JSON.parse(localStorage.getItem("clientes")) || [];
+
+function guardarCliente(){
+
+    const nombre =
+    document.getElementById("nombre").value;
+
+    const rfc =
+    document.getElementById("rfc").value;
+
+    const correo =
+    document.getElementById("correo").value;
+
+    clientes.push({
+        nombre,
+        rfc,
+        correo
+    });
+
+    localStorage.setItem(
+        "clientes",
+        JSON.stringify(clientes)
+    );
+
+    cargarClientes();
+
+    alert("Cliente guardado");
+}
+
+function cargarClientes(){
+
+    let html="";
+
+    clientes.forEach(c=>{
+
+        html += `
+        <tr>
+        <td>${c.nombre}</td>
+        <td>${c.rfc}</td>
+        <td>${c.correo}</td>
+        </tr>
+        `;
+    });
+
+    document.getElementById("tablaClientes").innerHTML =
+    html;
+}
+
+function buscarRFC(){
+
+    const rfc =
+    document.getElementById("buscarRFC").value;
+
+    const cliente =
+    clientes.find(c => c.rfc === rfc);
+
+    if(cliente){
+
+        document.getElementById("resultado").innerHTML =
+        `<b>${cliente.nombre}</b><br>${cliente.correo}`;
+
+    }else{
+
+        document.getElementById("resultado").innerHTML =
+        "RFC no encontrado";
+    }
+}
+
+cargarClientes();
+
 </script>
 
 </body>
