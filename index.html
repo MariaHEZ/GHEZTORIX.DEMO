@@ -4,13 +4,50 @@
 <meta charset="UTF-8">
 <title>GHEZTORIX</title>
 <link rel="stylesheet" href="css/styles.css">
+<style>
+  .inicio-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    max-width: 600px;
+    margin: auto;
+    background: #1f2937;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    text-align: center;
+  }
+  .inicio-container h1 {
+    color: #F59E0B; /* dorado */
+    margin-bottom: 15px;
+  }
+  .inicio-container p {
+    color: #3B82F6; /* azul */
+    margin-bottom: 20px;
+  }
+  button {
+    background: linear-gradient(90deg, #3B82F6, #10B981, #F59E0B);
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    max-width: 250px;
+  }
+</style>
 </head>
 <body>
-<header>GHEZTORIX - Plataforma de Gestión de Despachos</header>
-<div class="container">
-  <h2 class="gold">Bienvenido</h2>
-  <p>Sistema digital contable profesional</p>
+<header>GHEZTORIX - Plataforma de Gestión Digital</header>
+
+<div class="inicio-container">
+  <h1>Bienvenido a GHEZTORIX</h1>
+  <p>Sistema fiscal avanzado para despachos contables</p>
   <button onclick="location.href='login.html'">Entrar al sistema</button>
 </div>
+
 </body>
 </html>
