@@ -2,438 +2,489 @@
 <html lang="es">
 
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GHEZTORIX PRO</title>
-
-<link rel="stylesheet" href="style.css">
-
+<title>GHEZTORIX ERP PRO</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-
 
 <body>
 
-
 <!-- LOGIN -->
+<div id="login" class="login">
 
-<div id="loginPage">
+<h1>GHEZTORIX ERP</h1>
 
+<input id="user" placeholder="Usuario">
+<input id="pass" type="password" placeholder="Contraseña">
 
-<div class="login-card">
-
-
-<h1>GHEZTORIX</h1>
-
-<p>Sistema Digital para Gestión de Despachos</p>
-
-
-<input 
-id="usuario"
-placeholder="Usuario">
-
-
-<input 
-id="password"
-type="password"
-placeholder="Contraseña">
-
-
-
-<button onclick="login()">
-Ingresar
-</button>
-
+<button onclick="login()">Entrar</button>
 
 </div>
-
-
-</div>
-
-
-
-
 
 <!-- DASHBOARD -->
+<div id="app" class="hidden">
 
-
-<div id="dashboard" class="hidden">
-
-
-
-<!-- MENU -->
-
-
+<!-- SIDEBAR -->
 <aside class="sidebar">
 
+<h2>ERP</h2>
 
-<h2>
-GHEZTORIX
-</h2>
-
-
-
-<button onclick="mostrar('inicio')">
-🏠 Inicio
-</button>
-
-
-<button onclick="mostrar('registro')">
-👤 Registrar Cliente
-</button>
-
-
-
-<button onclick="mostrar('clientes')">
-📋 Clientes
-</button>
-
-
-
-<button onclick="mostrar('documentos')">
-📄 Documentos
-</button>
-
-
-
-<button onclick="mostrar('reportes')">
-📊 Reportes
-</button>
-
-
-
-<button onclick="mostrar('chat')">
-💬 Chat
-</button>
-
-
-
-<button onclick="cerrar()">
-🚪 Salir
-</button>
-
+<button onclick="openM('home')">🏠 Inicio</button>
+<button onclick="openM('clientes')">👤 Clientes</button>
+<button onclick="openM('docs')">📄 Documentos</button>
+<button onclick="openM('reportes')">📊 Reportes</button>
+<button onclick="openM('chat')">💬 Chat</button>
+<button onclick="logout()">🚪 Salir</button>
 
 </aside>
 
-
-
-
-
-<!-- CONTENIDO -->
-
-
+<!-- MAIN -->
 <main>
 
+<!-- HOME -->
+<section id="home" class="mod">
 
+<h1>Dashboard</h1>
 
-<section id="inicio" class="pantalla">
-
-
-<h1>
-Panel Principal
-</h1>
-
-
-
-<div class="cards">
-
+<div class="grid">
 
 <div class="card">
-
-<h2 id="totalClientes">
-0
-</h2>
-
-<p>Clientes</p>
-
+Clientes
+<h2 id="total">0</h2>
 </div>
-
-
-
 
 <div class="card">
-
-<h2>
-0
-</h2>
-
-<p>Facturas</p>
-
+Facturas Emitidas
+<h2 id="facturas">0</h2>
 </div>
-
-
-
-
 
 <div class="card">
-
-<h2>
-0
-</h2>
-
-<p>Reportes</p>
-
+Mensajes
+<h2 id="msgs">0</h2>
 </div>
 
-
 </div>
-
 
 </section>
-
-
-
-
-
-
-
-<!-- REGISTRO -->
-
-
-<section id="registro" class="pantalla hidden">
-
-
-<h2>
-Registrar Cliente
-</h2>
-
-
-
-<input id="razon"
-placeholder="Razón Social">
-
-
-
-<input id="rfc"
-placeholder="RFC">
-
-
-
-<input id="cp"
-placeholder="Código Postal">
-
-
-
-<input id="regimen"
-placeholder="Régimen Fiscal">
-
-
-
-<input id="correo"
-placeholder="Correo electrónico">
-
-
-
-<input id="actividad"
-placeholder="Actividad">
-
-
-
-<select id="firma">
-
-<option>
-Cuenta con firma electrónica
-</option>
-
-<option>
-No cuenta
-</option>
-
-</select>
-
-
-
-<button onclick="guardarCliente()">
-
-Guardar Cliente
-
-</button>
-
-
-
-</section>
-
-
-
-
-
-
-
 
 <!-- CLIENTES -->
+<section id="clientes" class="mod hidden">
 
+<h2>Registro de Clientes</h2>
 
-<section id="clientes" class="pantalla hidden">
+<input id="razon" placeholder="Razón Social">
+<input id="rfc" placeholder="RFC">
+<input id="correo" placeholder="Correo">
+<input id="regimen" placeholder="Régimen Fiscal">
 
-
-<h2>
-Clientes registrados
-</h2>
-
-
-
-<input 
-id="buscarRFC"
-placeholder="Buscar RFC">
-
-
-
-<button onclick="buscarCliente()">
-Buscar
-</button>
-
-
+<button onclick="add()">Guardar</button>
 
 <table>
-
-
-<tbody id="tabla">
-
-</tbody>
-
-
+<tbody id="tabla"></tbody>
 </table>
 
-
-
 </section>
-
-
-
-
-
-
-
-
-
 
 <!-- DOCUMENTOS -->
+<section id="docs" class="mod hidden">
 
-
-<section id="documentos" class="pantalla hidden">
-
-
-<h2>
-Documentos
-</h2>
-
-
-<div class="cards">
-
+<h2>Documentos ERP</h2>
 
 <div class="card">
-📄
-Factura electrónica
+📄 Facturas Emitidas
 </div>
-
-
 
 <div class="card">
-📥
-Recibidas
+📥 Facturas Recibidas
 </div>
-
-
 
 <div class="card">
-📁
-Estados de cuenta
+💰 Estados de Cuenta
 </div>
-
-
-</div>
-
-
 
 </section>
-
-
-
-
-
-
-
 
 <!-- REPORTES -->
+<section id="reportes" class="mod hidden">
 
+<h2>Reportes Mensuales</h2>
 
-<section id="reportes" class="pantalla hidden">
+<button onclick="reporte()">Generar</button>
 
-
-<h2>
-Reportes mensuales
-</h2>
-
-
-<button onclick="crearReporte()">
-
-Generar Reporte
-
-</button>
-
-
-<div id="reporte">
-
-</div>
-
-
+<div id="rep"></div>
 
 </section>
-
-
-
-
-
-
-
-
 
 <!-- CHAT -->
+<section id="chat" class="mod hidden">
 
+<h2>Chat Clientes</h2>
 
-<section id="chat" class="pantalla hidden">
+<input id="msg" placeholder="Mensaje">
+<button onclick="send()">Enviar</button>
 
-
-<h2>
-Comentarios clientes
-</h2>
-
-
-<input id="mensaje"
-placeholder="Escribe comentario">
-
-
-<button onclick="agregarComentario()">
-
-Enviar
-
-</button>
-
-
-
-<div id="listaComentarios">
-
-</div>
-
-
+<div id="chatBox"></div>
 
 </section>
-
-
-
-
 
 </main>
 
-
 </div>
-
-
 
 <script src="app.js"></script>
 
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>GHEZTORIX ERP PRO</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="login">
+
+<h1>GHEZTORIX ERP</h1>
+
+<input id="user" placeholder="Usuario">
+<input id="pass" type="password" placeholder="Contraseña">
+
+<button onclick="login()">Entrar</button>
+
+</div>
+
+<!-- DASHBOARD -->
+<div id="app" class="hidden">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+<h2>ERP</h2>
+
+<button onclick="openM('home')">🏠 Inicio</button>
+<button onclick="openM('clientes')">👤 Clientes</button>
+<button onclick="openM('docs')">📄 Documentos</button>
+<button onclick="openM('reportes')">📊 Reportes</button>
+<button onclick="openM('chat')">💬 Chat</button>
+<button onclick="logout()">🚪 Salir</button>
+
+</aside>
+
+<!-- MAIN -->
+<main>
+
+<!-- HOME -->
+<section id="home" class="mod">
+
+<h1>Dashboard</h1>
+
+<div class="grid">
+
+<div class="card">
+Clientes
+<h2 id="total">0</h2>
+</div>
+
+<div class="card">
+Facturas Emitidas
+<h2 id="facturas">0</h2>
+</div>
+
+<div class="card">
+Mensajes
+<h2 id="msgs">0</h2>
+</div>
+
+</div>
+
+</section>
+
+<!-- CLIENTES -->
+<section id="clientes" class="mod hidden">
+
+<h2>Registro de Clientes</h2>
+
+<input id="razon" placeholder="Razón Social">
+<input id="rfc" placeholder="RFC">
+<input id="correo" placeholder="Correo">
+<input id="regimen" placeholder="Régimen Fiscal">
+
+<button onclick="add()">Guardar</button>
+
+<table>
+<tbody id="tabla"></tbody>
+</table>
+
+</section>
+
+<!-- DOCUMENTOS -->
+<section id="docs" class="mod hidden">
+
+<h2>Documentos ERP</h2>
+
+<div class="card">
+📄 Facturas Emitidas
+</div>
+
+<div class="card">
+📥 Facturas Recibidas
+</div>
+
+<div class="card">
+💰 Estados de Cuenta
+</div>
+
+</section>
+
+<!-- REPORTES -->
+<section id="reportes" class="mod hidden">
+
+<h2>Reportes Mensuales</h2>
+
+<button onclick="reporte()">Generar</button>
+
+<div id="rep"></div>
+
+</section>
+
+<!-- CHAT -->
+<section id="chat" class="mod hidden">
+
+<h2>Chat Clientes</h2>
+
+<input id="msg" placeholder="Mensaje">
+<button onclick="send()">Enviar</button>
+
+<div id="chatBox"></div>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="app.js"></script>
 
 </body>
-
 </html>
+
+body{
+margin:0;
+font-family:Arial;
+background:#eef2f7;
+}
+
+.hidden{display:none;}
+
+.login{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:#1d3557;
+color:white;
+}
+
+input{
+padding:10px;
+margin:5px;
+width:250px;
+}
+
+button{
+padding:10px;
+background:#457b9d;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+#app{
+display:flex;
+height:100vh;
+}
+
+.sidebar{
+width:220px;
+background:#0f1c2e;
+color:white;
+padding:15px;
+}
+
+.sidebar button{
+display:block;
+width:100%;
+margin-top:10px;
+background:transparent;
+border:1px solid #444;
+}
+
+main{
+flex:1;
+padding:20px;
+}
+
+.mod{
+background:white;
+padding:20px;
+border-radius:10px;
+}
+
+.grid{
+display:flex;
+gap:10px;
+}
+
+.card{
+flex:1;
+padding:20px;
+background:#f8f9fa;
+border-radius:10px;
+text-align:center;
+}
+
+table{
+width:100%;
+margin-top:20px;
+}
+
+// BASE DE DATOS
+let clientes = JSON.parse(localStorage.getItem("c")) || [];
+let mensajes = JSON.parse(localStorage.getItem("m")) || [];
+let facturas = 0;
+
+
+// LOGIN
+function login(){
+
+let u = user.value;
+let p = pass.value;
+
+if(u==="admin" && p==="12345"){
+login.style.display="none";
+app.classList.remove("hidden");
+update();
+}
+else alert("Error");
+
+}
+
+
+// LOGOUT
+function logout(){
+location.reload();
+}
+
+
+// CAMBIO MODULOS
+function openM(id){
+document.querySelectorAll(".mod").forEach(x=>x.classList.add("hidden"));
+document.getElementById(id).classList.remove("hidden");
+render();
+}
+
+
+// CLIENTES
+function add(){
+
+let c = {
+razon:razon.value,
+rfc:rfc.value,
+correo:correo.value,
+regimen:regimen.value
+};
+
+clientes.push(c);
+
+localStorage.setItem("c",JSON.stringify(clientes));
+
+render();
+update();
+
+}
+
+
+// RENDER CLIENTES
+function render(){
+
+tabla.innerHTML="";
+
+clientes.forEach((c,i)=>{
+tabla.innerHTML += `
+<tr>
+<td>${c.razon}</td>
+<td>${c.rfc}</td>
+<td>
+<button onclick="del(${i})">X</button>
+</td>
+</tr>
+`;
+});
+
+}
+
+
+// DELETE
+function del(i){
+clientes.splice(i,1);
+localStorage.setItem("c",JSON.stringify(clientes));
+render();
+update();
+}
+
+
+// CHAT
+function send(){
+
+mensajes.push(msg.value);
+
+localStorage.setItem("m",JSON.stringify(mensajes));
+
+msg.value="";
+
+showChat();
+
+update();
+
+}
+
+
+function showChat(){
+
+chatBox.innerHTML="";
+
+mensajes.forEach(m=>{
+chatBox.innerHTML += `<p>💬 ${m}</p>`;
+});
+
+}
+
+
+// REPORTES
+function reporte(){
+
+rep.innerHTML = `
+Clientes: ${clientes.length}<br>
+Facturas: ${facturas}<br>
+Estado: Sistema OK
+`;
+
+}
+
+
+// UPDATE DASHBOARD
+function update(){
+
+total.innerText = clientes.length;
+facturas.innerText = facturas;
+msgs.innerText = mensajes.length;
+
+showChat();
+
+}
