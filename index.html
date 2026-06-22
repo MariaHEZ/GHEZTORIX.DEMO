@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GHEZTORIX - Control Documental</title>
+    <title>GHEZTORIX - Sistema Digital Para La Gestion De Despachos</title>
     <style>
         /* Estilos Generales */
         body {
@@ -282,3 +282,28 @@
     <div id="recover-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="close-recover">&times;</span>
+<script>
+    const formLogin = document.getElementById("form-login");
+    const errorBox = document.getElementById("error-box");
+
+    formLogin.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const usuario = document.getElementById("usuario").value;
+        const password = document.getElementById("password").value;
+
+        // Aquí defines tus credenciales de prueba
+        if((usuario === "admin@correo.com" || usuario === "XAXX010101000") && password === "1234"){
+            // Si es administrador (correo)
+            if(usuario.includes("@")){
+                window.location.href = "panel.html"; 
+            } 
+            // Si es cliente (RFC)
+            else {
+                window.location.href = "cliente.html"; 
+            }
+        } else {
+            errorBox.style.display = "block";
+        }
+    });
+</script>
+
