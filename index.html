@@ -179,3 +179,128 @@ renderClientes();
 
 </body>
 </html>
+let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+
+function guardarCliente(){
+
+let cliente = {
+nombre:document.getElementById("nombre").value,
+rfc:document.getElementById("rfc").value,
+regimen:document.getElementById("regimen").value,
+telefono:document.getElementById("telefono").value,
+correo:document.getElementById("correo").value,
+password:document.getElementById("password").value,
+documentos:{
+constancia:"",
+opinion:"",
+facturas:[]
+}
+};
+
+clientes.push(cliente);
+localStorage.setItem("clientes", JSON.stringify(clientes));
+
+alert("Cliente registrado correctamente");
+}
+
+function renderClientes(){
+
+let html = "<h3>Clientes Registrados</h3>";
+
+clientes.forEach((c,i)=>{
+html += `
+<div class="card">
+<b>${c.nombre}</b><br>
+RFC: ${c.rfc}<br>
+<button onclick="verCliente(${i})">Abrir</button>
+</div>
+`;
+});
+
+document.getElementById("panel").innerHTML = html;
+}
+
+function verCliente(i){
+localStorage.setItem("clienteActivo", i);
+alert("Cliente abierto");
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Cliente GHEZTORIX</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<header>PORTAL CLIENTE</header>
+
+<div class="container">
+
+<button onclick="logout()">Cerrar sesión</button>
+
+<div id="info"></div>
+
+</div>
+
+<script>
+
+let sesion = JSON.parse(localStorage.getItem("sesion"));
+
+if(!sesion || sesion.tipo !== "cliente"){
+location.href="login.html";
+}
+
+document.getElementById("info").innerHTML = `
+<div class="card">
+<h3>${sesion.data.nombre}</h3>
+<p>RFC: ${sesion.data.rfc}</p>
+<p>Correo: ${sesion.data.correo}</p>
+</div>
+`;
+
+function logout(){
+localStorage.removeItem("sesion");
+location.href="login.html";
+}
+
+</script>
+
+</body>
+</html>
+function subirDocumento(rfc, tipo, archivo){
+
+let clientes = JSON.parse(localStorage.getItem("clientes"));
+
+let c = clientes.find(x => x.rfc === rfc);
+
+if(!c.documentos) c.documentos = {};
+
+c.documentos[tipo] = archivo;
+
+localStorage.setItem("clientes", JSON.stringify(clientes));
+}
+
+function generarFactura(cliente){
+
+let factura = {
+fecha:new Date(),
+monto:0,
+estado:"pendiente"
+};
+
+console.log("Factura generada:", factura);
+}
+
+document.addEventListener("keydown", function(e){
+
+if(e.ctrlKey && e.key === "r"){
+alert("Registro de cliente");
+}
+
+if(e.ctrlKey && e.key === "q"){
+location.href="login.html";
+}
+
+});
