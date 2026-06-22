@@ -2,27 +2,49 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>GHEZTORIX Login</title>
-<link rel="stylesheet" href="css/style.css">
+<title>GHEZTORIX</title>
 </head>
 
 <body>
 
-<div class="login-box">
+<div style="width:300px;margin:100px auto;text-align:center">
 
-    <h1>GHEZTORIX</h1>
-    <p>Sistema Digital de Gestión</p>
+<h2>GHEZTORIX</h2>
 
-    <input id="usuario" placeholder="Correo">
-    <input id="password" type="password" placeholder="Contraseña">
+<input id="usuario" placeholder="Usuario">
+<br><br>
+<input id="password" type="password" placeholder="Contraseña">
+<br><br>
 
-    <button onclick="login()">Ingresar</button>
+<button onclick="login()">Ingresar</button>
 
-    <p id="error" style="color:red;"></p>
+<p id="error" style="color:red;"></p>
 
 </div>
 
-<script src="js/app.js"></script>
+<script>
+function login(){
+
+    const user = document.getElementById("usuario");
+    const pass = document.getElementById("password");
+    const error = document.getElementById("error");
+
+    if(!user || !pass){
+        document.body.innerHTML = "ERROR HTML";
+        return;
+    }
+
+    if(user.value === "admin@gheztorix.com" && pass.value === "123456"){
+
+        localStorage.setItem("sesion","ok");
+
+        window.location.href = "dashboard.html";
+
+    }else{
+        error.innerText = "Usuario incorrecto";
+    }
+}
+</script>
 
 </body>
 </html>
