@@ -1,29 +1,22 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>GHEZTORIX Login</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
+function login(){
 
-<body>
+    const user = document.getElementById("usuario").value.trim();
+    const pass = document.getElementById("password").value.trim();
 
-<div class="login-container">
+    // USUARIO DE PRUEBA
+    const adminUser = "admin@gheztorix.com";
+    const adminPass = "123456";
 
-    <div class="login-box">
-        <h1>💼 GHEZTORIX</h1>
-        <p>Sistema Digital de Gestión</p>
+    if(user === adminUser && pass === adminPass){
 
-        <input id="usuario" placeholder="Usuario o correo">
-        <input id="password" type="password" placeholder="Contraseña">
+        localStorage.setItem("sesion","ok");
+        localStorage.setItem("rol","admin");
 
-        <button onclick="login()">Iniciar sesión</button>
+        window.location.href = "./dashboard.html";
 
-        <p id="error"></p>
-    </div>
+    }else{
 
-</div>
-
-<script src="js/app.js"></script>
-</body>
-</html>
+        document.getElementById("error").innerText =
+        "Usuario o contraseña incorrectos";
+    }
+}
