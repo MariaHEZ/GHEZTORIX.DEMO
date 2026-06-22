@@ -1,93 +1,188 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<title>GHEZTORIX ERP</title>
-<link rel="stylesheet" href="styles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GHEZTORIX PRO</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
 
 <!-- LOGIN -->
 
-<div id="login" class="login">
+<div id="loginPage">
+
+
+<div class="login-card">
+
 
 <h1>GHEZTORIX</h1>
 
-<input id="usuario" placeholder="Usuario">
+<p>Sistema Digital para Gestión de Despachos</p>
 
-<input id="password" type="password" placeholder="Contraseña">
 
-<button onclick="entrar()">
-Iniciar sesión
+<input 
+id="usuario"
+placeholder="Usuario">
+
+
+<input 
+id="password"
+type="password"
+placeholder="Contraseña">
+
+
+
+<button onclick="login()">
+Ingresar
 </button>
+
+
+</div>
+
 
 </div>
 
 
 
+
+
 <!-- DASHBOARD -->
+
 
 <div id="dashboard" class="hidden">
 
 
-<header>
 
-<h1>Panel Principal GHEZTORIX</h1>
+<!-- MENU -->
 
-<button onclick="salir()">
-Cerrar sesión
+
+<aside class="sidebar">
+
+
+<h2>
+GHEZTORIX
+</h2>
+
+
+
+<button onclick="mostrar('inicio')">
+🏠 Inicio
 </button>
 
-</header>
+
+<button onclick="mostrar('registro')">
+👤 Registrar Cliente
+</button>
+
+
+
+<button onclick="mostrar('clientes')">
+📋 Clientes
+</button>
+
+
+
+<button onclick="mostrar('documentos')">
+📄 Documentos
+</button>
+
+
+
+<button onclick="mostrar('reportes')">
+📊 Reportes
+</button>
+
+
+
+<button onclick="mostrar('chat')">
+💬 Chat
+</button>
+
+
+
+<button onclick="cerrar()">
+🚪 Salir
+</button>
+
+
+</aside>
+
+
+
+
+
+<!-- CONTENIDO -->
+
+
+<main>
+
+
+
+<section id="inicio" class="pantalla">
+
+
+<h1>
+Panel Principal
+</h1>
 
 
 
 <div class="cards">
 
 
-<div class="icon"
-onclick="abrir('registro')">
+<div class="card">
 
-👤
-<h3>Registrar Cliente</h3>
+<h2 id="totalClientes">
+0
+</h2>
 
-</div>
-
-
-
-<div class="icon"
-onclick="abrir('clientes')">
-
-📋
-<h3>Clientes</h3>
+<p>Clientes</p>
 
 </div>
 
 
 
-<div class="icon"
-onclick="abrir('reportes')">
 
-📊
-<h3>Reportes</h3>
+<div class="card">
 
-</div>
+<h2>
+0
+</h2>
 
-
-
-<div class="icon"
-onclick="abrir('chat')">
-
-💬
-<h3>Comentarios</h3>
+<p>Facturas</p>
 
 </div>
 
 
 
+
+
+<div class="card">
+
+<h2>
+0
+</h2>
+
+<p>Reportes</p>
+
 </div>
+
+
+</div>
+
+
+</section>
+
+
 
 
 
@@ -95,26 +190,72 @@ onclick="abrir('chat')">
 
 <!-- REGISTRO -->
 
-<section id="registro" class="modulo hidden">
 
-<h2>Registrar Cliente</h2>
+<section id="registro" class="pantalla hidden">
 
 
-<input id="razon" placeholder="Razón Social">
+<h2>
+Registrar Cliente
+</h2>
 
-<input id="rfc" placeholder="RFC">
 
-<input id="correo" placeholder="Correo">
 
-<input id="actividad" placeholder="Actividad">
+<input id="razon"
+placeholder="Razón Social">
+
+
+
+<input id="rfc"
+placeholder="RFC">
+
+
+
+<input id="cp"
+placeholder="Código Postal">
+
+
+
+<input id="regimen"
+placeholder="Régimen Fiscal">
+
+
+
+<input id="correo"
+placeholder="Correo electrónico">
+
+
+
+<input id="actividad"
+placeholder="Actividad">
+
+
+
+<select id="firma">
+
+<option>
+Cuenta con firma electrónica
+</option>
+
+<option>
+No cuenta
+</option>
+
+</select>
+
 
 
 <button onclick="guardarCliente()">
-Guardar
+
+Guardar Cliente
+
 </button>
 
 
+
 </section>
+
+
+
 
 
 
@@ -123,20 +264,90 @@ Guardar
 <!-- CLIENTES -->
 
 
-<section id="clientes" class="modulo hidden">
+<section id="clientes" class="pantalla hidden">
 
 
-<h2>Clientes registrados</h2>
+<h2>
+Clientes registrados
+</h2>
+
+
+
+<input 
+id="buscarRFC"
+placeholder="Buscar RFC">
+
+
+
+<button onclick="buscarCliente()">
+Buscar
+</button>
+
 
 
 <table>
 
-<tbody id="lista"></tbody>
+
+<tbody id="tabla">
+
+</tbody>
+
 
 </table>
 
 
+
 </section>
+
+
+
+
+
+
+
+
+
+
+<!-- DOCUMENTOS -->
+
+
+<section id="documentos" class="pantalla hidden">
+
+
+<h2>
+Documentos
+</h2>
+
+
+<div class="cards">
+
+
+<div class="card">
+📄
+Factura electrónica
+</div>
+
+
+
+<div class="card">
+📥
+Recibidas
+</div>
+
+
+
+<div class="card">
+📁
+Estados de cuenta
+</div>
+
+
+</div>
+
+
+
+</section>
+
 
 
 
@@ -147,27 +358,30 @@ Guardar
 <!-- REPORTES -->
 
 
-<section id="reportes" class="modulo hidden">
+<section id="reportes" class="pantalla hidden">
 
 
-<h2>Reportes</h2>
+<h2>
+Reportes mensuales
+</h2>
 
 
-<p>
-Clientes registrados:
-<span id="cantidad"></span>
-</p>
+<button onclick="crearReporte()">
 
+Generar Reporte
 
-<button onclick="generarReporte()">
-Generar reporte
 </button>
 
 
-<div id="reporte"></div>
+<div id="reporte">
+
+</div>
+
 
 
 </section>
+
+
 
 
 
@@ -178,10 +392,12 @@ Generar reporte
 <!-- CHAT -->
 
 
-<section id="chat" class="modulo hidden">
+<section id="chat" class="pantalla hidden">
 
 
-<h2>Comentarios de clientes</h2>
+<h2>
+Comentarios clientes
+</h2>
 
 
 <input id="mensaje"
@@ -189,16 +405,26 @@ placeholder="Escribe comentario">
 
 
 <button onclick="agregarComentario()">
+
 Enviar
+
 </button>
 
 
-<div id="comentarios"></div>
+
+<div id="listaComentarios">
+
+</div>
+
 
 
 </section>
 
 
+
+
+
+</main>
 
 
 </div>
@@ -207,5 +433,7 @@ Enviar
 
 <script src="app.js"></script>
 
+
 </body>
+
 </html>
