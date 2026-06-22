@@ -1,30 +1,23 @@
-body{
-    font-family:Arial;
-    background:#f4f6f9;
-    margin:0;
+.topbar{
+    background:#000;
+    color:#d4af37;
+    padding:15px 30px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.login-box{
-    width:300px;
-    margin:100px auto;
-    padding:20px;
-    background:white;
-    text-align:center;
-    border-radius:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.2);
-}
-
-input{
-    width:100%;
-    margin:8px 0;
-    padding:10px;
-}
-
-button{
-    width:100%;
-    padding:10px;
-    background:black;
-    color:gold;
+.btn-salir{
+    background:#d4af37;
+    color:#000;
     border:none;
+    padding:10px 20px;
+    border-radius:8px;
     cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-salir:hover{
+    background:#f5c542;
 }
