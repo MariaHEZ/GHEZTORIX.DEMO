@@ -2,352 +2,594 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>GHEZTORIX </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GHEZTORIX PRO</title>
 
 <style>
-body{
-margin:0;
-font-family:Arial;
-transition:0.3s;
+
+*{
+    box-sizing:border-box;
+    font-family:Segoe UI,Arial;
 }
 
-/* DARK MODE */
-body.dark{
-background:#121212;
-color:white;
+body{
+    margin:0;
+    background:#eef2f7;
 }
+
 
 /* LOGIN */
+
 #login{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#1e3c72,#2a5298);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
+
+
+.card{
+    background:white;
+    width:380px;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 30px #999;
+}
+
+
+h1{
+    text-align:center;
+    color:#1d3557;
+}
+
+
+input,button,select{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+
+button{
+    background:#1d3557;
+    color:white;
+    cursor:pointer;
+}
+
+
+button:hover{
+    opacity:.8;
+}
+
+
+/* SISTEMA */
+
+#app{
+display:none;
+}
+
+
+header{
+background:#1d3557;
+color:white;
+padding:15px;
+display:flex;
+justify-content:space-between;
+}
+
+
+.menu{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+padding:20px;
+}
+
 
 .box{
 background:white;
 padding:25px;
-border-radius:10px;
-width:300px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 5px 15px #ccc;
 }
 
-input{
-width:100%;
-margin:8px 0;
-padding:10px;
-}
 
-button{
-padding:8px;
-border:none;
-cursor:pointer;
-width:100%;
-margin-top:5px;
-}
-
-.primary{background:#2a5298;color:white;}
-.danger{background:red;color:white;}
-.edit{background:orange;color:white;}
-
-/* APP */
-#app{display:none;}
-
-.sidebar{
-width:220px;
-background:#1e1e2f;
-color:white;
-position:fixed;
-height:100%;
+main{
 padding:20px;
 }
 
-.sidebar a{
-display:block;
-padding:10px;
-background:#2a2a40;
-margin-top:10px;
-cursor:pointer;
-border-radius:5px;
-}
 
-.main{
-margin-left:240px;
-padding:20px;
-}
-
-/* CARDS */
-.cards{
-display:flex;
-gap:10px;
-}
-
-.card{
-flex:1;
-background:white;
-padding:15px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
-
-/* TABLE */
 table{
 width:100%;
-margin-top:15px;
 background:white;
 border-collapse:collapse;
 }
 
-th,td{
+
+td,th{
 padding:10px;
 border-bottom:1px solid #ddd;
 }
 
-canvas{
-background:white;
-margin-top:20px;
+
+
+.modal{
+
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#0008;
+justify-content:center;
+align-items:center;
+
 }
+
+
+.modal div{
+
+background:white;
+padding:25px;
+width:400px;
+border-radius:15px;
+
+}
+
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <!-- LOGIN -->
-<div id="login">
+
+
+<section id="login">
+
+
+<div class="card">
+
+<h1>GHEZTORIX</h1>
+
+<input id="usuario" placeholder="Usuario">
+
+<input id="password" type="password" placeholder="Contraseña">
+
+
+<button onclick="login()">
+INICIAR SESIÓN
+</button>
+
+
+<p id="mensaje"></p>
+
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- SISTEMA -->
+
+<section id="app">
+
+
+<header>
+
+<b>GHEZTORIX PRO</b>
+
+<button onclick="salir()">
+Cerrar sesión
+</button>
+
+</header>
+
+
+
+<div class="menu">
+
+
 <div class="box">
-<h2>GHEZTORIX LOGIN</h2>
-<input id="user" placeholder="Usuario">
-<input id="pass" type="password" placeholder="Contraseña">
-<button class="primary" onclick="login()">Entrar</button>
-</div>
-</div>
 
-<!-- APP -->
-<div id="app">
+<h2 id="totalClientes">
+0
+</h2>
 
-<div class="sidebar">
-<h2>GHEZTORIX</h2>
+Clientes
 
-<a onclick="show('dash')">📊 Gestión</a>
-<a onclick="show('clientes')">👤 Clientes</a>
-<a onclick="toggleDark()">🌙 Modo</a>
-<a onclick="logout()">🚪 Salir</a>
 </div>
 
-<div class="main">
 
-<!-- DASH -->
-<div id="dash">
-<h1>Gestión</h1>
 
-<div class="cards">
-<div class="card">
-<h3>Total Clientes</h3>
-<p id="total">21</p>
-</div>
-</div>
+<div class="box">
 
-<div class="cards">
-<div class="card">
-<h3>Reportes Pendientes</h3>
-<p id="total">2</p>
-</div>
+<h2>
+📁
+</h2>
+
+Documentos
+
 </div>
 
-<canvas id="chart" width="400" height="200"></canvas>
+
+
+<div class="box">
+
+<h2>
+🔎
+</h2>
+
+Búsqueda
+
 </div>
 
-<!-- CLIENTES -->
-<div id="clientes" style="display:none">
-
-<h1>Clientes</h1>
-
-<input class="input"
-id="Razón Social"
-placeholder="Razón Social">
 
 
-<input class="input" 
-id="RFC" 
-placeholder="RFC">
+<div class="box">
+
+<h2>
+📊
+</h2>
+
+Reportes
+
+</div>
 
 
-<input class="input" 
-id="CODIGO POSTAL" 
-placeholder="Código Postal">
-
-
-<select id="Regimen">
-
-<option>
-601 - REGIMEN GENERAL DE LEY PERSONAS MORALES
-</option>
-
-<option>
-602 - RÉGIMEN SIMPLIFICADO DE LEY PERSONAS MORALES
-</option>
-
-<option>
-603 - PERSONAS MORALES CON FINES NO LUCRATIVOS
-</option>
-
-<option>
-605 - RÉGIMEN DE SUELDOS Y SALARIOS E INGRESOS ASIMILADOS A SALARIOS
-</option>
-
-<option>
-606 - RÉGIMEN DE ARRENDAMIENTO
-</option>
-
-<option>
-607 - RÉGIMEN DE ENAJENACIÓN O ADQUISICIÓN DE BIENES
-</option>
-
-<option>
-612 - RÉGIMEN DE LAS PERSONAS FÍSICAS CON ACTIVIDADES EMPRESARIALES Y PROFESIONALES
-</option>
-
-<option>
-616 - SIN OBLIGACIONES FISCALES
-</option>
-
-<option>
-621 - RÉGIMEN DE INCORPORACIÓN FISCAL
-</option>
-
-<option>
-625 - RÉGIMEN DE LAS ACTIVIDADES EMPRESARIALES CON INGRESOS A TRAVÉS DE PLATAFORMAS TECNOLÓGICAS
-</option>
-
-<option>
-626 - RÉGIMEN SIMPLIFICADO DE CONFIANZA
-</option>
-
-</select>
-
-
-<input class="input" 
-id="telefono"
-placeholder="Número Telefónico">
-
-
-<input class="input" 
-id="correo"
-placeholder="Correo Electrónico">
-
-
-<h3>Acceso Cliente</h3>
-
-
-<input class="input" 
-id="usuarioCliente" 
-placeholder="Usuario Cliente">
+</div>
 
 
 
-<input class="input" 
-id="passCliente"
-placeholder="Contraseña Cliente">
+<main>
 
-<button class="primary" onclick="add()">Agregar</button>
 
-  
-<input id="buscar" placeholder="Buscar..." onkeyup="render()">
+<button onclick="abrirModal()">
+➕ Nuevo Cliente
+</button>
+
+
+<h2>Clientes registrados</h2>
+
 
 <table>
+
 <thead>
+
 <tr>
-<th>ID</th>
+
+<th>Nombre</th>
 <th>RFC</th>
-<th>RAZÓN SOCIAL</th>
+<th>Correo</th>
 <th>Acciones</th>
+
 </tr>
+
 </thead>
 
-<tbody id="tabla"></tbody>
+
+<tbody id="tabla">
+
+</tbody>
+
+
 </table>
 
-function render(){
-let f=document.getElementById("buscar").value?.toLowerCase()||"";
-let t=document.getElementById("tabla");
-t.innerHTML="";
 
-clientes
-.filter(c=>c.razon.toLowerCase().includes(f)||c.rfc.toLowerCase().includes(f))
-.forEach(c=>{
-t.innerHTML+=`
-<tr>
-<td>${c.id}</td>
-<td>${c.rfc}</td>
-<td>${c.razon}</td>
-<td>
-<button class="edit" onclick="edit(${c.id})">Editar</button>
-<button class="danger" onclick="del(${c.id})">X</button>
-</td>
-</tr>`;
-});
+</main>
+
+
+</section>
+
+
+
+
+
+<!-- MODAL -->
+
+
+<div class="modal" id="modal">
+
+
+<div>
+
+<h2>Nuevo Cliente</h2>
+
+
+<input id="nombre" placeholder="Nombre">
+
+<input id="rfc" placeholder="RFC">
+
+<input id="correo" placeholder="Correo">
+
+<input id="actividad" placeholder="Actividad económica">
+
+<input id="clave" placeholder="Contraseña cliente">
+
+
+<button onclick="guardarCliente()">
+Guardar
+</button>
+
+
+<button onclick="cerrarModal()">
+Cancelar
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<script>
+
+
+const USER="admin@gheztorix.com";
+const PASS="12345";
+
+
+let clientes =
+JSON.parse(localStorage.getItem("clientes")) || [];
+
+
+
+
+// LOGIN
+
+
+function login(){
+
+
+let u =
+document.getElementById("usuario").value;
+
+
+let p =
+document.getElementById("password").value;
+
+
+
+if(u==USER && p==PASS){
+
+
+document.getElementById("login").style.display="none";
+
+document.getElementById("app").style.display="block";
+
+
+mostrarClientes();
+
+
 }
-/* LOGOUT */
-function logout(){
+
+else{
+
+
+mensaje.innerHTML=
+"Usuario incorrecto";
+
+
+}
+
+
+}
+
+
+
+
+
+function salir(){
+
 location.reload();
+
 }
 
-/* NAV */
-function show(s){
-document.getElementById("dash").style.display="none";
-document.getElementById("clientes").style.display="none";
-document.getElementById(s).style.display="block";
-update();
-chart();
+
+
+
+// MODAL
+
+
+function abrirModal(){
+
+modal.style.display="flex";
+
 }
 
-/* ADD */
-function add(){
 
-let razon = document.getElementById("Razón Social").value.trim();
-let rfc = document.getElementById("RFC").value.trim();
-let cp = document.getElementById("CODIGO POSTAL").value.trim();
-let regimen = document.getElementById("Regimen").value;
-let telefono = document.getElementById("telefono").value.trim();
-let correo = document.getElementById("correo").value.trim();
-let usuarioCliente = document.getElementById("usuarioCliente").value.trim();
-let passCliente = document.getElementById("passCliente").value.trim();
+function cerrarModal(){
 
-if(!razon || !rfc){
-alert("Completa Razón Social y RFC");
-return;
+modal.style.display="none";
+
 }
 
-clientes.push({
-id: Date.now(),
-razon,
-rfc,
-cp,
-regimen,
-telefono,
-correo,
-usuarioCliente,
-passCliente
+
+
+
+
+// GUARDAR CLIENTE
+
+
+
+function guardarCliente(){
+
+
+
+let cliente={
+
+id:Date.now(),
+
+nombre:nombre.value,
+
+rfc:rfc.value,
+
+correo:correo.value,
+
+actividad:actividad.value,
+
+clave:clave.value,
+
+documentos:[]
+
+};
+
+
+
+clientes.push(cliente);
+
+
+localStorage.setItem(
+"clientes",
+JSON.stringify(clientes)
+);
+
+
+
+cerrarModal();
+
+
+mostrarClientes();
+
+
+}
+
+
+
+
+// MOSTRAR
+
+
+
+function mostrarClientes(){
+
+
+tabla.innerHTML="";
+
+
+clientes.forEach(c=>{
+
+
+tabla.innerHTML += `
+
+<tr>
+
+<td>${c.nombre}</td>
+
+<td>${c.rfc}</td>
+
+<td>${c.correo}</td>
+
+
+<td>
+
+<button onclick="verCliente(${c.id})">
+Ver
+</button>
+
+
+<button onclick="eliminar(${c.id})">
+Eliminar
+</button>
+
+
+</td>
+
+
+</tr>
+
+`;
+
+
 });
 
-localStorage.setItem("clientes", JSON.stringify(clientes));
 
-render();
-update();
-chart();
 
-// limpiar campos
-document.getElementById("Razón Social").value = "";
-document.getElementById("RFC").value = "";
-document.getElementById("CODIGO POSTAL").value = "";
-document.getElementById("telefono").value = "";
-document.getElementById("correo").value = "";
-document.getElementById("usuarioCliente").value = "";
-document.getElementById("passCliente").value = "";
+totalClientes.innerHTML=clientes.length;
+
 
 }
+
+
+
+
+
+function eliminar(id){
+
+
+clientes =
+clientes.filter(c=>c.id!=id);
+
+
+localStorage.setItem(
+"clientes",
+JSON.stringify(clientes)
+);
+
+
+mostrarClientes();
+
+}
+
+
+
+
+
+function verCliente(id){
+
+
+let c =
+clientes.find(x=>x.id==id);
+
+
+
+alert(
+
+`
+EXPEDIENTE DIGITAL
+
+Cliente:
+${c.nombre}
+
+RFC:
+${c.rfc}
+
+Correo:
+${c.correo}
+
+Actividad:
+${c. actividad}
+
+Documentos:
+${c.documentos.length}
+
+`
+
+);
+
+
+}
+
+
+
 </script>
+
 
 </body>
 </html>
