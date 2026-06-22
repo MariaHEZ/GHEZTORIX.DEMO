@@ -1,23 +1,31 @@
-.topbar{
-    background:#000;
-    color:#d4af37;
-    padding:15px 30px;
+.carpeta{
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+background:white;
+padding:25px;
+border-radius:15px;
+cursor:pointer;
+box-shadow:0 5px 15px #0002;
+transition:.3s;
+
 }
 
-.btn-salir{
-    background:#d4af37;
-    color:#000;
-    border:none;
-    padding:10px 20px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
+
+.carpeta:hover{
+
+transform:translateY(-5px);
+
 }
 
-.btn-salir:hover{
-    background:#f5c542;
+
+.carpeta span{
+
+font-size:60px;
+
+}
+
+
+.carpeta h3{
+
+color:#163c8c;
+
 }
