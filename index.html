@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GHEZTORIX - Control Documental</title>
+    <title>Control de Documentación - Despacho</title>
     <style>
         /* Estilos Generales */
         body {
@@ -11,230 +11,146 @@
             background-color: #f4f6f9;
             color: #333;
             margin: 0;
-            padding: 0;
-            height: 100vh;
+            padding: 20px;
         }
-
-        /* --- PANTALLA DE LOGIN PROFESIONAL (SPLIT SCREEN) --- */
-        .login-wrapper {
-            display: flex;
-            height: 100vh;
-            width: 100vw;
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        /* Lado Izquierdo: Imagen Corporativa */
-        .login-bg-image {
-            flex: 1;
-            background-image: url('https://unsplash.com');
-            background-size: cover;
-            background-position: center;
-            display: block;
-        }
-        /* Lado Derecho: Formulario */
-        .login-side {
-            width: 450px;
-            background: #ffffff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 40px;
-            box-shadow: -4px 0 20px rgba(0,0,0,0.05);
-        }
-        .brand-logo {
+        header {
             text-align: center;
             margin-bottom: 30px;
+            border-bottom: 2px solid #eef2f3;
+            padding-bottom: 20px;
         }
-        .brand-logo h2 {
-            font-size: 32px;
-            font-weight: 800;
-            color: #1e293b;
-            letter-spacing: 2px;
-            margin: 0;
+        h1 { color: #2c3e50; margin: 0; }
+        h2 { color: #34495e; border-left: 4px solid #3498db; padding-left: 10px; margin-top: 30px; }
+
+        /* Pantalla de Login */
+        .login-container {
+            max-width: 400px;
+            margin: 80px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
         }
-        .brand-logo p {
-            color: #64748b;
-            margin: 5px 0 0 0;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .login-container h2 {
+            border-left: none;
+            padding-left: 0;
+            margin-bottom: 25px;
+            color: #2c3e50;
         }
 
-        /* Formularios del Login */
-        .login-side form {
-            background: none;
-            border: none;
-            padding: 0;
+        /* Formulario y Controles */
+        form {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
         }
         label {
             font-weight: 600;
             color: #475569;
             display: block;
-            margin-top: 15px;
-            font-size: 14px;
+            margin-top: 10px;
+            text-align: left;
         }
         input, select {
             width: 100%;
-            padding: 12px;
-            margin-top: 6px;
-            margin-bottom: 10px;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
             border: 1px solid #cbd5e1;
-            border-radius: 6px;
+            border-radius: 4px;
             box-sizing: border-box;
             font-size: 14px;
-            background-color: #f8fafc;
-            transition: all 0.3s;
-        }
-        input:focus, select:focus {
-            border-color: #3b82f6;
-            outline: none;
-            background-color: #fff;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
         button {
-            background-color: #1e293b;
+            background-color: #2c3e50;
             color: white;
-            padding: 14px 20px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
             width: 100%;
-            font-size: 15px;
-            margin-top: 15px;
+            font-size: 16px;
             transition: background 0.2s;
         }
-        button:hover { background-color: #0f172a; }
+        button:hover { background-color: #1a252f; }
 
-        /* Enlace de Olvidó Contraseña */
-        .forgot-link {
-            display: block;
-            text-align: right;
-            font-size: 13px;
-            color: #3b82f6;
-            text-decoration: none;
-            margin-top: 5px;
-        }
-        .forgot-link:hover { text-decoration: underline; }
-
-        /* Cuadro de Alertas */
-        .error-message, .success-message {
-            padding: 12px;
-            border-radius: 6px;
+        /* Mensajes de Error */
+        .error-message {
+            color: #842029;
+            background-color: #f8d7da;
+            padding: 10px;
+            border-radius: 4px;
             margin-bottom: 15px;
             display: none;
             font-size: 14px;
-            font-weight: 500;
-        }
-        .error-message { color: #842029; background-color: #f8d7da; border: 1px solid #f5c2c7; }
-        .success-message { color: #0f5132; background-color: #d1e7dd; border: 1px solid #badbcc; }
-
-        /* Ventana Emergente (Modal) para recuperar contraseña */
-        .modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.6);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 1000; display: none;
-        }
-        .modal-content {
-            background: white; padding: 30px; border-radius: 8px;
-            width: 90%; max-width: 400px; position: relative;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        .close-btn {
-            position: absolute; top: 15px; right: 15px;
-            font-size: 20px; cursor: pointer; color: #64748b;
         }
 
-        /* Ocultar elementos generales */
-        .hidden { display: none !important; }
-
-        /* --- ESTILOS DEL PANEL DE CONTROL (DASHBOARD) --- */
-        main {
-            max-width: 1100px;
-            margin: 40px auto;
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        /* Ocultar elementos */
+        .hidden {
+            display: none !important;
         }
-        header {
+
+        /* Tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px;
             text-align: left;
-            margin-bottom: 35px;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            border-bottom: 1px solid #cbd5e1;
         }
-        header h1 { color: #1e293b; font-size: 28px; font-weight: 700; }
-        header p { color: #64748b; margin: 5px 0 0 0; }
-        
-        .form-section {
-            background: #f8fafc;
-            padding: 25px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 40px;
-        }
-        h2 { color: #1e293b; font-size: 20px; margin-top: 0; margin-bottom: 20px; }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { padding: 14px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
-        th { background-color: #f1f5f9; color: #475569; font-weight: 600; }
-        mark { padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; }
-
-        @media (max-width: 800px) {
-            .login-bg-image { display: none; }
-            .login-side { width: 100%; }
+        th { background-color: #f1f5f9; color: #475569; }
+        mark {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
 
-    <!-- PANTALLA 1: LOGIN INTEGRADO -->
-    <div id="login-screen" class="login-wrapper">
-        <!-- Parte Izquierda (Imagen de Fondo de Stock Corporativo) -->
-        <div class="login-bg-image"></div>
+    <!-- PANTALLA 1: Formulario de Inicio de Sesión -->
+    <div id="login-screen" class="login-container">
+        <h2>Ingreso al Sistema</h2>
+        <div id="error-box" class="error-message">Usuario o contraseña incorrectos.</div>
         
-        <!-- Parte Derecha (Formulario) -->
-        <div class="login-side">
-            <div class="brand-logo">
-                <h2>GHEZTORIX</h2>
-                <p>Consultoría & Control Fiscal</p>
-            </div>
+        <form id="form-login">
+            <label for="usuario">Correo Electrónico o RFC:</label>
+            <input type="text" id="usuario" required placeholder="admin@despacho.com o RFC123456AAA">
 
-            <div id="error-box" class="error-message">Datos incorrectos. Intente de nuevo.</div>
-            <div id="success-login-box" class="success-message"></div>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" required placeholder="••••••••">
 
-            <form id="form-login">
-                <label Kakao for="usuario">Correo Electrónico o RFC:</label>
-                <input type="text" id="usuario" required placeholder="admin@gheztorix.com u Correo/RFC">
-
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" required placeholder="••••••••">
-
-                <a href="#" class="forgot-link" id="open-recover">¿Olvidó su contraseña?</a>
-
-                <button type="submit">Acceder al Sistema</button>
-            </form>
-        </div>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
     </div>
 
-    <!-- PANTALLA 2: PANEL DE CONTROL DE CLIENTES -->
+    <!-- PANTALLA 2: Panel de Control (Oculto al inicio) -->
     <main id="dashboard-screen" class="hidden">
         <header>
-            <div>
-                <h1>Panel Control Documental</h1>
-                <p>Firma GHEZTORIX — Auditoría de Obligaciones</p>
-            </div>
-            <button id="btn-logout" style="width: auto; margin-top: 0; background-color: #ef4444; padding: 10px 15px;">Cerrar Sesión</button>
+            <h1>Control de Documentación de Clientes</h1>
+            <p>Panel interno para el seguimiento de obligaciones fiscales y auditoría.</p>
         </header>
 
-        <div class="form-section">
+        <section>
             <h2>Registrar Requerimiento de Cliente</h2>
             <form id="form-registro">
                 <label for="cliente">Nombre del Cliente o Empresa:</label>
-                <input type="text" id="cliente" required placeholder="Ej. Logística Global SA">
+                <input type="text" id="cliente" required placeholder="Ej. Comercializadora Alfa SA de CV">
 
                 <label for="documento">Documentación Solicitada:</label>
                 <select id="documento">
@@ -255,9 +171,9 @@
                     <option value="pagada">Pagada</option>
                 </select>
 
-                <button type="submit" style="background-color: #3b82f6;">Registrar Expediente</button>
+                <button type="submit">Registrar Expediente</button>
             </form>
-        </div>
+        </section>
 
         <section>
             <h2>Expedientes de Clientes Registrados</h2>
@@ -278,7 +194,80 @@
         </section>
     </main>
 
-    <!-- VENTANA MODAL: RECUPERAR CONTRASEÑA -->
-    <div id="recover-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" id="close-recover">&times;</span>
+    <!-- Lógica del Sistema -->
+    <script>
+        // Elementos de las pantallas
+        const loginScreen = document.getElementById('login-screen');
+        const dashboardScreen = document.getElementById('dashboard-screen');
+        const errorBox = document.getElementById('error-box');
+
+        // Formularios
+        const formLogin = document.getElementById('form-login');
+        const formRegistro = document.getElementById('form-registro');
+        const tablaBody = document.querySelector('table tbody');
+        let contadorId = 1;
+
+        // --- LÓGICA DE INICIO DE SESIÓN ---
+        formLogin.addEventListener('submit', function(evento) {
+            evento.preventDefault();
+            
+            const usuarioIngresado = document.getElementById('usuario').value.trim();
+            const passwordIngresado = document.getElementById('password').value;
+
+            // Datos de acceso simulados (Puedes usar cualquiera de los dos)
+            const usuarioCorrectoCorreo = "admin@despacho.com";
+            const usuarioCorrectoRFC = "RFC123456AAA";
+            const passwordCorrecto = "12345";
+
+            if ((usuarioIngresado === usuarioCorrectoCorreo || usuarioIngresado === usuarioCorrectoRFC) && passwordIngresado === passwordCorrecto) {
+                // Si es correcto, oculta el login y muestra el panel
+                loginScreen.classList.add('hidden');
+                dashboardScreen.classList.remove('hidden');
+                errorBox.style.display = 'none';
+            } else {
+                // Si es incorrecto, muestra el mensaje de alerta
+                errorBox.style.display = 'block';
+            }
+        });
+
+        // --- LÓGICA DEL REGISTRO DE CLIENTES ---
+        formRegistro.addEventListener('submit', function(evento) {
+            evento.preventDefault();
+
+            const cliente = document.getElementById('cliente').value;
+            const documentoSelect = document.getElementById('documento');
+            const documentoTexto = documentoSelect.options[documentoSelect.selectedIndex].text;
+            const fecha = document.getElementById('fecha').value;
+            const estadoSelect = document.getElementById('estado');
+            const estadoTexto = estadoSelect.options[estadoSelect.selectedIndex].text;
+
+            let colorFondo = '#fff3cd'; 
+            let colorTexto = '#856404';
+
+            if (estadoSelect.value === 'actualizada') {
+                colorFondo = '#d1e7dd'; 
+                colorTexto = '#0f5132';
+            } else if (estadoSelect.value === 'pagada') {
+                colorFondo = '#cff4fc'; 
+                colorTexto = '#055160';
+            } else if (estadoSelect.value === 'vencimiento') {
+                colorFondo = '#f8d7da'; 
+                colorTexto = '#842029';
+            }
+
+            const nuevaFila = document.createElement('tr');
+            nuevaFila.innerHTML = `
+                <td>#${String(contadorId++).padStart(3, '0')}</td>
+                <td><b>${cliente}</b></td>
+                <td>${documentoTexto}</td>
+                <td>${fecha}</td>
+                <td><mark style="background-color: ${colorFondo}; color: ${colorTexto};">${estadoTexto}</mark></td>
+            `;
+
+            tablaBody.appendChild(nuevaFila);
+            formRegistro.reset();
+        });
+    </script>
+
+</body>
+</html>
