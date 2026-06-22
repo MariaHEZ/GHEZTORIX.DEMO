@@ -9,32 +9,49 @@
 
 <body>
 
-<header>
-    <h1>GHEZTORIX</h1>
-    <p>Panel principal</p>
+<!-- HEADER -->
+<header class="topbar">
+    <div>
+        <h1>GHEZTORIX</h1>
+        <p>Sistema de Gestión de Despachos</p>
+    </div>
 
-    <button onclick="logout()">Cerrar sesión</button>
+    <div>
+        <span id="rol"></span>
+        <button onclick="logout()">Cerrar sesión</button>
+    </div>
 </header>
 
-<h3>Rol: <span id="rol"></span></h3>
+<!-- DASHBOARD -->
+<main class="dashboard">
 
-<!-- ADMIN -->
-<div id="adminPanel">
-    <h2>Panel Administrador</h2>
+    <!-- ADMIN -->
+    <section id="adminPanel" class="panel admin">
+        <h2>Panel Administrador</h2>
 
-    <button>Registrar clientes</button>
-    <button>Ver todos los clientes</button>
-    <button>Emitir facturas</button>
-</div>
+        <div class="cards">
+            <div class="card blue">Clientes</div>
+            <div class="card green">Facturas</div>
+            <div class="card gold">Impuestos</div>
+            <div class="card gray">Reportes</div>
+        </div>
 
-<!-- CLIENTE -->
-<div id="clientePanel">
-    <h2>Panel Cliente</h2>
+    </section>
 
-    <button>Mis documentos</button>
-    <button>Descargar CFDI</button>
-    <button>Comentarios</button>
-</div>
+    <!-- CLIENTE -->
+    <section id="clientePanel" class="panel cliente">
+        <h2>Panel Cliente</h2>
+
+        <div class="cards">
+            <div class="card blue">Mis documentos</div>
+            <div class="card green">CFDI</div>
+            <div class="card gold">Estados de cuenta</div>
+            <div class="card gray">Comentarios</div>
+        </div>
+
+    </section>
+
+</main>
 
 <script src="js/dashboard.js"></script>
 
