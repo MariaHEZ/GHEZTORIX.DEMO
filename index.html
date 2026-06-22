@@ -268,43 +268,26 @@ placeholder="Contraseña Cliente">
 <tbody id="tabla"></tbody>
 </table>
 
-</div>
+function render(){
+let f=document.getElementById("buscar").value?.toLowerCase()||"";
+let t=document.getElementById("tabla");
+t.innerHTML="";
 
-</div>
-</div>
-
-<script>
-
-/* USERS */
-const USERS=[
-{u:"admin",p:"12345",role:"admin"},
-{u:"user",p:"123",role:"user"}
-];
-
-let session=null;
-
-/* CLIENTES */
-let clientes=JSON.parse(localStorage.getItem("clientes"))||[];
-
-/* LOGIN */
-function login(){
-let u=document.getElementById("user").value;
-let p=document.getElementById("pass").value;
-
-let found=USERS.find(x=>x.u===u && x.p===p);
-
-if(found){
-session=found;
-document.getElementById("login").style.display="none";
-document.getElementById("app").style.display="block";
-render();
-update();
-chart();
-}else{
-alert("Error login");
+clientes
+.filter(c=>c.razon.toLowerCase().includes(f)||c.rfc.toLowerCase().includes(f))
+.forEach(c=>{
+t.innerHTML+=`
+<tr>
+<td>${c.id}</td>
+<td>${c.rfc}</td>
+<td>${c.razon}</td>
+<td>
+<button class="edit" onclick="edit(${c.id})">Editar</button>
+<button class="danger" onclick="del(${c.id})">X</button>
+</td>
+</tr>`;
+});
 }
-}
-
 /* LOGOUT */
 function logout(){
 location.reload();
@@ -321,89 +304,49 @@ chart();
 
 /* ADD */
 function add(){
-let n=document.getElementById("nombre").value;
-let r=document.getElementById("rfc").value;
 
-if(!n||!r)return;
+let razon = document.getElementById("Razón Social").value.trim();
+let rfc = document.getElementById("RFC").value.trim();
+let cp = document.getElementById("CODIGO POSTAL").value.trim();
+let regimen = document.getElementById("Regimen").value;
+let telefono = document.getElementById("telefono").value.trim();
+let correo = document.getElementById("correo").value.trim();
+let usuarioCliente = document.getElementById("usuarioCliente").value.trim();
+let passCliente = document.getElementById("passCliente").value.trim();
 
-clientes.push({id:Date.now(),nombre:n,rfc:r});
-
-localStorage.setItem("clientes",JSON.stringify(clientes));
-
-render();
-update();
-chart();
+if(!razon || !rfc){
+alert("Completa Razón Social y RFC");
+return;
 }
 
-/* DELETE */
-function del(id){
-clientes=clientes.filter(c=>c.id!==id);
-localStorage.setItem("clientes",JSON.stringify(clientes));
-render();
-update();
-chart();
-}
-
-/* EDIT */
-function edit(id){
-let c=clientes.find(x=>x.id===id);
-let n=prompt("Nuevo nombre",c.nombre);
-let r=prompt("Nuevo RFC",c.rfc);
-
-if(n&&r){
-c.nombre=n;
-c.rfc=r;
-localStorage.setItem("clientes",JSON.stringify(clientes));
-render();
-update();
-chart();
-}
-}
-
-/* RENDER */
-function render(){
-let f=document.getElementById("buscar").value?.toLowerCase()||"";
-let t=document.getElementById("tabla");
-t.innerHTML="";
-
-clientes
-.filter(c=>c.nombre.toLowerCase().includes(f)||c.rfc.toLowerCase().includes(f))
-.forEach(c=>{
-t.innerHTML+=`
-<tr>
-<td>${c.id}</td>
-<td>${c.nombre}</td>
-<td>${c.rfc}</td>
-<td>
-<button class="edit" onclick="edit(${c.id})">Editar</button>
-<button class="danger" onclick="del(${c.id})">X</button>
-</td>
-</tr>`;
+clientes.push({
+id: Date.now(),
+razon,
+rfc,
+cp,
+regimen,
+telefono,
+correo,
+usuarioCliente,
+passCliente
 });
+
+localStorage.setItem("clientes", JSON.stringify(clientes));
+
+render();
+update();
+chart();
+
+// limpiar campos
+document.getElementById("Razón Social").value = "";
+document.getElementById("RFC").value = "";
+document.getElementById("CODIGO POSTAL").value = "";
+document.getElementById("telefono").value = "";
+document.getElementById("correo").value = "";
+document.getElementById("usuarioCliente").value = "";
+document.getElementById("passCliente").value = "";
+
 }
-
-/* DASH */
-function update(){
-document.getElementById("total").innerText=clientes.length;
-}
-
-/* CHART SIMPLE */
-function chart(){
-let ctx=document.getElementById("chart").getContext("2d");
-ctx.clearRect(0,0,400,200);
-
-ctx.fillStyle="#2a5298";
-ctx.fillRect(50,150-clientes.length*10,50,clientes.length*10);
-
-ctx.fillStyle="#999";
-ctx.fillText("Clientes",50,180);
-}
-
-/* DARK MODE */
-function toggleDark(){
-document.body.classList.toggle("dark");
-}
-
 </script>
 
 </body>
