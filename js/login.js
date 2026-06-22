@@ -1,9 +1,8 @@
 function login(){
 
-    const usuario = document.getElementById("usuario").value;
-    const password = document.getElementById("password").value;
+    const usuario = document.getElementById("usuario").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    // usuarios simulados
     const usuarios = [
         {usuario:"admin", password:"123456", rol:"admin"},
         {usuario:"cliente1", password:"123456", rol:"cliente"}
@@ -15,12 +14,12 @@ function login(){
 
     if(acceso){
 
-        // guardamos usuario completo
         localStorage.setItem("sesion", JSON.stringify(acceso));
 
         window.location.href = "dashboard.html";
 
     }else{
+
         document.getElementById("error").innerText =
         "Usuario o contraseña incorrectos";
     }
