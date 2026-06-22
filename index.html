@@ -1,16 +1,57 @@
-const USER = "admin@gheztorix.com";
-const PASS = "12345";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>GHEZTORIX</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-function login(){
+<!-- LOGIN -->
+<div id="loginBox" class="box">
+  <h2>Iniciar Sesión</h2>
 
-  const usuario = document.getElementById("usuario").value.trim();
-  const password = document.getElementById("password").value.trim();
+  <input type="text" id="usuario" placeholder="Correo">
+  <input type="password" id="password" placeholder="Contraseña">
 
-  if(usuario === USER && password === PASS){
-    alert("Acceso correcto");
-    // aquí luego puedes redirigir:
-    // window.location.href = "dashboard.html";
-  } else {
-    alert("Usuario o contraseña incorrectos");
-  }
-}
+  <button onclick="login()">Entrar</button>
+</div>
+
+<!-- PANEL -->
+<div id="panel" class="hidden">
+
+  <h1>GHEZTORIX - Panel Principal</h1>
+
+  <div class="menu">
+    <button onclick="mostrar('clientes')">Clientes</button>
+    <button onclick="mostrar('consultas')">Consultas</button>
+  </div>
+
+  <!-- CLIENTES -->
+  <div id="clientes" class="seccion hidden">
+    <h2>Registro de Clientes</h2>
+
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="text" id="rfc" placeholder="RFC">
+    <input type="email" id="correo" placeholder="Correo">
+
+    <button onclick="agregarCliente()">Guardar</button>
+
+    <div id="listaClientes"></div>
+  </div>
+
+  <!-- CONSULTAS -->
+  <div id="consultas" class="seccion hidden">
+    <h2>Buscar Cliente</h2>
+
+    <input type="text" id="buscarRFC" placeholder="RFC">
+    <button onclick="buscarCliente()">Buscar</button>
+
+    <div id="resultado"></div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
