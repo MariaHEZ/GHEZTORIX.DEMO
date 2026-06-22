@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel del Cliente - GHEZTORIX</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header>Panel del Cliente - GHEZTORIX PRO</header>
+<div class="container">
+  <h2 class="gold">Bienvenido Cliente</h2>
+  <p>Accede a tus documentos fiscales y obligaciones.</p>
+
+  <!-- Facturas -->
+  <h3 class="blue">Mis Facturas</h3>
+  <table style="width:100%; border-collapse:collapse; background:#1f2937; color:white; margin-bottom:20px;">
+    <thead><tr style="background:#1E3A8A;"><th>Razón Social</th><th>RFC</th><th>Uso de CFDI</th><th>Subtotal</th><th>Impuestos</th><th>Total</th><th>Método de Pago</th><th>Forma de Pago</th><th>Acciones</th></tr></thead>
+    <tbody><tr><td>Empresa Ejemplo S.A. de C.V.</td><td>AAA010101AAA</td><td>G03</td><td>$10,000.00</td><td>$1,600.00</td><td>$11,600.00</td><td>Transferencia</td><td>SPEI</td><td><button>XML</button> <button>PDF</button></td></tr></tbody>
+  </table>
+
+  <!-- Declaraciones -->
+  <h3 class="blue">Mis Declaraciones</h3>
+  <table style="width:100%; border-collapse:collapse; background:#1f2937; color:white; margin-bottom:20px;">
+    <thead><tr style="background:#1E3A8A;"><th>Periodo</th><th>Tipo</th><th>Estatus</th><th>Vencimiento</th><th>Acciones</th></tr></thead>
+    <tbody>
+      <tr><td>Mayo 2026</td><td>ISR Mensual</td><td style="color:#F59E0B;">Pendiente</td><td>17/06/2026</td><td><button>Presentar</button></td></tr>
+      <tr><td>Abril 2026</td><td>IVA Mensual</td><td style="color:#10B981;">Presentada</td><td>17/05/2026</td><td><button>Ver Acuse</button></td></tr>
+    </tbody>
+  </table>
+
+  <!-- Documentos -->
+  <h3 class="blue">Mis Documentos</h3>
+  <table style="width:100%; border-collapse:collapse; background:#1f2937; color:white;">
+    <thead><tr style="background:#1E3A8A;"><th>Documento</th><th>Descripción</th><th>Fecha</th><th>Acciones</th></tr></thead>
+    <tbody>
+      <tr><td>Opinión de Cumplimiento</td><td>Constancia SAT</td><td>01/06/2026</td><td><button>PDF</button></td></tr>
+      <tr><td>Certificado Digital</td><td>Archivo .cer</td><td>15/05/2026</td><td><button>Descargar</button></td></tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
