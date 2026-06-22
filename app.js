@@ -1,71 +1,108 @@
+
+// ================================
+// BASE DE DATOS LOCAL
+// ================================
+
+
 let clientes =
-JSON.parse(localStorage.getItem("clientes")) || [];
+JSON.parse(localStorage.getItem("clientesGHEZTORIX")) || [];
 
 
 let comentarios =
-JSON.parse(localStorage.getItem("comentarios")) || [];
+JSON.parse(localStorage.getItem("comentariosGHEZTORIX")) || [];
 
 
 
 
+// ================================
 // LOGIN
+// ================================
 
-function entrar(){
+
+function login(){
 
 
-let u =
+let usuario =
 document.getElementById("usuario").value;
 
 
-let p =
+let password =
 document.getElementById("password").value;
 
 
 
-if(u=="admin" && p=="12345"){
-
-
-document.getElementById("login")
-.style.display="none";
-
-
-document.getElementById("dashboard")
-.classList.remove("hidden");
-
-
-}else{
-
-
-alert("Datos incorrectos");
-
-
-}
-
-
-}
-
-
-
-// SALIR
-
-function salir(){
-
-location.reload();
-
-}
-
-
-
-
-
-// ABRIR MODULO
-
-function abrir(id){
+if(usuario==="admin" && password==="12345"){
 
 
 document
-.querySelectorAll(".modulo")
-.forEach(x=>x.classList.add("hidden"));
+.getElementById("loginPage")
+.classList.add("hidden");
+
+
+document
+.getElementById("dashboard")
+.classList.remove("hidden");
+
+
+
+actualizarDatos();
+
+
+}
+
+else{
+
+
+alert("Usuario o contraseña incorrectos");
+
+
+}
+
+
+}
+
+
+
+
+
+// ================================
+// CERRAR SESION
+// ================================
+
+
+function cerrar(){
+
+
+location.reload();
+
+
+}
+
+
+
+
+
+
+
+// ================================
+// CAMBIO DE MODULOS
+// ================================
+
+
+function mostrar(id){
+
+
+let pantallas =
+document.querySelectorAll(".pantalla");
+
+
+
+pantallas.forEach(p=>{
+
+p.classList.add("hidden");
+
+});
+
 
 
 document
@@ -73,7 +110,12 @@ document
 .classList.remove("hidden");
 
 
+
+if(id==="clientes"){
+
 mostrarClientes();
+
+}
 
 
 }
@@ -82,7 +124,11 @@ mostrarClientes();
 
 
 
-// GUARDAR CLIENTE
+
+
+// ================================
+// REGISTRAR CLIENTE
+// ================================
 
 
 function guardarCliente(){
@@ -90,15 +136,52 @@ function guardarCliente(){
 
 let cliente={
 
-razon:razon.value,
 
-rfc:rfc.value,
+razon:
+document.getElementById("razon").value,
 
-correo:correo.value,
 
-actividad:actividad.value
+rfc:
+document.getElementById("rfc").value,
+
+
+cp:
+document.getElementById("cp").value,
+
+
+regimen:
+document.getElementById("regimen").value,
+
+
+correo:
+document.getElementById("correo").value,
+
+
+actividad:
+document.getElementById("actividad").value,
+
+
+firma:
+document.getElementById("firma").value
+
 
 };
+
+
+
+
+
+if(cliente.razon==="" ||
+cliente.rfc===""){
+
+
+alert("Completa los datos obligatorios");
+
+return;
+
+}
+
+
 
 
 
@@ -107,69 +190,167 @@ clientes.push(cliente);
 
 
 localStorage.setItem(
-"clientes",
+
+"clientesGHEZTORIX",
+
 JSON.stringify(clientes)
+
 );
+
 
 
 
 alert("Cliente registrado");
 
 
+
+limpiar();
+
+
+actualizarDatos();
+
+
+
 }
 
 
 
 
 
+
+
+function limpiar(){
+
+
+document
+.querySelectorAll("#registro input")
+.forEach(x=>x.value="");
+
+
+}
+
+
+
+
+
+
+
+
+
+// ================================
 // MOSTRAR CLIENTES
+// ================================
+
 
 
 function mostrarClientes(){
 
 
-lista.innerHTML="";
+let tabla =
+document.getElementById("tabla");
 
 
-clientes.forEach((c,i)=>{
+
+tabla.innerHTML="";
 
 
-lista.innerHTML += `
+
+clientes.forEach((c,index)=>{
+
+
+
+tabla.innerHTML += `
 
 <tr>
 
-<td>
-${c.razon}
-</td>
+<td>${c.razon}</td>
+
+<td>${c.rfc}</td>
+
+<td>${c.correo}</td>
 
 
 <td>
-${c.rfc}
-</td>
 
 
-<td>
-<button onclick="editar(${i})">
+<button onclick="editarCliente(${index})">
 Editar
 </button>
 
 
-<button onclick="eliminar(${i})">
+
+<button onclick="eliminarCliente(${index})">
 Eliminar
 </button>
+
 
 </td>
 
 
 </tr>
 
-
 `;
+
+
 
 });
 
 
-cantidad.innerHTML=clientes.length;
+}
+
+
+
+
+
+
+
+
+
+// ================================
+// BUSCAR RFC
+// ================================
+
+
+function buscarCliente(){
+
+
+
+let texto =
+document.getElementById("buscarRFC").value;
+
+
+
+let encontrado =
+clientes.find(
+c=>c.rfc===texto
+);
+
+
+
+
+
+if(encontrado){
+
+
+alert(
+
+"Cliente encontrado: "
+
++ encontrado.razon
+
+);
+
+
+
+}
+
+else{
+
+
+alert("No existe cliente");
+
+}
+
 
 
 }
@@ -178,26 +359,41 @@ cantidad.innerHTML=clientes.length;
 
 
 
+
+
+
+
+// ================================
 // EDITAR
+// ================================
 
-function editar(i){
+
+function editarCliente(i){
 
 
-clientes[i].razon =
+let nuevo =
 prompt(
+
 "Nueva razón social",
+
 clientes[i].razon
+
 );
 
 
 
-localStorage.setItem(
-"clientes",
-JSON.stringify(clientes)
-);
+if(nuevo){
 
 
-mostrarClientes();
+clientes[i].razon=nuevo;
+
+
+
+guardarCambios();
+
+
+
+}
 
 }
 
@@ -206,21 +402,46 @@ mostrarClientes();
 
 
 
+
+// ================================
 // ELIMINAR
+// ================================
 
 
-function eliminar(i){
+function eliminarCliente(i){
 
 
-if(confirm("Eliminar cliente?")){
+
+if(confirm("¿Eliminar cliente?")){
 
 
 clientes.splice(i,1);
 
 
+
+guardarCambios();
+
+
+
+}
+
+
+}
+
+
+
+
+
+
+function guardarCambios(){
+
+
 localStorage.setItem(
-"clientes",
+
+"clientesGHEZTORIX",
+
 JSON.stringify(clientes)
+
 );
 
 
@@ -228,23 +449,75 @@ JSON.stringify(clientes)
 mostrarClientes();
 
 
+actualizarDatos();
+
+
+
 }
 
 
+
+
+
+
+
+
+
+
+// ================================
+// DASHBOARD
+// ================================
+
+
+function actualizarDatos(){
+
+
+document
+.getElementById("totalClientes")
+.innerHTML=clientes.length;
+
+
+
 }
 
 
 
 
 
+
+
+
+
+// ================================
 // REPORTES
+// ================================
 
 
-function generarReporte(){
+
+function crearReporte(){
 
 
-reporte.innerHTML =
-"Reporte generado correctamente";
+document
+.getElementById("reporte")
+.innerHTML=
+
+
+`
+
+<h3>Reporte mensual</h3>
+
+<p>
+Clientes registrados:
+${clientes.length}
+</p>
+
+
+<p>
+Sistema funcionando correctamente
+</p>
+
+`;
+
 
 
 }
@@ -253,24 +526,41 @@ reporte.innerHTML =
 
 
 
-// COMENTARIOS
+
+
+
+
+
+// ================================
+// CHAT CLIENTES
+// ================================
+
 
 
 function agregarComentario(){
 
 
-let m =
-mensaje.value;
+
+let mensaje =
+document.getElementById("mensaje").value;
 
 
 
-comentarios.push(m);
+if(mensaje==="") return;
+
+
+
+
+comentarios.push(mensaje);
 
 
 
 localStorage.setItem(
-"comentarios",
+
+"comentariosGHEZTORIX",
+
 JSON.stringify(comentarios)
+
 );
 
 
@@ -278,37 +568,59 @@ JSON.stringify(comentarios)
 mostrarComentarios();
 
 
+
+document.getElementById("mensaje").value="";
+
+
+
 }
+
+
 
 
 
 function mostrarComentarios(){
 
 
-comentarios.innerHTML="";
+let lista =
+document.getElementById("listaComentarios");
+
+
+lista.innerHTML="";
+
 
 
 comentarios.forEach((c,i)=>{
 
 
-comentarios.innerHTML += `
+
+lista.innerHTML += `
 
 <p>
 
-${c}
+💬 ${c}
 
 <button onclick="borrarComentario(${i})">
-X
+
+Eliminar
+
 </button>
+
 
 </p>
 
 `;
 
+
+
 });
 
 
 }
+
+
+
+
 
 
 
@@ -318,10 +630,15 @@ function borrarComentario(i){
 comentarios.splice(i,1);
 
 
+
 localStorage.setItem(
-"comentarios",
+
+"comentariosGHEZTORIX",
+
 JSON.stringify(comentarios)
+
 );
+
 
 
 mostrarComentarios();
