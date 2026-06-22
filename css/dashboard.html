@@ -1,8 +1,0 @@
-let sesion = JSON.parse(localStorage.getItem("sesion"));
-
-if(!sesion){
-    window.location.href = "index.html";
-}
-
-// mostrar rol en pantalla
-document.getElementById("rolUsuario").innerText = sesion.rol;

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>GHEZTORIX</title>
+
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+<header>
+    <h1>GHEZTORIX</h1>
+    <p>Panel principal</p>
+
+    <button onclick="logout()">Cerrar sesión</button>
+</header>
+
+<h3>Rol: <span id="rol"></span></h3>
+
+<!-- ADMIN -->
+<div id="adminPanel">
+    <h2>Panel Administrador</h2>
+
+    <button>Registrar clientes</button>
+    <button>Ver todos los clientes</button>
+    <button>Emitir facturas</button>
+</div>
+
+<!-- CLIENTE -->
+<div id="clientePanel">
+    <h2>Panel Cliente</h2>
+
+    <button>Mis documentos</button>
+    <button>Descargar CFDI</button>
+    <button>Comentarios</button>
+</div>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>
