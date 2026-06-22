@@ -8,102 +8,204 @@
 
 <body>
 
+
 <!-- LOGIN -->
-<div id="loginScreen" class="center">
-  <div class="cardLogin">
-    <h2>GHEZTORIX ERP</h2>
 
-    <input id="user" placeholder="Usuario">
-    <input id="pass" type="password" placeholder="Contraseña">
+<div id="login" class="login">
 
-    <button onclick="login()">Ingresar</button>
-  </div>
+<h1>GHEZTORIX</h1>
+
+<input id="usuario" placeholder="Usuario">
+
+<input id="password" type="password" placeholder="Contraseña">
+
+<button onclick="entrar()">
+Iniciar sesión
+</button>
+
 </div>
+
+
 
 <!-- DASHBOARD -->
-<div id="app" class="hidden">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <h2>ERP</h2>
+<div id="dashboard" class="hidden">
 
-    <button onclick="openModule('home')">🏠 Inicio</button>
-    <button onclick="openModule('clientes')">👤 Clientes</button>
-    <button onclick="openModule('busqueda')">🔎 Buscar RFC</button>
-    <button onclick="logout()">🚪 Salir</button>
-  </aside>
 
-  <!-- CONTENIDO -->
-  <main class="main">
+<header>
 
-    <!-- HOME -->
-    <section id="home" class="module">
-      <h1>Dashboard ERP</h1>
+<h1>Panel Principal GHEZTORIX</h1>
 
-      <div class="grid">
-        <div class="box">Clientes: <span id="total"></span></div>
-        <div class="box">Sistema activo</div>
-        <div class="box">LocalStorage DB</div>
-      </div>
-    </section>
+<button onclick="salir()">
+Cerrar sesión
+</button>
 
-    <!-- CLIENTES -->
-    <section id="clientes" class="module hidden">
+</header>
 
-      <h2>Registro de Clientes</h2>
 
-      <div class="form">
 
-        <input id="razon" placeholder="Razón Social">
-        <input id="rfc" placeholder="RFC">
-        <input id="cp" placeholder="Código Postal">
-        <input id="regimen" placeholder="Régimen Fiscal">
-        <input id="correo" placeholder="Correo">
-        <input id="passCli" placeholder="Contraseña cliente">
+<div class="cards">
 
-        <label>
-          Firma electrónica:
-          <select id="firma">
-            <option>Sí</option>
-            <option>No</option>
-          </select>
-        </label>
 
-        <input id="actividad" placeholder="Actividad económica">
+<div class="icon"
+onclick="abrir('registro')">
 
-        <button onclick="addClient()">Registrar Cliente</button>
-      </div>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Razón Social</th>
-            <th>RFC</th>
-            <th>Correo</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="table"></tbody>
-      </table>
-
-    </section>
-
-    <!-- BUSQUEDA -->
-    <section id="busqueda" class="module hidden">
-
-      <h2>Buscar Cliente por RFC</h2>
-
-      <input id="searchRfc" placeholder="RFC">
-      <button onclick="search()">Buscar</button>
-
-      <div id="result"></div>
-
-    </section>
-
-  </main>
+👤
+<h3>Registrar Cliente</h3>
 
 </div>
 
+
+
+<div class="icon"
+onclick="abrir('clientes')">
+
+📋
+<h3>Clientes</h3>
+
+</div>
+
+
+
+<div class="icon"
+onclick="abrir('reportes')">
+
+📊
+<h3>Reportes</h3>
+
+</div>
+
+
+
+<div class="icon"
+onclick="abrir('chat')">
+
+💬
+<h3>Comentarios</h3>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<!-- REGISTRO -->
+
+<section id="registro" class="modulo hidden">
+
+<h2>Registrar Cliente</h2>
+
+
+<input id="razon" placeholder="Razón Social">
+
+<input id="rfc" placeholder="RFC">
+
+<input id="correo" placeholder="Correo">
+
+<input id="actividad" placeholder="Actividad">
+
+
+<button onclick="guardarCliente()">
+Guardar
+</button>
+
+
+</section>
+
+
+
+
+
+<!-- CLIENTES -->
+
+
+<section id="clientes" class="modulo hidden">
+
+
+<h2>Clientes registrados</h2>
+
+
+<table>
+
+<tbody id="lista"></tbody>
+
+</table>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- REPORTES -->
+
+
+<section id="reportes" class="modulo hidden">
+
+
+<h2>Reportes</h2>
+
+
+<p>
+Clientes registrados:
+<span id="cantidad"></span>
+</p>
+
+
+<button onclick="generarReporte()">
+Generar reporte
+</button>
+
+
+<div id="reporte"></div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- CHAT -->
+
+
+<section id="chat" class="modulo hidden">
+
+
+<h2>Comentarios de clientes</h2>
+
+
+<input id="mensaje"
+placeholder="Escribe comentario">
+
+
+<button onclick="agregarComentario()">
+Enviar
+</button>
+
+
+<div id="comentarios"></div>
+
+
+</section>
+
+
+
+
+</div>
+
+
+
 <script src="app.js"></script>
+
 </body>
 </html>
