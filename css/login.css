@@ -1,0 +1,99 @@
+body{
+    margin:0;
+    font-family:Segoe UI;
+    overflow:hidden;
+}
+
+/* FONDO CON EFECTO */
+.background{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg,#000,#1c1c1c,#d4af37);
+    background-size:400% 400%;
+    animation:moveBg 10s infinite alternate;
+    z-index:-1;
+}
+
+@keyframes moveBg{
+    0%{background-position:0% 50%}
+    100%{background-position:100% 50%}
+}
+
+/* CENTRADO */
+.login-wrapper{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* EFECTO GLASS */
+.login-box{
+    width:340px;
+    padding:30px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    border:1px solid rgba(255,255,255,0.2);
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    text-align:center;
+
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(-20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* LOGO */
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    color:#d4af37;
+}
+
+.subtitle{
+    color:white;
+    margin-bottom:20px;
+}
+
+/* INPUTS */
+input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border:none;
+    border-radius:6px;
+    outline:none;
+}
+
+/* BOTÓN */
+button{
+    width:100%;
+    padding:12px;
+    background:#d4af37;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+    border-radius:6px;
+}
+
+button:hover{
+    background:#b8902e;
+}
+
+/* MENSAJE */
+#msg{
+    color:red;
+    font-size:14px;
+    margin-top:5px;
+}
+
+/* LOADING */
+#loading{
+    display:none;
+    color:white;
+    margin:10px 0;
+}
