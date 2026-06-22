@@ -1,98 +1,114 @@
 body{
-  margin:0;
-  font-family:Arial;
-  background:#f4f6f9;
+
+font-family:Arial;
+background:#eef2f7;
+margin:0;
+
 }
 
-/* LOGIN */
-.center{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
+
+
+.login{
+
+width:300px;
+margin:150px auto;
+background:white;
+padding:30px;
+border-radius:15px;
+text-align:center;
+
 }
 
-.cardLogin{
-  background:white;
-  padding:30px;
-  width:300px;
-  text-align:center;
-  border-radius:10px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+
+input{
+
+width:90%;
+padding:10px;
+margin:8px;
+
 }
 
-input, select{
-  width:90%;
-  padding:10px;
-  margin:8px 0;
-}
+
 
 button{
-  padding:10px;
-  width:100%;
-  background:#1d3557;
-  color:white;
-  border:none;
-  cursor:pointer;
+
+padding:10px;
+background:#1d3557;
+color:white;
+border:none;
+cursor:pointer;
+
 }
 
-/* APP */
-.hidden{display:none;}
 
-#app{
-  display:flex;
+
+.hidden{
+
+display:none;
+
 }
 
-/* SIDEBAR */
-.sidebar{
-  width:220px;
-  background:#1d3557;
-  color:white;
-  height:100vh;
-  padding:15px;
+
+
+header{
+
+background:#1d3557;
+color:white;
+padding:20px;
+display:flex;
+justify-content:space-between;
+
 }
 
-.sidebar button{
-  background:transparent;
-  border:1px solid rgba(255,255,255,0.2);
-  margin-top:10px;
+
+
+.cards{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+padding:30px;
+
 }
 
-/* MAIN */
-.main{
-  flex:1;
-  padding:20px;
+
+
+.icon{
+
+background:white;
+padding:30px;
+border-radius:15px;
+text-align:center;
+cursor:pointer;
+font-size:30px;
+
+box-shadow:0 5px 15px #ccc;
+
 }
 
-/* GRID */
-.grid{
-  display:flex;
-  gap:10px;
+
+
+.modulo{
+
+background:white;
+margin:30px;
+padding:20px;
+border-radius:15px;
+
 }
 
-.box{
-  background:white;
-  padding:20px;
-  flex:1;
-  border-radius:10px;
-}
 
-/* FORM */
-.form{
-  background:white;
-  padding:15px;
-  border-radius:10px;
-  margin-bottom:20px;
-}
 
-/* TABLE */
 table{
-  width:100%;
-  background:white;
-  border-collapse:collapse;
+
+width:100%;
+
 }
 
-th, td{
-  padding:10px;
-  border-bottom:1px solid #ddd;
+
+td{
+
+padding:10px;
+border-bottom:1px solid #ddd;
+
 }
