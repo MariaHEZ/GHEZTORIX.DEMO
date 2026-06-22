@@ -1,24 +1,88 @@
-function login() {
-  const perfil = document.getElementById("perfil").value;
-  const usuario = document.getElementById("usuario").value.trim();
-  const password = document.getElementById("password").value.trim();
-
-  const adminUser = "admin@correo.com";
-  const adminPass = "12345";
-
-  if (perfil === "usuario") {
-    if (usuario === adminUser && password === adminPass) {
-      alert("Bienvenido Administrador");
-      window.location.href = "dashboard.html";
-    } else {
-      alert("Credenciales inválidas para Usuario");
-    }
-  } else if (perfil === "cliente") {
-    if (usuario.length > 0 && password.length > 0) {
-      alert("Bienvenido Cliente");
-      window.location.href = "cliente.html";
-    } else {
-      alert("Por favor ingresa tus datos");
-    }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Login GHEZTORIX</title>
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  .login-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    min-height: 80vh;
   }
-}
+  .login-form {
+    flex: 1;
+    max-width: 400px;
+    background: #1f2937;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+  .login-form h2 {
+    color: #F59E0B; /* dorado */
+    margin-bottom: 15px;
+  }
+  .login-image {
+    flex: 1;
+    max-width: 450px;
+  }
+  .login-image img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+  label, select, input {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  select, input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+  }
+  button {
+    background: linear-gradient(90deg, #3B82F6, #10B981, #F59E0B);
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+<header>INICIO DE SESIÓN - GHEZTORIX</header>
+
+<div class="container login-container">
+
+  <!-- Imagen profesional -->
+  <div class="login-image">
+    <img src="images/gestion-digital.jpg" alt="Gestión digital de despachos">
+  </div>
+
+  <!-- Formulario -->
+  <div class="login-form">
+    <h2>Acceso al Sistema</h2>
+    <label for="perfil">Ingresar como:</label>
+    <select id="perfil">
+      <option value="usuario">Usuario (Administrador)</option>
+      <option value="cliente">Cliente</option>
+    </select>
+
+    <input id="usuario" placeholder="Correo o RFC">
+    <input id="password" type="password" placeholder="Contraseña">
+
+    <button onclick="login()">Entrar</button>
+  </div>
+
+</div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>
