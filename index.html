@@ -112,27 +112,28 @@ clienteEditando=null;
 
 function guardarCliente(){
 
+let docsActuales = [];
 
-let nuevo={
+if(clienteEditando){
+let clienteExistente = clientes.find(c => c.id == clienteEditando);
+docsActuales = clienteExistente ? clienteExistente.documentos : [];
+}
+
+let nuevo = {
 
 id: clienteEditando || Date.now(),
 
-nombre:
-nombre.value,
+nombre: document.getElementById("nombre").value,
 
-rfc:
-rfc.value.toUpperCase(),
+rfc: document.getElementById("rfc").value.toUpperCase(),
 
-correo:
-correo.value,
+correo: document.getElementById("correo").value,
 
-actividad:
-actividad.value,
+actividad: document.getElementById("actividad").value,
 
-clave:
-clave.value,
+clave: document.getElementById("clave").value,
 
-documentos:[]
+documentos: docsActuales
 
 };
 
@@ -140,48 +141,32 @@ documentos:[]
 
 if(clienteEditando){
 
-
-clientes =
-clientes.map(c=>
-
-c.id==clienteEditando ? nuevo : c
-
+clientes = clientes.map(c =>
+c.id == clienteEditando ? nuevo : c
 );
 
+}else{
 
-}
-
-else{
-
-
-if(clientes.find(c=>c.rfc==nuevo.rfc)){
-
+if(clientes.find(c => c.rfc == nuevo.rfc)){
 alert("RFC ya registrado");
-
 return;
-
 }
-
 
 clientes.push(nuevo);
 
-
 }
 
 
 
-localStorage.setItem(
-"clientes",
-JSON.stringify(clientes)
-);
-
-
+localStorage.setItem("clientes", JSON.stringify(clientes));
 
 cerrarModal();
-
 mostrarClientes();
 
 }
+
+
+
 
 
 
@@ -252,28 +237,21 @@ clientes.length;
 
 function editar(id){
 
-
 let c =
 clientes.find(x=>x.id==id);
 
+clienteEditando = id;
 
 
-clienteEditando=id;
-
-
-nombre.value=c.nombre;
-rfc.value=c.rfc;
-correo.value=c.correo;
-actividad.value=c.actividad;
-clave.value=c.clave;
-
+document.getElementById("nombre").value = c.nombre;
+document.getElementById("rfc").value = c.rfc;
+document.getElementById("correo").value = c.correo;
+document.getElementById("actividad").value = c.actividad;
+document.getElementById("clave").value = c.clave;
 
 abrirModal();
 
-
 }
-
-
 
 
 
@@ -343,45 +321,45 @@ alert("Cliente no encontrado");
 
 function verCliente(id){
 
-
 let c =
 clientes.find(x=>x.id==id);
 
+let listaDocs = "";
 
+if(!c.documentos){
+c.documentos = [];
+}
+
+if(c.documentos && c.documentos.length > 0){
+
+c.documentos.forEach((doc, index)=>{
+listaDocs += `📄 ${index+1}. ${doc}\n`;
+});
+
+}else{
+listaDocs = "Sin documentos";
+}
 
 alert(`
 
-EXPEDIENTE DIGITAL GHEZTORIX
-
+📁 EXPEDIENTE DIGITAL GHEZTORIX
 
 Cliente:
-
 ${c.nombre}
 
-
 RFC:
-
 ${c.rfc}
 
-
 Correo:
-
 ${c.correo}
 
-
 Actividad:
-
 ${c.actividad}
 
-
 Documentos:
-
-${c.documentos.length}
-
+${listaDocs}
 
 `);
 
-}
-
-
+  }
 </script>
