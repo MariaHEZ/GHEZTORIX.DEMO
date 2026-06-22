@@ -1,440 +1,94 @@
-const USER="admin@gheztorix.com";
-const PASS="12345";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>GHEZTORIX LOGIN</title>
 
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#111827;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
 
-let clientes =
-JSON.parse(localStorage.getItem("clientes")) || [];
+.login-box{
+background:#1E3A8A;
+padding:30px;
+border-radius:15px;
+width:300px;
+}
 
-let clienteEditando=null;
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:none;
+border-radius:8px;
+}
 
+button{
+width:100%;
+padding:10px;
+background:#10B981;
+border:none;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
+</style>
+</head>
 
+<body>
 
-// ================= LOGIN =================
+<div class="login-box">
+<h2>GHEZTORIX</h2>
+
+<input id="usuario" placeholder="Correo o usuario">
+<input id="password" type="password" placeholder="Contraseña">
+
+<button onclick="login()">Entrar</button>
+</div>
+
+<script>
+
+const ADMIN_USER = "admin@gheztorix.com";
+const ADMIN_PASS = "12345";
 
 function login(){
 
-const usuario=
-document.getElementById("usuario").value.trim();
+const u = document.getElementById("usuario").value;
+const p = document.getElementById("password").value;
 
-const password=
-document.getElementById("password").value.trim();
+if(u === ADMIN_USER && p === ADMIN_PASS){
 
+localStorage.setItem("sesion", JSON.stringify({tipo:"admin", user:u}));
 
-if(usuario===USER && password===PASS){
+window.location.href = "panel.html";
 
+}else{
 
-localStorage.setItem("sesion","activa");
+// buscar cliente
+let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
-
-document.getElementById("login").style.display="none";
-document.getElementById("app").style.display="block";
-
-
-mostrarClientes();
-
-}
-
-else{
-
-document.getElementById("mensaje").innerHTML=
-"Usuario incorrecto";
-
-}
-
-}
-
-
-
-
-window.onload=function(){
-
-if(localStorage.getItem("sesion")=="activa"){
-
-loginAutomatico();
-
-}
-
-}
-
-
-
-function loginAutomatico(){
-
-document.getElementById("login").style.display="none";
-
-document.getElementById("app").style.display="block";
-
-mostrarClientes();
-
-}
-
-
-
-
-function salir(){
-
-localStorage.removeItem("sesion");
-
-location.reload();
-
-}
-
-
-
-
-
-// ================= MODAL =================
-
-
-function abrirModal(){
-
-document.getElementById("modal")
-.style.display="flex";
-
-
-}
-
-
-function cerrarModal(){
-
-document.getElementById("modal")
-.style.display="none";
-
-
-limpiarCampos();
-
-}
-
-
-
-
-function limpiarCampos(){
-
-nombre.value="";
-rfc.value="";
-correo.value="";
-actividad.value="";
-clave.value="";
-
-clienteEditando=null;
-
-}
-
-
-
-
-
-// ================= CLIENTES =================
-
-
-
-function guardarCliente(){
-
-
-let nuevo={
-
-id: clienteEditando || Date.now(),
-
-nombre:
-document.getElementById("nombre").value,
-
-rfc:
-document.getElementById("rfc").value.toUpperCase(),
-
-correo:
-document.getElementById("correo").value,
-
-actividad:
-document.getElementById("actividad").value,
-
-clave:
-document.getElementById("clave").value,
-
-documentos:[]
-
-};
-
-
-
-if(clienteEditando){
-
-
-clientes =
-clientes.map(c=>
-c.id==clienteEditando?nuevo:c
-);
-
-
-}
-
-else{
-
-
-let existe =
-clientes.find(c=>c.rfc==nuevo.rfc);
-
-
-if(existe){
-
-alert("RFC ya registrado");
-
-return;
-
-}
-
-
-clientes.push(nuevo);
-
-
-}
-
-
-
-guardar();
-
-cerrarModal();
-
-mostrarClientes();
-
-
-}
-
-
-
-
-
-function guardar(){
-
-localStorage.setItem(
-"clientes",
-JSON.stringify(clientes)
-);
-
-}
-
-
-
-
-
-
-
-// ================= TABLA =================
-
-
-function mostrarClientes(){
-
-
-let tabla =
-document.getElementById("tabla");
-
-
-tabla.innerHTML="";
-
-
-clientes.forEach(c=>{
-
-
-tabla.innerHTML+=`
-
-<tr>
-
-<td>${c.nombre}</td>
-
-<td>${c.rfc}</td>
-
-<td>${c.correo}</td>
-
-
-<td>
-
-
-<button onclick="verCliente(${c.id})">
-👁 Ver
-</button>
-
-
-<button onclick="editar(${c.id})">
-✏ Editar
-</button>
-
-
-<button onclick="eliminar(${c.id})">
-🗑 Eliminar
-</button>
-
-
-</td>
-
-
-</tr>
-
-
-`;
-
-
-});
-
-
-
-document.getElementById("totalClientes")
-.innerHTML=clientes.length;
-
-
-
-}
-
-
-
-
-
-// ================= EDITAR =================
-
-
-function editar(id){
-
-
-let c=
-clientes.find(x=>x.id==id);
-
-
-
-clienteEditando=id;
-
-
-nombre.value=c.nombre;
-rfc.value=c.rfc;
-correo.value=c.correo;
-actividad.value=c.actividad;
-clave.value=c.clave;
-
-
-
-abrirModal();
-
-
-
-}
-
-
-
-
-
-// ================= ELIMINAR =================
-
-
-
-function eliminar(id){
-
-
-if(confirm("¿Eliminar cliente?")){
-
-
-clientes =
-clientes.filter(c=>c.id!=id);
-
-
-guardar();
-
-
-mostrarClientes();
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-// ================= BUSCAR RFC =================
-
-
-
-function buscarRFC(){
-
-
-let dato=
-prompt("Ingrese RFC");
-
-
-let cliente =
-clientes.find(
-c=>c.rfc==dato.toUpperCase()
-);
-
-
+let cliente = clientes.find(c => c.rfc === u && c.password === p);
 
 if(cliente){
-
-
-verCliente(cliente.id);
-
+localStorage.setItem("sesion", JSON.stringify({tipo:"cliente", data:cliente}));
+window.location.href = "cliente.html";
+}else{
+alert("Credenciales incorrectas");
+}
 
 }
 
-else{
-
-alert("Cliente no encontrado");
-
 }
 
+</script>
 
-}
-
-
-
-
-
-
-
-
-// ================= EXPEDIENTE =================
-
-
-function verCliente(id){
-
-
-let c=
-clientes.find(x=>x.id==id);
-
-
-
-alert(`
-
-EXPEDIENTE DIGITAL GHEZTORIX
-
-
-CLIENTE:
-
-${c.nombre}
-
-
-RFC:
-
-${c.rfc}
-
-
-CORREO:
-
-${c.correo}
-
-
-ACTIVIDAD:
-
-${c.actividad}
-
-
-DOCUMENTOS:
-
-${c.documentos.length}
-
-
-`);
-
-}
-
-
+</body>
+</html>
