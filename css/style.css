@@ -1,75 +1,70 @@
+/* ===== CARPETAS (MODULOS ERP) ===== */
 .carpeta{
-
-background:white;
-padding:25px;
-border-radius:15px;
-cursor:pointer;
-box-shadow:0 5px 15px #0002;
-transition:.3s;
-
+  background: #fff;
+  padding: 25px;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: all .25s ease;
+  text-align: center;
+  border: 1px solid #f0f0f0;
 }
-
 
 .carpeta:hover{
-
-transform:translateY(-5px);
-
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  border-color: #163c8c33;
 }
-
 
 .carpeta span{
-
-font-size:60px;
-
+  font-size: 55px;
+  display: block;
+  margin-bottom: 10px;
 }
-
 
 .carpeta h3{
-
-color:#163c8c;
-
+  color: #163c8c;
+  font-size: 16px;
+  margin: 0;
 }
 
-
-/* CAMPOS NUEVOS CLIENTES */
-
-.input{
-
-width:100%;
-padding:12px;
-margin:8px 0;
-border-radius:8px;
-border:1px solid #ccc;
-
-}
-
-
+/* ===== INPUTS ERP PROFESIONAL ===== */
+.input,
 select{
-
-width:100%;
-padding:12px;
-margin:8px 0;
-border-radius:8px;
-
+  width: 100%;
+  padding: 12px 14px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: 1px solid #d6d6d6;
+  outline: none;
+  font-size: 14px;
+  transition: all .2s ease;
+  background: #fff;
 }
 
+.input:focus,
+select:focus{
+  border-color: #163c8c;
+  box-shadow: 0 0 0 3px rgba(22,60,140,0.15);
+}
 
+/* ===== BOTÓN PRINCIPAL ERP ===== */
 .btn-primary{
-
-background:#163c8c;
-color:white;
-padding:12px 20px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-
+  background: linear-gradient(135deg, #163c8c, #0f2f6d);
+  color: white;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all .2s ease;
 }
-
 
 .btn-primary:hover{
-
-background:#0b2d70;
-
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(22,60,140,0.25);
 }
 
-</style>
+.btn-primary:active{
+  transform: scale(0.98);
+}
