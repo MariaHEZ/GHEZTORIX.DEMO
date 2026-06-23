@@ -633,34 +633,56 @@ document.getElementById("titulo")
 
 
 
-let clientes=
-JSON.parse(localStorage.getItem("clientes"))||[];
+let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
+let editIndex = null;
 
-function guardarCliente(){
+// =========================
+// GUARDAR CLIENTE
+// =========================
+function guardarCliente() {
+
+let nombre = document.getElementById("nombre").value.trim();
+let rfc = document.getElementById("rfc").value.trim();
+
+if (!nombre || !rfc) {
+  alert("Nombre y RFC son obligatorios");
+  return;
+}
 
 let cliente = {
-  nombre: document.getElementById("nombre").value,
-  rfc: document.getElementById("rfc").value,
+  nombre,
+  rfc,
   regimen: document.getElementById("regimen").value,
   cp: document.getElementById("cp").value,
   telefono: document.getElementById("telefono").value,
   correo: document.getElementById("correo").value
 };
 
-clientes.push(cliente);
+// EDITAR
+if (editIndex !== null) {
+  clientes[editIndex] = cliente;
+  editIndex = null;
+} 
+// NUEVO
+else {
+  if (clientes.some(c => c.rfc === rfc)) {
+    alert("Este RFC ya existe");
+    return;
+  }
+  clientes.push(cliente);
+}
 
 localStorage.setItem("clientes", JSON.stringify(clientes));
 
 mostrarClientes();
-
+limpiarFormulario();
 }
 
-
-
-
-
-function mostrarClientes(){
+// =========================
+// MOSTRAR CLIENTES
+// =========================
+function mostrarClientes() {
 
 let tabla = document.getElementById("tabla");
 
@@ -669,25 +691,106 @@ tabla.innerHTML = `
 <th>Nombre</th>
 <th>RFC</th>
 <th>Correo</th>
+<th>Acciones</th>
 </tr>
 `;
 
-clientes.forEach(c => {
+clientes.forEach((c, index) => {
 tabla.innerHTML += `
 <tr>
 <td>${c.nombre}</td>
 <td>${c.rfc}</td>
 <td>${c.correo || "-"}</td>
+<td>
+<button onclick="editarCliente(${index})">✏️</button>
+<button onclick="eliminarCliente(${index})">🗑️</button>
+</td>
 </tr>
 `;
 });
 
 document.getElementById("totalClientes").innerText = clientes.length;
-
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+// =========================
+// EDITAR
+// =========================
+function editarCliente(index) {
+let c = clientes[index];
+
+document.getElementById("nombre").value = c.nombre;
+document.getElementById("rfc").value = c.rfc;
+document.getElementById("regimen").value = c.regimen;
+document.getElementById("cp").value = c.cp;
+document.getElementById("telefono").value = c.telefono;
+document.getElementById("correo").value = c.correo;
+
+editIndex = index;
+}
+
+// =========================
+// ELIMINAR
+// =========================
+function eliminarCliente(index) {
+
+if (confirm("¿Eliminar este cliente?")) {
+  clientes.splice(index, 1);
+  localStorage.setItem("clientes", JSON.stringify(clientes));
   mostrarClientes();
+}
+}
+
+// =========================
+// LIMPIAR FORM
+// =========================
+function limpiarFormulario() {
+document.getElementById("nombre").value = "";
+document.getElementById("rfc").value = "";
+document.getElementById("regimen").value = "";
+document.getElementById("cp").value = "";
+document.getElementById("telefono").value = "";
+document.getElementById("correo").value = "";
+}
+
+// =========================
+// BUSCADOR POR RFC (OPCIONAL)
+// =========================
+function buscarCliente() {
+
+let valor = document.getElementById("buscar").value.toLowerCase();
+
+let filtrados = clientes.filter(c =>
+  c.rfc.toLowerCase().includes(valor)
+);
+
+let tabla = document.getElementById("tabla");
+
+tabla.innerHTML = `
+<tr>
+<th>Nombre</th>
+<th>RFC</th>
+<th>Correo</th>
+<th>Acciones</th>
+</tr>
+`;
+
+filtrados.forEach((c, index) => {
+tabla.innerHTML += `
+<tr>
+<td>${c.nombre}</td>
+<td>${c.rfc}</td>
+<td>${c.correo || "-"}</td>
+<td>🔍</td>
+</tr>
+`;
+});
+}
+
+// =========================
+// INICIALIZAR
+// =========================
+document.addEventListener("DOMContentLoaded", function () {
+mostrarClientes();
 });
 
 
