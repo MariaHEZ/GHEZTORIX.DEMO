@@ -405,39 +405,31 @@ Gestión de Clientes
 </h1>
 
 
-<div class="card">
+<div class="card form-card">
 
+<h3>➕ Nuevo Cliente</h3>
 
-<h3>
+<div class="form-grid">
 
-Nuevo Cliente
+  <input id="nombre" placeholder="Razón social / Nombre">
 
-</h3>
+  <input id="rfc" placeholder="RFC">
 
+  <input id="regimen" placeholder="Régimen fiscal">
 
-<input id="nombre" placeholder="Razón social">
+  <input id="cp" placeholder="Código postal">
 
-<input id="rfc" placeholder="RFC">
+  <input id="telefono" placeholder="Teléfono">
 
-<input id="regimen" placeholder="REGIMEN FISCAL">
+  <input id="correo" placeholder="Correo electrónico">
 
-<input id="cp" placeholder="CODIGO POSTAL">
+</div>
 
-<input id="telefono" placeholder="TELEFONO">
+<br>
 
-<input id="correo" placeholder="CORREO ELECTRONICO">
-
-
-
-<br><br>
-
-<button onclick="guardarCliente()">
-
-Guardar
-
+<button onclick="guardarCliente()" class="btn-primary">
+💾 Guardar Cliente
 </button>
-
-
 
 </div>
 
