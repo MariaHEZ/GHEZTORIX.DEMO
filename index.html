@@ -36,7 +36,7 @@ GHEZTORIX
 </h1>
 
 <p>
-Sistema Administrativo Fiscal
+Sistema Digital Para La Gestión De Despachos
 </p>
 
 </div>
@@ -46,30 +46,87 @@ Sistema Administrativo Fiscal
 <form id="loginForm">
 
 
-<label>
-Tipo de acceso
-</label>
+
+<h3>
+Selecciona tu portal
+</h3>
 
 
-<select id="role" required>
+<div class="tipo-acceso">
 
 
-<option value="">
-Selecciona una opción
-</option>
+<div 
+class="acceso-card"
+onclick="seleccionarAcceso('usuario',this)"
+>
 
 
-<option value="usuario">
-👨‍💼 Administrador
-</option>
+<div class="icono-acceso">
+🔐
+</div>
 
 
-<option value="cliente">
-👤 Cliente
-</option>
+<h3>
+Portal Administrativo
+</h3>
 
 
-</select>
+<p>
+Administrador
+</p>
+
+
+<span>
+Gestión de clientes,
+documentos y reportes
+</span>
+
+
+</div>
+
+
+
+
+
+<div 
+class="acceso-card"
+onclick="seleccionarAcceso('cliente',this)"
+>
+
+
+<div class="icono-acceso">
+👤
+</div>
+
+
+<h3>
+Portal Cliente
+</h3>
+
+
+<p>
+Cliente registrado
+</p>
+
+
+<span>
+Consulta documentos y obligaciones
+</span>
+
+
+</div>
+
+
+
+</div>
+
+
+
+<input 
+type="hidden"
+id="role"
+required
+>
 
 
 
@@ -140,6 +197,8 @@ maxlength="13"
 
 placeholder="ABC123456XXX"
 
+style="text-transform:uppercase"
+
 >
 
 
@@ -194,6 +253,5 @@ placeholder="********"
 
 
 </body>
-
 
 </html>
