@@ -20,7 +20,7 @@
 
 <div class="dashboard">
 
- <aside class="sidebar">
+<aside class="sidebar">
 
   <div class="logo">
     <h2>GHEZTORIX</h2>
@@ -29,102 +29,36 @@
 
   <nav class="menu">
 
-    <a href="dashboard.html" class="active">
-      🏠 Inicio
+    <a href="clientes.html">
+      👥 Clientes
     </a>
 
-    <!-- CLIENTES -->
-    <div class="dropdown">
+    <a href="registro_cliente.html">
+      ➕ Agregar Clientes
+    </a>
 
-      <div class="dropdown-title" onclick="toggleMenu(this)">
-        👥 Clientes
-        <span class="arrow">▶</span>
-      </div>
+    <a href="documentos.html">
+      📂 Documentos
+    </a>
 
-      <div class="submenu">
+    <a href="calendario.html">
+      📅 Calendario
+    </a>
 
-        <a href="clientes.html">📋 Ver clientes</a>
-        <a href="registro_cliente.html">➕ Agregar cliente</a>
+    <a href="reportes.html">
+      📊 Reportes
+    </a>
 
-      </div>
-
-    </div>
-
-    <a href="documentos.html">📂 Documentos</a>
-    <a href="calendario.html">📅 Calendario</a>
-    <a href="reportes.html">📊 Reportes</a>
-    <a href="configuracion.html">⚙ Configuración</a>
+    <a href="configuracion.html">
+      ⚙ Configuración
+    </a>
 
   </nav>
 
   <div class="logout">
-    <a href="#" onclick="cerrarSesion()">🚪 Cerrar sesión</a>
+    <a href="#" onclick="cerrarSesion()">
+      🚪 Cerrar sesión
+    </a>
   </div>
 
 </aside>
- <main class="contenido">
-
-    <header class="topbar">
-
-        <span></span>
-
-        <h1>Portal administrador</h1>
-
-        <span>Administrador</span>
-
-    </header>
-
-    <!-- BIENVENIDA -->
-<section class="bienvenida">
-
-    <h2>Bienvenido a GHEZTORIX</h2>
-
-    <p>
-        Aquí podrás administrar clientes,
-        documentos, reportes y configuraciones del sistema.
-    </p>
-
-</section>
-
-    <!-- TARJETAS -->
-    <section class="cards">
-
-        <div class="card">
-            <h3>Clientes</h3>
-            <h2>0</h2>
-        </div>
-
-        <div class="card">
-            <h3>Documentos</h3>
-            <h2>0</h2>
-        </div>
-
-        <div class="card">
-            <h3>Pendientes</h3>
-            <h2>0</h2>
-        </div>
-
-        <div class="card">
-            <h3>Reportes</h3>
-            <h2>0</h2>
-        </div>
-
-    </section>
-
-</main>
-
-</div>
-
-<script>
-
-function toggleMenu(element) {
-    const dropdown = element.parentElement;
-    dropdown.classList.toggle("open");
-}
-
-function cerrarSesion() {
-    localStorage.removeItem("usuarioActivo");
-    location.href = "index.html";
-}
-
-</script>
