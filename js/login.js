@@ -1,101 +1,162 @@
-console.log("login.js cargado correctamente");
-
-// Mostrar formulario según el rol
-const role = document.getElementById("role");
-const loginUsuario = document.getElementById("loginUsuario");
-const loginCliente = document.getElementById("loginCliente");
-
-role.addEventListener("change", function () {
-
-    if (role.value === "usuario") {
-
-        loginUsuario.style.display = "block";
-        loginCliente.style.display = "none";
-
-    } else if (role.value === "cliente") {
-
-        loginUsuario.style.display = "none";
-        loginCliente.style.display = "block";
-
-    } else {
-
-        loginUsuario.style.display = "none";
-        loginCliente.style.display = "none";
-
-    }
-
-}); // ← Aquí termina el evento "change"
+const role =
+document.getElementById("role");
 
 
-// Inicio de sesión
-document.getElementById("loginForm").addEventListener("submit", function (e) {
+const loginUsuario =
+document.getElementById("loginUsuario");
 
-    e.preventDefault();
 
-    const tipo = document.getElementById("role").value;
+const loginCliente =
+document.getElementById("loginCliente");
 
-    // Usuarios del sistema
-    const usuarios = [
-        {
-            correo: "admin@gheztorix.com",
-            password: "12345"
-        }
-    ];
 
-    // Clientes
-    const clientes = [
-        {
-            rfc: "HEMM010101ABC",
-            password: "12345"
-        }
-    ];
 
-    if (tipo === "usuario") {
+role.addEventListener("change",()=>{
 
-        const correo = document.getElementById("email").value.trim();
-        const password = document.getElementById("passwordUsuario").value;
 
-        const usuario = usuarios.find(u =>
-            u.correo === correo &&
-            u.password === password
-        );
+if(role.value==="usuario"){
 
-        if (usuario) {
+loginUsuario.style.display="block";
 
-            alert("Bienvenido Usuario");
-            window.location.href = "dashboard_usuario.html";
+loginCliente.style.display="none";
 
-        } else {
+}
 
-            alert("Correo o contraseña incorrectos");
 
-        }
+else if(role.value==="cliente"){
 
-    } else if (tipo === "cliente") {
 
-        const rfc = document.getElementById("rfc").value.trim().toUpperCase();
-        const password = document.getElementById("passwordCliente").value;
+loginCliente.style.display="block";
 
-        const cliente = clientes.find(c =>
-            c.rfc === rfc &&
-            c.password === password
-        );
+loginUsuario.style.display="none";
 
-        if (cliente) {
 
-            alert("Bienvenido Cliente");
-            window.location.href = "dashboard_cliente.html";
+}
 
-        } else {
 
-            alert("RFC o contraseña incorrectos");
+else{
 
-        }
 
-    } else {
+loginUsuario.style.display="none";
 
-        alert("Selecciona un tipo de acceso.");
+loginCliente.style.display="none";
 
-    }
+
+}
+
+
+});
+
+
+
+
+
+document
+.getElementById("loginForm")
+.addEventListener("submit",function(e){
+
+
+e.preventDefault();
+
+
+
+let tipo =
+role.value;
+
+
+
+if(tipo==="usuario"){
+
+
+let correo =
+document.getElementById("email").value;
+
+
+let password =
+document.getElementById("passwordUsuario").value;
+
+
+
+if(
+correo==="admin@gheztorix.com" &&
+password==="12345"
+
+){
+
+
+localStorage.setItem(
+"usuarioActivo",
+correo
+);
+
+
+location.href="dashboard_usuario.html";
+
+
+}
+
+else{
+
+
+mensajeLogin.innerHTML=
+"❌ Datos incorrectos";
+
+
+}
+
+
+
+}
+
+
+
+
+
+if(tipo==="cliente"){
+
+
+let rfc =
+document.getElementById("rfc").value.toUpperCase();
+
+
+let password =
+document.getElementById("passwordCliente").value;
+
+
+
+if(
+rfc==="CHE890512HJ4" &&
+password==="12345"
+
+){
+
+
+localStorage.setItem(
+"clienteActivo",
+rfc
+);
+
+
+location.href=
+"dashboard_cliente.html";
+
+
+}
+
+
+else{
+
+
+mensajeLogin.innerHTML=
+"❌ RFC o contraseña incorrectos";
+
+
+}
+
+
+
+}
+
+
 
 });
