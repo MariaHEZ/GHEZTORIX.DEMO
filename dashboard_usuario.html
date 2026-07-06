@@ -1,338 +1,222 @@
-/* ==============================
-   DASHBOARD GHEZTORIX
-============================== */
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
 
-.dashboard{
+<meta charset="UTF-8">
 
-display:flex;
-min-height:100vh;
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-}
+<title>Panel Usuario | GHEZTORIX</title>
 
 
+<link rel="stylesheet" href="css/estilo.css">
 
-/* SIDEBAR */
 
-.sidebar{
+</head>
 
-width:260px;
-background:#163A6B;
-color:white;
-padding:25px 15px;
-position:fixed;
-height:100vh;
 
-}
 
+<body>
 
-.logo{
 
-text-align:center;
-margin-bottom:40px;
+<div class="layout">
 
-}
 
 
-.logo h2{
+<aside class="sidebar">
 
-margin:0;
-font-size:28px;
 
-}
+<h2>
+GHEZTORIX
+</h2>
 
 
-.logo small{
+<a href="dashboard_usuario.html">
+🏠 Inicio
+</a>
 
-opacity:.8;
 
-}
+<a href="#">
+👥 Clientes
+</a>
 
 
+<a href="#">
+📂 Documentos
+</a>
 
-/* MENU */
 
-.menu{
+<a href="#">
+📅 Calendario Fiscal
+</a>
 
-display:flex;
-flex-direction:column;
-gap:10px;
 
-}
+<a href="#">
+⚙️ Configuración
+</a>
 
 
-.menu a{
+<a onclick="salir()">
+🚪 Salir
+</a>
 
-text-decoration:none;
-color:white;
-padding:14px;
-border-radius:10px;
-font-size:16px;
 
-transition:.3s;
+</aside>
 
-}
 
 
-.menu a:hover,
-.menu a.active{
 
-background:#1E88E5;
 
-}
+<main class="contenido">
 
 
+<h1>
+Panel de Control
+</h1>
 
-/* CONTENIDO */
 
-.contenido{
+<p>
+Resumen general de clientes y obligaciones fiscales
+</p>
 
-margin-left:260px;
-padding:30px;
-width:100%;
-background:#f4f6f9;
 
-}
 
+<section class="tarjetas">
 
 
-/* TOPBAR */
+<div class="tarjeta">
 
-.topbar{
+<h2>
+2
+</h2>
 
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 5px 15px #0002;
+<p>
+👥 Clientes Activos
+</p>
 
-}
+</div>
 
 
-.topbar h1{
 
-margin:0;
-color:#163A6B;
+<div class="tarjeta">
 
-}
+<h2>
+3
+</h2>
 
+<p>
+📄 Impuestos Pendientes
+</p>
 
-.usuario{
+</div>
 
-background:#163A6B;
-color:white;
-padding:12px 20px;
-border-radius:25px;
 
-}
 
 
+<div class="tarjeta alerta">
 
+<h2>
+1
+</h2>
 
+<p>
+⚠️ Impuestos Vencidos
+</p>
 
-/* TARJETAS */
+</div>
 
-.tarjetas{
 
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:20px;
-margin-top:30px;
 
-}
 
+<div class="tarjeta">
 
+<h2>
+1
+</h2>
 
-.card{
+<p>
+💬 Comentarios Clientes
+</p>
 
-background:white;
-padding:25px;
-border-radius:18px;
+</div>
 
-display:flex;
-align-items:center;
-gap:20px;
 
-box-shadow:0 5px 15px #0002;
 
-transition:.3s;
+</section>
 
-}
 
 
-.card:hover{
 
-transform:translateY(-5px);
 
-}
+<h2>
+Acciones rápidas
+</h2>
 
 
 
-.icono{
+<div class="acciones">
 
-font-size:40px;
 
-}
+<button>
+➕ Registrar Cliente
+</button>
 
 
+<button>
+👥 Ver Directorio
+</button>
 
-.card h3{
 
-margin:0;
-color:#555;
+<button>
+🔔 Alertas Fiscales
+</button>
 
-}
 
+</div>
 
 
-.card span{
 
-font-size:35px;
-font-weight:bold;
-color:#163A6B;
 
-}
 
+<section class="panel">
 
 
+<h2>
+⚠️ Impuestos Vencidos
+</h2>
 
 
-/* ACCESOS */
+<p>
+Comercializadora Hernández S.A. de C.V.
+</p>
 
-.acciones{
 
-margin-top:35px;
-background:white;
-padding:25px;
-border-radius:18px;
+<p>
+RFC: CHE890512HJ4
+</p>
 
-box-shadow:0 5px 15px #0002;
 
-}
+<p>
+IMSS Enero 2025 - $4,200.00
+</p>
 
 
 
-.botones{
+</section>
 
-display:flex;
-gap:20px;
-margin-top:20px;
 
-}
 
+</main>
 
 
-.botones a{
+</div>
 
-background:#1E88E5;
-color:white;
 
-padding:15px 25px;
 
-border-radius:12px;
+<script src="js/app.js"></script>
 
-text-decoration:none;
 
-transition:.3s;
+</body>
 
-}
-
-
-.botones a:hover{
-
-background:#163A6B;
-
-}
-
-
-
-
-/* ULTIMOS CLIENTES */
-
-
-.ultimos{
-
-margin-top:30px;
-
-background:white;
-
-padding:25px;
-
-border-radius:18px;
-
-box-shadow:0 5px 15px #0002;
-
-}
-
-
-
-.cliente-mini{
-
-border-bottom:1px solid #ddd;
-
-padding:15px 0;
-
-}
-
-
-.cliente-mini h3{
-
-margin:0;
-color:#163A6B;
-
-}
-
-
-
-/* RESPONSIVE CELULAR */
-
-
-@media(max-width:900px){
-
-
-.sidebar{
-
-width:80px;
-
-}
-
-
-.logo h2{
-
-font-size:15px;
-
-}
-
-
-.menu a{
-
-font-size:0;
-
-}
-
-
-.contenido{
-
-margin-left:80px;
-
-}
-
-
-.tarjetas{
-
-grid-template-columns:1fr;
-
-}
-
-
-
-.botones{
-
-flex-direction:column;
-
-}
-
-
-}
+</html>
