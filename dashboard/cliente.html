@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal del Cliente | GHEZTORIX</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Portal del Cliente</h1>
+</header>
+
+<main>
+
+    <h2>Bienvenido a GHEZTORIX</h2>
+
+    <p>Desde este portal podrás consultar la información de tu empresa.</p>
+
+    <div class="menu">
+
+        <button onclick="location.href='mis_documentos.html'">
+            📂 Mis Documentos
+        </button>
+
+        <button onclick="location.href='mis_facturas.html'">
+            🧾 Mis Facturas
+        </button>
+
+        <button onclick="location.href='mi_perfil.html'">
+            👤 Mi Perfil
+        </button>
+
+        <button onclick="cerrarSesion()">
+            🚪 Cerrar sesión
+        </button>
+
+    </div>
+
+</main>
+
+<script>
+function cerrarSesion() {
+    localStorage.removeItem("clienteActivo");
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
