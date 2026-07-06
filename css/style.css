@@ -806,6 +806,40 @@ flex-direction:column;
 }
 
 
+/* ==========================================
+   LOGIN RESPONSIVE PARA CELULAR
+========================================== */
+
+@media(max-width:600px){
+
+
+.login-card,
+.login-box{
+
+width:90%;
+
+padding:30px;
+
+}
+
+
+.logo-login h1{
+
+font-size:32px;
+
+}
+
+
+.tipo-acceso{
+
+grid-template-columns:1fr;
+
+}
+
+
+}
+
+
 
 /* =================================================
    LOGIN PORTAL PROFESIONAL
