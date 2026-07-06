@@ -17,17 +17,30 @@ body {
 
 .login-box {
   background: rgba(255, 255, 255, 0.95);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  width: 350px;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  width: 380px;
 }
+
 
 h2 {
   text-align: center;
   color: var(--accent-color);
-  margin-bottom: 20px;
+  font-size: 28px;
+  margin-bottom: 10px;
 }
+
+.subtitle {
+  text-align: center;
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
+  color: var(--neutral-gray);
+  font-weight: 500;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
 
 input, select, button {
   width: 100%;
@@ -46,24 +59,21 @@ button {
   background: var(--primary-color);
   color: #fff;
   border: none;
+  border-radius: 8px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 button:hover {
   background: var(--accent-color);
   color: var(--dark-black);
+  transform: scale(1.05);
 }
 
-.subtitle {
-  text-align: center;
-  font-size: 14px;
-  font-family: 'Georgia', 'Times New Roman', serif; /* Fuente más formal */
-  color: var(--neutral-gray);
-  font-weight: bold;
-  margin-bottom: 25px;
-  letter-spacing: 1px;
-}
+
+
+
 
 
