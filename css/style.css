@@ -1,79 +1,128 @@
-:root {
-  --primary-color: #0078d7;   /* Azul */
-  --accent-color: #d4af37;    /* Dorado */
-  --neutral-gray: #2f2f2f;    /* Gris oscuro */
-  --dark-black: #000000;      /* Negro */
-  --font-family: 'Segoe UI', Arial, sans-serif;
-}
-
-body, input, select, button, .subtitle {
-  font-family: 'Roboto', sans-serif;
-}
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.login-box {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-  width: 380px;
-}
+<!DOCTYPE html>
+<html lang="es">
 
 
-h2 {
-  text-align: center;
-  color: var(--accent-color);
-  font-size: 28px;
-  margin-bottom: 10px;
-}
+<head>
 
-.subtitle {
-  text-align: center;
-  font-size: 15px;
-  font-family: 'Roboto', sans-serif;
-  color: var(--neutral-gray);
-  font-weight: 500;
-  margin-bottom: 30px;
-  letter-spacing: 1px;
-}
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-input, select, button {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 8px;
-  border: 1px solid var(--neutral-gray);
-}
+<title>Portal Cliente | GHEZTORIX</title>
 
-input, select {
-  background: #f9f9f9;
-  color: var(--dark-black);
-}
 
-button {
-  background: var(--primary-color);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+<link rel="stylesheet" href="css/estilo.css">
 
-button:hover {
-  background: var(--accent-color);
-  color: var(--dark-black);
-  transform: scale(1.05);
-}
+
+</head>
 
 
 
+<body>
 
 
 
+<div class="cliente-panel">
+
+
+<h1>
+Bienvenido
+</h1>
+
+
+<p>
+Comercializadora Hernández S.A. de C.V.
+</p>
+
+
+
+<div class="tarjetas">
+
+
+<div class="tarjeta">
+
+<h2>
+📄
+</h2>
+
+<p>
+Mis Documentos
+</p>
+
+
+</div>
+
+
+
+<div class="tarjeta">
+
+<h2>
+📅
+</h2>
+
+<p>
+Obligaciones Fiscales
+</p>
+
+
+</div>
+
+
+
+<div class="tarjeta">
+
+<h2>
+💬
+</h2>
+
+<p>
+Mensajes con asesor
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<h2>
+Documentos recientes
+</h2>
+
+
+
+<div class="panel">
+
+
+<p>
+✔ Constancia de Situación Fiscal
+</p>
+
+
+<p>
+✔ Opinión de Cumplimiento SAT
+</p>
+
+
+<p>
+✔ Declaración mensual
+</p>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</body>
+
+</html>
