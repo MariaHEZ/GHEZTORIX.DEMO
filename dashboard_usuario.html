@@ -9,41 +9,56 @@
 
 <title>Panel Usuario | GHEZTORIX</title>
 
-
-<link rel="stylesheet" href="css/estilo.css">
-
+<link rel="stylesheet" href="css/style.css">
 
 </head>
-
 
 
 <body>
 
 
-<div class="layout">
+<div class="app">
 
 
+<!-- MENU LATERAL -->
 
 <aside class="sidebar">
 
+
+<div class="logo">
 
 <h2>
 GHEZTORIX
 </h2>
 
+<p>
+Administrador
+</p>
 
-<a href="dashboard_usuario.html">
-🏠 Inicio
+</div>
+
+
+
+<nav>
+
+
+<a class="active" href="dashboard_usuario.html">
+🏠 Panel de Control
 </a>
 
 
-<a href="#">
+<a href="clientes.html">
 👥 Clientes
 </a>
 
 
+<a href="registro_cliente.html">
+➕ Registrar Cliente
+</a>
+
+
 <a href="#">
-📂 Documentos
+📄 Documentos
 </a>
 
 
@@ -53,13 +68,16 @@ GHEZTORIX
 
 
 <a href="#">
-⚙️ Configuración
+⚙ Configuración
 </a>
 
 
-<a onclick="salir()">
-🚪 Salir
+<a onclick="cerrarSesion()">
+🚪 Cerrar sesión
 </a>
+
+
+</nav>
 
 
 </aside>
@@ -68,7 +86,18 @@ GHEZTORIX
 
 
 
+
+
+<!-- CONTENIDO -->
+
+
 <main class="contenido">
+
+
+<header class="header">
+
+
+<div>
 
 
 <h1>
@@ -81,66 +110,103 @@ Resumen general de clientes y obligaciones fiscales
 </p>
 
 
+</div>
 
-<section class="tarjetas">
 
 
-<div class="tarjeta">
+<div class="usuario">
 
-<h2>
+👨‍💼 Administrador
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+
+
+<!-- RESUMEN -->
+
+
+<section class="resumen">
+
+
+<div class="fiscal-card">
+
+
+<h2 id="clientes">
 2
 </h2>
+
 
 <p>
 👥 Clientes Activos
 </p>
 
+
 </div>
 
 
 
-<div class="tarjeta">
+
+
+<div class="fiscal-card">
+
 
 <h2>
 3
 </h2>
 
+
 <p>
 📄 Impuestos Pendientes
 </p>
 
+
 </div>
 
 
 
 
-<div class="tarjeta alerta">
+
+<div class="fiscal-card vencido">
+
 
 <h2>
 1
 </h2>
+
 
 <p>
-⚠️ Impuestos Vencidos
+⚠ Impuestos Vencidos
 </p>
+
 
 </div>
 
 
 
 
-<div class="tarjeta">
+
+<div class="fiscal-card">
+
 
 <h2>
 1
 </h2>
+
 
 <p>
 💬 Comentarios Clientes
 </p>
 
-</div>
 
+</div>
 
 
 </section>
@@ -149,8 +215,19 @@ Resumen general de clientes y obligaciones fiscales
 
 
 
+
+
+
+
+
+<!-- ACCIONES -->
+
+
+<section class="seccion">
+
+
 <h2>
-Acciones rápidas
+Acciones Rápidas
 </h2>
 
 
@@ -158,38 +235,103 @@ Acciones rápidas
 <div class="acciones">
 
 
-<button>
-➕ Registrar Cliente
-</button>
+
+<a href="registro_cliente.html">
+
+<div>
+➕
+</div>
+
+<b>
+Registrar Cliente
+</b>
+
+<span>
+Alta de nuevo cliente
+</span>
+
+</a>
 
 
-<button>
-👥 Ver Directorio
-</button>
 
 
-<button>
-🔔 Alertas Fiscales
-</button>
+<a href="clientes.html">
+
+
+<div>
+👥
+</div>
+
+
+<b>
+Ver Directorio
+</b>
+
+
+<span>
+Accede a todos los clientes
+</span>
+
+
+</a>
+
+
+
+
+
+<a href="#">
+
+
+<div>
+🔔
+</div>
+
+
+<b>
+Alertas Fiscales
+</b>
+
+
+<span>
+1 vencido, 3 pendientes
+</span>
+
+
+</a>
+
 
 
 </div>
 
 
+</section>
 
 
 
-<section class="panel">
+
+
+
+
+
+
+<!-- ALERTAS -->
+
+
+<section class="seccion">
 
 
 <h2>
-⚠️ Impuestos Vencidos
+⚠ Impuestos Vencidos — Atención Inmediata
 </h2>
 
 
-<p>
+
+<div class="alerta">
+
+
+<h3>
 Comercializadora Hernández S.A. de C.V.
-</p>
+</h3>
 
 
 <p>
@@ -197,10 +339,55 @@ RFC: CHE890512HJ4
 </p>
 
 
+<strong>
+IMSS · Enero 2025 · $4,200.00
+</strong>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- COMENTARIOS -->
+
+
+<section class="seccion">
+
+
+<h2>
+💬 Comentarios Recientes de Clientes
+</h2>
+
+
+
+<div class="comentario">
+
+
+<h3>
+Comercializadora Hernández S.A. de C.V.
+</h3>
+
+
 <p>
-IMSS Enero 2025 - $4,200.00
+"Por favor, necesito la constancia de situación fiscal actualizada para este mes."
 </p>
 
+
+<small>
+28-ene, 10:30 a.m.
+</small>
+
+
+</div>
 
 
 </section>
@@ -214,7 +401,21 @@ IMSS Enero 2025 - $4,200.00
 
 
 
-<script src="js/app.js"></script>
+
+
+<script>
+
+function cerrarSesion(){
+
+localStorage.removeItem("usuarioActivo");
+
+location.href="index.html";
+
+}
+
+
+</script>
+
 
 
 </body>
