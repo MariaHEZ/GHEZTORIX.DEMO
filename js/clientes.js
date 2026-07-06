@@ -1,35 +1,58 @@
-console.log("clientes.js cargado");
+console.log("Lista de clientes cargada");
 
 let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
-// Esperar a que cargue el DOM
-document.addEventListener("DOMContentLoaded", () => {
+const contenedor = document.getElementById("listaClientes");
+const buscador = document.getElementById("buscador");
 
-    const form = document.getElementById("formCliente");
+// Renderizar clientes
+function mostrarClientes(lista) {
 
-    if (!form) return; // evita errores en otras páginas
+    contenedor.innerHTML = "";
 
-    form.addEventListener("submit", function(e){
-        e.preventDefault();
+    if (lista.length === 0) {
+        contenedor.innerHTML = "<p>No hay clientes registrados</p>";
+        return;
+    }
 
-        const nuevoCliente = {
-            id: Date.now(),
-            razon: document.getElementById("razon").value,
-            rfc: document.getElementById("rfc").value.toUpperCase(),
-            cp: document.getElementById("cp").value,
-            regimen: document.getElementById("regimen").value,
-            actividad: document.getElementById("actividad").value,
-            correo: document.getElementById("correo").value,
-            telefono: document.getElementById("telefono").value,
-            password: document.getElementById("password").value
-        };
+    lista.forEach(cliente => {
 
-        clientes.push(nuevoCliente);
-        localStorage.setItem("clientes", JSON.stringify(clientes));
+        contenedor.innerHTML += `
+            <div class="cliente-card">
+                <h3>${cliente.razon}</h3>
+                <p><b>RFC:</b> ${cliente.rfc}</p>
+                <p><b>Correo:</b> ${cliente.correo}</p>
+                <p><b>Teléfono:</b> ${cliente.telefono}</p>
+                <p><b>Régimen:</b> ${cliente.regimen}</p>
 
-        alert("Cliente guardado correctamente");
-
-        window.location.href = "clientes.html";
+                <button onclick="verExpediente(${cliente.id})">
+                    📁 Acceder al expediente
+                </button>
+            </div>
+            <hr>
+        `;
     });
+}
 
+// Búsqueda
+buscador.addEventListener("input", function () {
+
+    const texto = this.value.toLowerCase();
+
+    const filtrados = clientes.filter(c =>
+        c.razon.toLowerCase().includes(texto) ||
+        c.rfc.toLowerCase().includes(texto) ||
+        c.correo.toLowerCase().includes(texto)
+    );
+
+    mostrarClientes(filtrados);
 });
+
+// Expediente
+function verExpediente(id) {
+    localStorage.setItem("clienteActivo", id);
+    window.location.href = "expediente.html";
+}
+
+// inicial
+mostrarClientes(clientes);
