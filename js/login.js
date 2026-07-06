@@ -11,7 +11,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
       { email: "usuario1@gheztorix.com", password: "usuario123" }
     ],
     cliente: [
-      { email: "RFC123456789X", password: "cliente123" }
+      { rfc: "RFC123456789X", password: "cliente123" }
     ]
   };
 
