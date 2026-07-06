@@ -1,1 +1,45 @@
+/* ===== AJUSTE TOPBAR ===== */
 
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.topbar h1{
+    color:#16355c;
+    font-size:24px;
+}
+
+.topbar span{
+    background:#16355c;
+    color:#fff;
+    padding:8px 18px;
+    border-radius:30px;
+    font-size:14px;
+}
+
+/* ===== BIENVENIDA ===== */
+
+.bienvenida{
+    background:#fff;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.bienvenida h2{
+    color:#16355c;
+    margin-bottom:10px;
+}
+
+.bienvenida p{
+    color:#555;
+    line-height:1.6;
+}
+
+.sidebar li.activo{
+    background:#1f4d80;
+    font-weight:bold;
+}
