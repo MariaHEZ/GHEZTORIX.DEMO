@@ -17,7 +17,18 @@
   </nav>
   <main>
     <h2>Bienvenido al sistema</h2>
-    <p>Has iniciado sesión correctamente.</p>
+    <div id="clientes"></div>
   </main>
+  <script>
+    // Ejemplo de clientes simulados
+    const clientes = [
+      { nombre: "Empresa XYZ", rfc: "XYZ123456789", estado: "Activo" },
+      { nombre: "Consultoría ABC", rfc: "ABC987654321", estado: "Pendiente" }
+    ];
+    const cont = document.getElementById("clientes");
+    cont.innerHTML = "<h3>Clientes</h3><ul>" +
+      clientes.map(c => `<li>${c.nombre} - ${c.rfc} - ${c.estado}</li>`).join("") +
+      "</ul>";
+  </script>
 </body>
 </html>
