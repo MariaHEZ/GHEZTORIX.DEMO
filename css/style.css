@@ -1,128 +1,184 @@
-<!DOCTYPE html>
-<html lang="es">
+*{
 
+box-sizing:border-box;
 
-<head>
+font-family:Arial;
 
-<meta charset="UTF-8">
+}
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+body{
 
-<title>Portal Cliente | GHEZTORIX</title>
+margin:0;
 
+background:#f4f6f9;
 
-<link rel="stylesheet" href="css/estilo.css">
+}
 
 
-</head>
 
+.login-container{
 
+height:100vh;
 
-<body>
+display:flex;
 
+justify-content:center;
 
+align-items:center;
 
-<div class="cliente-panel">
+background:#163A6B;
 
+}
 
-<h1>
-Bienvenido
-</h1>
 
 
-<p>
-Comercializadora Hernández S.A. de C.V.
-</p>
+.login-box{
 
+background:white;
 
+padding:40px;
 
-<div class="tarjetas">
+border-radius:20px;
 
+width:350px;
 
-<div class="tarjeta">
+text-align:center;
 
-<h2>
-📄
-</h2>
+}
 
-<p>
-Mis Documentos
-</p>
 
 
-</div>
+.login-box input{
 
+width:100%;
 
+padding:15px;
 
-<div class="tarjeta">
+margin:10px 0;
 
-<h2>
-📅
-</h2>
+}
 
-<p>
-Obligaciones Fiscales
-</p>
 
 
-</div>
+button{
 
+background:#1E88E5;
 
+color:white;
 
-<div class="tarjeta">
+border:0;
 
-<h2>
-💬
-</h2>
+padding:15px;
 
-<p>
-Mensajes con asesor
-</p>
+border-radius:10px;
 
+cursor:pointer;
 
-</div>
+}
 
 
-</div>
 
+.layout{
 
+display:flex;
 
+}
 
 
-<h2>
-Documentos recientes
-</h2>
 
+.sidebar{
 
+width:250px;
 
-<div class="panel">
+height:100vh;
 
+background:#163A6B;
 
-<p>
-✔ Constancia de Situación Fiscal
-</p>
+color:white;
 
+padding:25px;
 
-<p>
-✔ Opinión de Cumplimiento SAT
-</p>
+}
 
 
-<p>
-✔ Declaración mensual
-</p>
 
+.sidebar a{
 
-</div>
+display:block;
 
+color:white;
 
+padding:15px;
 
+text-decoration:none;
 
-</div>
+}
 
 
 
-</body>
+.contenido{
 
-</html>
+padding:30px;
+
+width:100%;
+
+}
+
+
+
+.tarjetas{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:20px;
+
+}
+
+
+
+.tarjeta{
+
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+box-shadow:0 5px 15px #0002;
+
+}
+
+
+
+.alerta{
+
+border-left:5px solid red;
+
+}
+
+
+
+.acciones{
+
+display:flex;
+
+gap:15px;
+
+}
+
+
+
+.panel{
+
+background:white;
+
+padding:25px;
+
+margin-top:30px;
+
+border-radius:15px;
+
+}
