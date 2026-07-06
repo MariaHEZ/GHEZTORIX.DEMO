@@ -635,16 +635,18 @@ box-shadow:var(--sombra);
 
 margin-bottom:20px;
 
-}
+position:relative;
 
-
-
-.cliente-card h3{
-
-color:var(--azul);
+transition:.3s;
 
 }
 
+
+.cliente-card:hover{
+
+transform:translateY(-5px);
+
+}
 
 
 /* ===============================
