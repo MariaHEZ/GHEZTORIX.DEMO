@@ -3,90 +3,56 @@ console.log("Lista de clientes cargada");
 // Obtener clientes
 let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
+// Validar elementos del DOM (IMPORTANTE)
 const contenedor = document.getElementById("listaClientes");
 const buscador = document.getElementById("buscador");
 
-// 🚨 Validación de elementos
+// Evita errores si no existen en la página
 if (!contenedor) {
-    console.error("No existe #listaClientes en el HTML");
+  console.error("No existe #listaClientes en el HTML");
 }
 
-// Renderizar clientes
-function mostrarClientes(lista) {
+function mostrar(lista) {
 
-    if (!contenedor) return;
+  if (!contenedor) return;
 
-    contenedor.innerHTML = "";
+  contenedor.innerHTML = "";
 
-    if (lista.length === 0) {
-        contenedor.innerHTML = `
-            <div class="vacio">
-                <h3>No hay clientes registrados</h3>
-            </div>
-        `;
-        return;
-    }
+  if (lista.length === 0) {
+    contenedor.innerHTML = "<p>No hay clientes registrados</p>";
+    return;
+  }
 
-    lista.forEach(cliente => {
+  lista.forEach(c => {
 
-        contenedor.innerHTML += `
-            <div class="cliente-card">
-
-                <h3>${cliente.razon || "Sin nombre"}</h3>
-
-                <p><b>RFC:</b> ${cliente.rfc}</p>
-                <p><b>Correo:</b> ${cliente.correo}</p>
-                <p><b>Teléfono:</b> ${cliente.telefono}</p>
-                <p><b>Régimen:</b> ${cliente.regimen}</p>
-
-                <div class="acciones">
-
-                    <button onclick="verExpediente(${cliente.id})">
-                        📁 Expediente
-                    </button>
-
-                    <button onclick="eliminarCliente(${cliente.id})">
-                        🗑 Eliminar
-                    </button>
-
-                </div>
-
-            </div>
-        `;
-    });
+    contenedor.innerHTML += `
+      <div class="card-cliente">
+        <h3>${c.razon}</h3>
+        <p><b>RFC:</b> ${c.rfc}</p>
+        <p><b>Correo:</b> ${c.correo}</p>
+        <p><b>Tel:</b> ${c.telefono}</p>
+      </div>
+    `;
+  });
 }
 
-// 🔍 BUSCADOR (seguro)
+// BUSCADOR (solo si existe)
 if (buscador) {
-    buscador.addEventListener("input", function () {
 
-        const texto = this.value.toLowerCase();
+  buscador.addEventListener("input", () => {
 
-        const filtrados = clientes.filter(c =>
-            (c.razon || "").toLowerCase().includes(texto) ||
-            (c.rfc || "").toLowerCase().includes(texto) ||
-            (c.correo || "").toLowerCase().includes(texto)
-        );
+    const texto = buscador.value.toLowerCase();
 
-        mostrarClientes(filtrados);
-    });
+    const filtrados = clientes.filter(c =>
+      c.razon.toLowerCase().includes(texto) ||
+      c.rfc.toLowerCase().includes(texto) ||
+      c.correo.toLowerCase().includes(texto)
+    );
+
+    mostrar(filtrados);
+  });
+
 }
 
-// 📁 Expediente
-function verExpediente(id) {
-    localStorage.setItem("clienteActivo", id);
-    window.location.href = "expediente.html";
-}
-
-// 🗑 Eliminar cliente
-function eliminarCliente(id) {
-
-    clientes = clientes.filter(c => c.id !== id);
-
-    localStorage.setItem("clientes", JSON.stringify(clientes));
-
-    mostrarClientes(clientes);
-}
-
-// Inicial
-mostrarClientes(clientes);
+// INICIAL
+mostrar(clientes);
