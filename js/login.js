@@ -1,55 +1,83 @@
-const role =
-document.getElementById("role");
+// ======================================
+// GHEZTORIX LOGIN
+// PORTAL ADMINISTRADOR / CLIENTE
+// ======================================
 
 
-const loginUsuario =
-document.getElementById("loginUsuario");
-
-
-const loginCliente =
-document.getElementById("loginCliente");
+let tipoSeleccionado = "";
 
 
 
-role.addEventListener("change",()=>{
+// Seleccionar portal
+
+function seleccionarAcceso(tipo, elemento){
 
 
-if(role.value==="usuario"){
+    tipoSeleccionado = tipo;
 
-loginUsuario.style.display="block";
 
-loginCliente.style.display="none";
+    // Guardar valor oculto
+    document.getElementById("role").value = tipo;
+
+
+
+    // quitar selección anterior
+
+    document
+    .querySelectorAll(".acceso-card")
+    .forEach(card=>{
+
+        card.classList.remove("seleccionado");
+
+    });
+
+
+
+    // activar tarjeta seleccionada
+
+    elemento.classList.add("seleccionado");
+
+
+
+    // Mostrar formulario correspondiente
+
+
+    if(tipo==="usuario"){
+
+
+        document.getElementById("loginUsuario")
+        .style.display="block";
+
+
+        document.getElementById("loginCliente")
+        .style.display="none";
+
+
+    }
+
+
+
+
+    if(tipo==="cliente"){
+
+
+        document.getElementById("loginUsuario")
+        .style.display="none";
+
+
+        document.getElementById("loginCliente")
+        .style.display="block";
+
+
+    }
+
 
 }
 
 
-else if(role.value==="cliente"){
 
 
-loginCliente.style.display="block";
-
-loginUsuario.style.display="none";
-
-
-}
-
-
-else{
-
-
-loginUsuario.style.display="none";
-
-loginCliente.style.display="none";
-
-
-}
-
-
-});
-
-
-
-
+// LOGIN
 
 document
 .getElementById("loginForm")
@@ -60,12 +88,19 @@ e.preventDefault();
 
 
 
-let tipo =
-role.value;
+let mensaje =
+document.getElementById("mensajeLogin");
 
 
 
-if(tipo==="usuario"){
+
+
+// =============================
+// PORTAL ADMINISTRADOR
+// =============================
+
+
+if(tipoSeleccionado==="usuario"){
 
 
 let correo =
@@ -77,20 +112,31 @@ document.getElementById("passwordUsuario").value;
 
 
 
-if(
-correo==="admin@gheztorix.com" &&
-password==="12345"
+// LICENCIA ADMINISTRADOR
 
+if(
+correo==="admin@gheztorix.com"
+&&
+password==="123456"
 ){
 
 
 localStorage.setItem(
 "usuarioActivo",
-correo
+JSON.stringify({
+
+nombre:"Administrador",
+
+tipo:"usuario"
+
+})
+
 );
 
 
-location.href="dashboard_usuario.html";
+
+window.location.href=
+"dashboard_usuario.html";
 
 
 }
@@ -98,8 +144,8 @@ location.href="dashboard_usuario.html";
 else{
 
 
-mensajeLogin.innerHTML=
-"❌ Datos incorrectos";
+mensaje.innerHTML=
+"❌ Licencia administrativa incorrecta";
 
 
 }
@@ -112,47 +158,101 @@ mensajeLogin.innerHTML=
 
 
 
-if(tipo==="cliente"){
+
+// =============================
+// PORTAL CLIENTE
+// =============================
+
+
+else if(tipoSeleccionado==="cliente"){
+
 
 
 let rfc =
-document.getElementById("rfc").value.toUpperCase();
+document
+.getElementById("rfc")
+.value
+.toUpperCase();
+
 
 
 let password =
-document.getElementById("passwordCliente").value;
+document
+.getElementById("passwordCliente")
+.value;
 
 
 
-if(
-rfc==="CHE890512HJ4" &&
-password==="12345"
-
-){
 
 
-localStorage.setItem(
-"clienteActivo",
-rfc
+// Buscar clientes registrados
+
+let clientes =
+JSON.parse(
+localStorage.getItem("clientes")
+)
+|| [];
+
+
+
+
+
+let cliente =
+clientes.find(c =>
+
+c.rfc.toUpperCase()===rfc
+&&
+c.password===password
+
 );
 
 
-location.href=
+
+
+
+if(cliente){
+
+
+
+localStorage.setItem(
+
+"clienteActivo",
+
+JSON.stringify(cliente)
+
+);
+
+
+
+window.location.href=
 "dashboard_cliente.html";
+
 
 
 }
 
-
 else{
 
 
-mensajeLogin.innerHTML=
+mensaje.innerHTML=
 "❌ RFC o contraseña incorrectos";
 
 
 }
 
+
+
+}
+
+
+
+
+
+else{
+
+
+mensaje.innerHTML=
+"⚠ Selecciona un portal";
 
 
 }
