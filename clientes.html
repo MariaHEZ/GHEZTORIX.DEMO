@@ -37,7 +37,6 @@
 
     <h1>👥 Clientes registrados</h1>
 
-    <input id="buscador" placeholder="Buscar por RFC o razón social...">
 
 <div class="busqueda">
 
@@ -47,7 +46,7 @@
         placeholder="Buscar por RFC o razón social..."
     >
 
-    <button onclick="buscarCliente()">
+    <button type="button" onclick="buscarCliente()">
         🔍 Buscar
     </button>
 
@@ -55,12 +54,16 @@
 
 <div id="listaClientes"></div>
 
+</main>
+
+</div>
+
 <script src="js/clientes.js"></script>
 
 <script>
 function cerrarSesion(){
-  localStorage.removeItem("usuarioActivo");
-  location.href="index.html";
+    localStorage.removeItem("usuarioActivo");
+    location.href = "index.html";
 }
 </script>
 
