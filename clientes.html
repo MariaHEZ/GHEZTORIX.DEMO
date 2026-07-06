@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes | GHEZTORIX</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h1>Registro de Clientes</h1>
+
+<form id="formCliente">
+
+    <label>Razón Social</label><br>
+    <input type="text" id="razon" required><br><br>
+
+    <label>RFC</label><br>
+    <input type="text" id="rfc" maxlength="13" required><br><br>
+
+    <label>Correo</label><br>
+    <input type="email" id="correo" required><br><br>
+
+    <label>Teléfono</label><br>
+    <input type="text" id="telefono"><br><br>
+
+    <label>Contraseña</label><br>
+    <input type="password" id="password" required><br><br>
+
+    <button type="submit">Guardar Cliente</button>
+
+</form>
+
+<hr>
+
+<h2>Clientes Registrados</h2>
+
+<div id="listaClientes"></div>
+
+<script src="js/clientes.js"></script>
+
+</body>
+</html>
