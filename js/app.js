@@ -9,15 +9,3 @@ document.getElementById("loginForm")?.addEventListener("submit", function(e) {
     alert("Credenciales incorrectas");
   }
 });
-
-// Cargar clientes en dashboard
-if (document.getElementById("clientes")) {
-  fetch("data/clientes.json")
-    .then(res => res.json())
-    .then(data => {
-      const cont = document.getElementById("clientes");
-      cont.innerHTML = "<h3>Clientes</h3><ul>" +
-        data.map(c => `<li>${c.nombre} - ${c.rfc} - ${c.estado}</li>`).join("") +
-        "</ul>";
-    });
-}
