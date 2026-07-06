@@ -4,18 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GHEZTORIX | Agregar Clientes</title>
+<title>Clientes | GHEZTORIX</title>
 
 <link rel="stylesheet" href="css/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="css/dashboard.css">
 </head>
 
 <body>
 
 <div class="dashboard">
 
-  <!-- SIDEBAR SIMPLE -->
+  <!-- SIDEBAR -->
   <aside class="sidebar">
 
     <div class="logo">
@@ -24,17 +23,11 @@
     </div>
 
     <nav class="menu">
-
-      <a href="dashboard.html">🏠 Panel principal</a>
-      <a href="clientes.html">👥 Clientes</a>
-      <a class="active" href="registro_cliente.html">➕ Agregar clientes</a>
+      <a href="dashboard.html">🏠 Panel</a>
+      <a href="clientes.html" class="active">👥 Clientes</a>
+      <a href="registro_cliente.html">➕ Agregar cliente</a>
       <a href="documentos.html">📂 Documentos</a>
-      <a href="calendario.html">📅 Calendario</a>
-      <a href="reportes.html">📊 Reportes</a>
-      <a href="configuracion.html">⚙ Configuración</a>
-
-      <a href="index.html">🚪 Cerrar sesión</a>
-
+      <a href="#" onclick="cerrarSesion()">🚪 Cerrar sesión</a>
     </nav>
 
   </aside>
@@ -42,49 +35,24 @@
   <!-- CONTENIDO -->
   <main class="contenido">
 
-    <header class="topbar">
-      <h1>➕ Agregar clientes</h1>
-      <span>Panel administrativo</span>
-    </header>
+    <h1>👥 Clientes registrados</h1>
 
-    <!-- FORMULARIO -->
-    <section class="formulario">
+    <input id="buscador" type="text" placeholder="Buscar cliente...">
 
-      <h2>Registro de Clientes</h2>
-
-      <form id="formCliente">
-
-        <input type="text" id="razon" placeholder="Razón social o nombre" required>
-
-        <input type="text" id="rfc" placeholder="RFC" required>
-
-        <input type="text" id="cp" placeholder="Código postal" required>
-
-        <input type="text" id="regimen" placeholder="Régimen fiscal" required>
-
-        <input type="text" id="actividad" placeholder="Actividad" required>
-
-        <input type="email" id="correo" placeholder="Correo electrónico" required>
-
-        <input type="text" id="telefono" placeholder="Teléfono" required>
-
-        <input type="password" id="password" placeholder="Contraseña" required>
-
-        <button type="submit">💾 Guardar cliente</button>
-
-      </form>
-
-      <br>
-
-      <a href="dashboard.html">⬅ Regresar a panel principal</a>
-
-    </section>
+    <div id="listaClientes"></div>
 
   </main>
 
 </div>
 
 <script src="js/clientes.js"></script>
+
+<script>
+function cerrarSesion(){
+  localStorage.removeItem("usuarioActivo");
+  location.href="index.html";
+}
+</script>
 
 </body>
 </html>
