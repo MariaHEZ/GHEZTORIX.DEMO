@@ -1,32 +1,26 @@
-document.getElementById("loginForm").addEventListener("submit", function(event) {
-  event.preventDefault();
+// Mostrar formulario según el rol
 
-  const emailOrRFC = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const role = document.getElementById("role").value;
+const role = document.getElementById("role");
+const loginUsuario = document.getElementById("loginUsuario");
+const loginCliente = document.getElementById("loginCliente");
 
-  // Licencias genéricas de prueba
-  const licencias = {
-    usuario: [
-      { email: "usuario1@gheztorix.com", password: "usuario123" }
-    ],
-    cliente: [
-      { rfc: "RFC123456789X", password: "cliente123" }
-    ]
-  };
+role.addEventListener("change", function () {
 
-  // Validación
-  const licenciaValida = licencias[role]?.some(
-    lic => lic.email === emailOrRFC && lic.password === password
-  );
+    if (role.value === "usuario") {
 
-  if (licenciaValida) {
-    if (role === "usuario") {
-      window.location.href = "dashboard_usuario.html";
-    } else if (role === "cliente") {
-      window.location.href = "dashboard_cliente.html";
+        loginUsuario.style.display = "block";
+        loginCliente.style.display = "none";
+
+    } else if (role.value === "cliente") {
+
+        loginUsuario.style.display = "none";
+        loginCliente.style.display = "block";
+
+    } else {
+
+        loginUsuario.style.display = "none";
+        loginCliente.style.display = "none";
+
     }
-  } else {
-    alert("Licencia inválida. Verifica tus credenciales.");
-  }
+
 });
