@@ -62,47 +62,44 @@ function mostrarClientes(lista){
 
 
 // Buscar por RFC o Razón Social
+function buscarCliente(){
 
-buscador.addEventListener("input", function(){
+    let texto = buscador.value.toLowerCase().trim();
 
+    if(texto === ""){
 
-    let texto = this.value.toLowerCase();
+        mostrarClientes(clientes);
+        return;
 
+    }
 
     let filtrados = clientes.filter(cliente =>
 
-        cliente.rfc.toLowerCase().includes(texto)
-
-        ||
+        cliente.rfc.toLowerCase().includes(texto) ||
 
         cliente.razon.toLowerCase().includes(texto)
 
     );
 
-
     mostrarClientes(filtrados);
 
+}
+// Buscar al presionar Enter
+buscador.addEventListener("keypress", function(e){
+
+    if(e.key === "Enter"){
+        buscarCliente();
+    }
 
 });
 
-
-
 // Abrir expediente del cliente
-
 function abrirCliente(id){
 
-    localStorage.setItem(
-        "clienteSeleccionado",
-        id
-    );
-
-
-    window.location.href="expediente.html";
+    localStorage.setItem("clienteSeleccionado", id);
+    window.location.href = "expediente.html";
 
 }
 
-
-
-// Cargar clientes al entrar
-
+// Mostrar todos los clientes al cargar la página
 mostrarClientes(clientes);
