@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dashboard | GHEZTORIX</title>
+<title>Panel principal | GHEZTORIX</title>
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/dashboard.css">
@@ -18,111 +18,94 @@
 
 <div class="dashboard">
 
-    <aside class="sidebar">
+  <aside class="sidebar">
 
-        <h2>GHEZTORIX</h2>
+    <h2>GHEZTORIX</h2>
 
-        <ul>
+    <ul>
 
-            <li class="activo">🏠 Dashboard</li>
+        <li class="activo">🏠 Panel principal</li>
 
-            <li onclick="location.href='clientes.html'">
-                👥 Clientes
-            </li>
+        <li onclick="location.href='clientes.html'">
+            👥 Clientes
+        </li>
 
-            <li>
-                📂 Documentos
-            </li>
+        <li onclick="location.href='registro_cliente.html'">
+            ➕ Agregar clientes
+        </li>
 
-            <li>
-                📅 Calendario
-            </li>
+        <li onclick="location.href='documentos.html'">
+            📂 Documentos
+        </li>
 
-            <li>
-                📊 Reportes
-            </li>
+        <li onclick="location.href='configuracion.html'">
+            ⚙ Configuración
+        </li>
 
-            <li>
-                ⚙ Configuración
-            </li>
+        <li onclick="cerrarSesion()">
+            🚪 Cerrar sesión
+        </li>
 
-            <li onclick="cerrarSesion()">
-                🚪 Cerrar sesión
-            </li>
+    </ul>
 
-        </ul>
+  </aside>
 
-    </aside>
+  <main class="contenido">
 
-    <main class="contenido">
+      <header class="topbar">
 
-       <section class="bienvenida">
+          <span></span>
 
-            <h1>Panel de Administración</h1>
+          <h1>Portal administrador</h1>
 
-            <span>Administrador</span>
+          <span>Administrador</span>
 
-        </header>
+      </header>
 
-        <section class="cards">
+      <section class="cards">
 
-            <div class="card">
+          <div class="card">
+              <h3>Clientes</h3>
+              <h2>0</h2>
+          </div>
 
-                <h3>Clientes</h3>
+          <div class="card">
+              <h3>Documentos</h3>
+              <h2>0</h2>
+          </div>
 
-                <h2>0</h2>
+          <div class="card">
+              <h3>Pendientes</h3>
+              <h2>0</h2>
+          </div>
 
-            </div>
+          <div class="card">
+              <h3>Reportes</h3>
+              <h2>0</h2>
+          </div>
 
-            <div class="card">
+      </section>
 
-                <h3>Documentos</h3>
+      <section class="bienvenida">
 
-                <h2>0</h2>
+          <h2>Bienvenido a GHEZTORIX</h2>
 
-            </div>
+          <p>
+              Aquí podrás administrar clientes,
+              documentos, reportes y configuraciones del sistema.
+          </p>
 
-            <div class="card">
+      </section>
 
-                <h3>Pendientes</h3>
-
-                <h2>0</h2>
-
-            </div>
-
-            <div class="card">
-
-                <h3>Reportes</h3>
-
-                <h2>0</h2>
-
-            </div>
-
-        </section>
-
-        <section class="bienvenida">
-
-            <h2>Bienvenido a GHEZTORIX</h2>
-
-            <p>
-                Aquí podrás administrar clientes,
-                documentos, reportes y configuraciones del sistema.
-            </p>
-
-        </section>
-
-    </main>
+  </main>
 
 </div>
 
 <script>
 
 function cerrarSesion(){
-
-localStorage.removeItem("usuarioActivo");
-
-location.href="index.html";
-
+    localStorage.removeItem("usuarioActivo");
+    location.href="index.html";
 }
 
 </script>
