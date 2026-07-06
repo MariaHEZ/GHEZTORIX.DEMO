@@ -1,38 +1,32 @@
-// Cargar estadísticas del dashboard
-
 let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
 
 // Total clientes
 
-document.getElementById("totalClientes").innerHTML =
-clientes.length;
+document.getElementById("totalClientes").innerHTML = clientes.length;
 
 
 
-// Últimos clientes registrados
+// Mostrar últimos clientes
 
-let contenedor =
-document.getElementById("ultimosClientes");
+let lista = document.getElementById("ultimosClientes");
 
 
 if(clientes.length > 0){
 
-
-contenedor.innerHTML="";
+lista.innerHTML="";
 
 
 clientes.slice(-3).reverse().forEach(cliente=>{
 
 
-contenedor.innerHTML += `
+lista.innerHTML += `
 
 <div class="cliente-mini">
 
 <h3>
-${cliente.razon || cliente.nombre}
+${cliente.razon || "Cliente sin nombre"}
 </h3>
-
 
 <p>
 RFC: ${cliente.rfc}
