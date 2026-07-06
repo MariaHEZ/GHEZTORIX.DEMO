@@ -59,9 +59,11 @@ button:hover {
 .subtitle {
   text-align: center;
   font-size: 14px;
+  font-family: 'Georgia', 'Times New Roman', serif; /* Fuente más formal */
   color: var(--neutral-gray);
   font-weight: bold;
   margin-bottom: 25px;
   letter-spacing: 1px;
 }
+
 
