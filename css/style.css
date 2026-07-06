@@ -1,5 +1,13 @@
+:root {
+  --primary-color: #0078d7;   /* Azul */
+  --accent-color: #d4af37;    /* Dorado */
+  --neutral-gray: #2f2f2f;    /* Gris oscuro */
+  --dark-black: #000000;      /* Negro */
+  --font-family: 'Segoe UI', Arial, sans-serif;
+}
+
 body {
-  background: linear-gradient(135deg, #0078d7, #00b294);
+  background: linear-gradient(135deg, var(--primary-color), var(--neutral-gray));
   font-family: var(--font-family);
   display: flex;
   justify-content: center;
@@ -7,27 +15,18 @@ body {
   height: 100vh;
 }
 
-.login-container {
-  width: 100%;
-  max-width: 400px;
-}
-
-.login-card {
-  background: #fff;
+.login-box {
+  background: rgba(255, 255, 255, 0.95);
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  width: 350px;
 }
 
 h2 {
   text-align: center;
-  color: var(--primary-color);
+  color: var(--accent-color);
   margin-bottom: 20px;
-}
-
-label {
-  font-weight: bold;
-  color: var(--text-color);
 }
 
 input, select, button {
@@ -35,7 +34,12 @@ input, select, button {
   padding: 12px;
   margin: 8px 0;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--neutral-gray);
+}
+
+input, select {
+  background: #f9f9f9;
+  color: var(--dark-black);
 }
 
 button {
@@ -44,8 +48,10 @@ button {
   border: none;
   font-size: 16px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 button:hover {
-  background: var(--secondary-color);
+  background: var(--accent-color);
+  color: var(--dark-black);
 }
