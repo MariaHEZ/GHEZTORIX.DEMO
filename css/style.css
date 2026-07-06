@@ -6,9 +6,9 @@
   --font-family: 'Segoe UI', Arial, sans-serif;
 }
 
-body {
-  background: linear-gradient(135deg, var(--primary-color), var(--neutral-gray));
-  font-family: var(--font-family);
+body, input, select, button, .subtitle {
+  font-family: 'Roboto', sans-serif;
+}
   display: flex;
   justify-content: center;
   align-items: center;
