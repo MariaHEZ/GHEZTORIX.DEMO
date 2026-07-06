@@ -1,4 +1,3 @@
-
 document.getElementById("loginForm").addEventListener("submit", function(event) {
   event.preventDefault();
 
@@ -22,4 +21,3 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     alert("No tienes licencia activa para el rol seleccionado.");
   }
 });
-
