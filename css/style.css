@@ -1,32 +1,70 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
+/* ===== CARPETAS (MODULOS ERP) ===== */
+.carpeta{
+  background: #fff;
+  padding: 25px;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: all .25s ease;
+  text-align: center;
+  border: 1px solid #f0f0f0;
+}
+
+.carpeta:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  border-color: #163c8c33;
+}
+
+.carpeta span{
+  font-size: 55px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.carpeta h3{
+  color: #163c8c;
+  font-size: 16px;
   margin: 0;
-  padding: 20px;
 }
-.login-container {
-  max-width: 400px;
-  margin: 80px auto;
-  padding: 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-button {
+
+/* ===== INPUTS ERP PROFESIONAL ===== */
+.input,
+select{
   width: 100%;
-  padding: 10px;
-  background: #333;
+  padding: 12px 14px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: 1px solid #d6d6d6;
+  outline: none;
+  font-size: 14px;
+  transition: all .2s ease;
+  background: #fff;
+}
+
+.input:focus,
+select:focus{
+  border-color: #163c8c;
+  box-shadow: 0 0 0 3px rgba(22,60,140,0.15);
+}
+
+/* ===== BOTÓN PRINCIPAL ERP ===== */
+.btn-primary{
+  background: linear-gradient(135deg, #163c8c, #0f2f6d);
   color: white;
+  padding: 12px 22px;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all .2s ease;
 }
-nav {
-  background: #333;
-  color: white;
-  padding: 10px;
+
+.btn-primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(22,60,140,0.25);
 }
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
+
+.btn-primary:active{
+  transform: scale(0.98);
 }
