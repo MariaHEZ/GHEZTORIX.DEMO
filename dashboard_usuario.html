@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard Usuario</title>
+    <meta charset="UTF-8">
+    <title>Dashboard | GHEZTORIX</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>Bienvenido Usuario</h1>
-  <p>Aquí podrás gestionar clientes, ver reportes y configurar el sistema.</p>
+
+<h1>Panel de Administración</h1>
+
+<p>Bienvenido a GHEZTORIX.</p>
+
+<div class="menu">
+
+    <button onclick="location.href='clientes.html'">
+        👥 Clientes
+    </button>
+
+    <button onclick="location.href='documentos.html'">
+        📂 Documentos
+    </button>
+
+    <button onclick="location.href='reportes.html'">
+        📊 Reportes
+    </button>
+
+    <button onclick="location.href='configuracion.html'">
+        ⚙️ Configuración
+    </button>
+
+    <button onclick="cerrarSesion()">
+        🚪 Cerrar sesión
+    </button>
+
+</div>
+
+<script>
+function cerrarSesion() {
+    localStorage.removeItem("usuarioActivo");
+    window.location.href = "index.html";
+}
+</script>
+
 </body>
 </html>
