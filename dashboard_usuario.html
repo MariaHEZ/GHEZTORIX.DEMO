@@ -20,38 +20,48 @@
 
 <div class="dashboard">
 
-  <aside class="sidebar">
+ <aside class="sidebar">
 
+  <div class="logo">
     <h2>GHEZTORIX</h2>
+    <small>Panel administrativo</small>
+  </div>
 
-    <ul>
+  <nav class="menu">
 
-        <li class="activo">🏠 Panel principal</li>
+    <a href="dashboard.html" class="active">
+      🏠 Inicio
+    </a>
 
-        <li onclick="location.href='clientes.html'">
-            👥 Clientes
-        </li>
+    <!-- CLIENTES -->
+    <div class="dropdown">
 
-        <li onclick="location.href='registro_cliente.html'">
-            ➕ Agregar clientes
-        </li>
+      <div class="dropdown-title" onclick="toggleMenu(this)">
+        👥 Clientes
+        <span class="arrow">▶</span>
+      </div>
 
-        <li onclick="location.href='documentos.html'">
-            📂 Documentos
-        </li>
+      <div class="submenu">
 
-        <li onclick="location.href='configuracion.html'">
-            ⚙ Configuración
-        </li>
+        <a href="clientes.html">📋 Ver clientes</a>
+        <a href="registro_cliente.html">➕ Agregar cliente</a>
 
-        <li onclick="cerrarSesion()">
-            🚪 Cerrar sesión
-        </li>
+      </div>
 
-    </ul>
+    </div>
 
-  </aside>
+    <a href="documentos.html">📂 Documentos</a>
+    <a href="calendario.html">📅 Calendario</a>
+    <a href="reportes.html">📊 Reportes</a>
+    <a href="configuracion.html">⚙ Configuración</a>
 
+  </nav>
+
+  <div class="logout">
+    <a href="#" onclick="cerrarSesion()">🚪 Cerrar sesión</a>
+  </div>
+
+</aside>
  <main class="contenido">
 
     <header class="topbar">
@@ -107,12 +117,14 @@
 
 <script>
 
-function cerrarSesion(){
+function toggleMenu(element) {
+    const dropdown = element.parentElement;
+    dropdown.classList.toggle("open");
+}
+
+function cerrarSesion() {
     localStorage.removeItem("usuarioActivo");
-    location.href="index.html";
+    location.href = "index.html";
 }
 
 </script>
-
-</body>
-</html>
