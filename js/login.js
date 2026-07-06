@@ -1,3 +1,5 @@
+console.log("login.js cargado correctamente");
+
 // Mostrar formulario según el rol
 
 const role = document.getElementById("role");
