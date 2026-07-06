@@ -1,58 +1,108 @@
 console.log("Lista de clientes cargada");
 
-// Obtener clientes
+// Obtener clientes guardados
 let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
-// Validar elementos del DOM (IMPORTANTE)
 const contenedor = document.getElementById("listaClientes");
 const buscador = document.getElementById("buscador");
 
-// Evita errores si no existen en la página
-if (!contenedor) {
-  console.error("No existe #listaClientes en el HTML");
+
+// Mostrar clientes
+function mostrarClientes(lista){
+
+    contenedor.innerHTML = "";
+
+
+    if(lista.length === 0){
+
+        contenedor.innerHTML = `
+        <p style="text-align:center">
+        No se encontraron clientes
+        </p>
+        `;
+
+        return;
+    }
+
+
+    lista.forEach(cliente => {
+
+
+        contenedor.innerHTML += `
+
+        <div class="cliente-card">
+
+            <h3>${cliente.razon}</h3>
+
+            <p>
+            <b>RFC:</b> ${cliente.rfc}
+            </p>
+
+            <p>
+            <b>Código Postal:</b> ${cliente.cp || "No registrado"}
+            </p>
+
+            <p>
+            <b>Régimen:</b> ${cliente.regimen || "No registrado"}
+            </p>
+
+            <button onclick="abrirCliente(${cliente.id})">
+            📁 Ver expediente
+            </button>
+
+        </div>
+
+        `;
+
+
+    });
+
 }
 
-function mostrar(lista) {
 
-  if (!contenedor) return;
 
-  contenedor.innerHTML = "";
+// Buscar por RFC o Razón Social
 
-  if (lista.length === 0) {
-    contenedor.innerHTML = "<p>No hay clientes registrados</p>";
-    return;
-  }
+buscador.addEventListener("input", function(){
 
-  lista.forEach(c => {
 
-    contenedor.innerHTML += `
-      <div class="card-cliente">
-        <h3>${c.razon}</h3>
-        <p><b>RFC:</b> ${c.rfc}</p>
-        <p><b>Correo:</b> ${c.correo}</p>
-        <p><b>Tel:</b> ${c.telefono}</p>
-      </div>
-    `;
-  });
-}
+    let texto = this.value.toLowerCase();
 
-// BUSCADOR (solo si existe)
-if (buscador) {
 
-  buscador.addEventListener("input", () => {
+    let filtrados = clientes.filter(cliente =>
 
-    const texto = buscador.value.toLowerCase();
+        cliente.rfc.toLowerCase().includes(texto)
 
-    const filtrados = clientes.filter(c =>
-      c.razon.toLowerCase().includes(texto) ||
-      c.rfc.toLowerCase().includes(texto) ||
-      c.correo.toLowerCase().includes(texto)
+        ||
+
+        cliente.razon.toLowerCase().includes(texto)
+
     );
 
-    mostrar(filtrados);
-  });
+
+    mostrarClientes(filtrados);
+
+
+});
+
+
+
+// Abrir expediente del cliente
+
+function abrirCliente(id){
+
+    localStorage.setItem(
+        "clienteSeleccionado",
+        id
+    );
+
+
+    window.location.href="expediente.html";
 
 }
 
-// INICIAL
-mostrar(clientes);
+
+
+// Cargar clientes al entrar
+
+mostrarClientes(clientes);
