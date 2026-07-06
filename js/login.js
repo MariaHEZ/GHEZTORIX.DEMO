@@ -5,19 +5,28 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   const password = document.getElementById("password").value;
   const role = document.getElementById("role").value;
 
-  // Simulación de licencias activas
+  // Licencias genéricas de prueba
   const licencias = {
-    usuario: ["usuario1@mail.com", "usuario2@mail.com"],
-    cliente: ["RFC123456789", "RFC987654321"]
+    usuario: [
+      { email: "usuario1@gheztorix.com", password: "usuario123" }
+    ],
+    cliente: [
+      { email: "RFC123456789X", password: "cliente123" }
+    ]
   };
 
-  if (licencias[role] && licencias[role].includes(emailOrRFC)) {
+  // Validación
+  const licenciaValida = licencias[role]?.some(
+    lic => lic.email === emailOrRFC && lic.password === password
+  );
+
+  if (licenciaValida) {
     if (role === "usuario") {
       window.location.href = "dashboard_usuario.html";
     } else if (role === "cliente") {
       window.location.href = "dashboard_cliente.html";
     }
   } else {
-    alert("No tienes licencia activa para el rol seleccionado.");
+    alert("Licencia inválida. Verifica tus credenciales.");
   }
 });
