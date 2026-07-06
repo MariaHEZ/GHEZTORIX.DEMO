@@ -1,0 +1,6 @@
+body { font-family: Arial, sans-serif; background: #f4f4f4; }
+.login-box { width: 350px; margin: 100px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+h2 { text-align: center; margin-bottom: 20px; }
+input, select, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
+button { background: #0078d7; color: #fff; border: none; cursor: pointer; }
+button:hover { background: #005a9e; }
