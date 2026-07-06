@@ -5,9 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Panel principal | Bienvenido a GHEZTORIX</title>
-          
-        
+<title>Panel principal | GHEZTORIX</title>
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/dashboard.css">
@@ -20,6 +18,7 @@
 
 <div class="dashboard">
 
+<!-- SIDEBAR -->
 <aside class="sidebar">
 
   <div class="logo">
@@ -29,36 +28,69 @@
 
   <nav class="menu">
 
-    <a href="clientes.html">
-      👥 Clientes
-    </a>
+    <a href="dashboard.html">🏠 Panel administrativo</a>
+    <a href="clientes.html">👥 Clientes</a>
+    <a href="registro_cliente.html">➕ Agregar clientes</a>
+    <a href="documentos.html">📂 Documentos</a>
+    <a href="calendario.html">📅 Calendario</a>
+    <a href="reportes.html">📊 Reportes</a>
+    <a href="configuracion.html">⚙ Configuración</a>
 
-    <a href="registro_cliente.html">
-      ➕ Agregar Clientes
-    </a>
-
-    <a href="documentos.html">
-      📂 Documentos
-    </a>
-
-    <a href="calendario.html">
-      📅 Calendario
-    </a>
-
-    <a href="reportes.html">
-      📊 Reportes
-    </a>
-
-    <a href="configuracion.html">
-      ⚙ Configuración
-    </a>
+    <a href="#" onclick="cerrarSesion()">🚪 Cerrar sesión</a>
 
   </nav>
 
-  <div class="logout">
-    <a href="#" onclick="cerrarSesion()">
-      🚪 Cerrar sesión
-    </a>
-  </div>
-
 </aside>
+
+<!-- CONTENIDO -->
+<main class="contenido">
+
+  <header class="topbar">
+    <h1>Portal administrador</h1>
+    <span>Administrador</span>
+  </header>
+
+  <section class="bienvenida">
+    <h2>Bienvenido a GHEZTORIX</h2>
+    <p>
+      Aquí podrás administrar clientes, documentos, reportes y configuraciones del sistema.
+    </p>
+  </section>
+
+  <section class="cards">
+
+    <div class="card">
+      <h3>Clientes</h3>
+      <h2>0</h2>
+    </div>
+
+    <div class="card">
+      <h3>Documentos</h3>
+      <h2>0</h2>
+    </div>
+
+    <div class="card">
+      <h3>Pendientes</h3>
+      <h2>0</h2>
+    </div>
+
+    <div class="card">
+      <h3>Reportes</h3>
+      <h2>0</h2>
+    </div>
+
+  </section>
+
+</main>
+
+</div>
+
+<script>
+function cerrarSesion(){
+    localStorage.removeItem("usuarioActivo");
+    location.href="index.html";
+}
+</script>
+
+</body>
+</html>
