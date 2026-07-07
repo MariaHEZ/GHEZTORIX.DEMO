@@ -253,9 +253,13 @@ placeholder="Buscar por RFC o Razón Social">
 
 <tr>
 
+<th>Razón Social</th>    
+
 <th>RFC</th>
 
-<th>Razón Social</th>
+<th>Regimen Fiscal</th>
+
+<th>Codigo postal</th>    
 
 <th>Correo</th>
 
@@ -351,6 +355,109 @@ Guardar Cliente
 
 </section>
 
+
+<!-- ===================== EXPEDIENTE CLIENTE ===================== -->
+
+<section id="expediente" class="pagina d-none">
+
+<h2>
+📁 Expediente del Cliente
+</h2>
+
+
+<div class="card p-4 mt-3 expediente-card">
+
+
+<h3 id="expNombre">
+Seleccione un cliente
+</h3>
+
+
+<hr>
+
+
+<p>
+<strong>RFC:</strong>
+<span id="expRFC"></span>
+</p>
+
+
+<p>
+<strong>Correo:</strong>
+<span id="expCorreo"></span>
+</p>
+
+
+<p>
+<strong>Teléfono:</strong>
+<span id="expTelefono"></span>
+</p>
+
+
+<hr>
+
+
+<h4>
+📄 Documentos
+</h4>
+
+
+<div class="documento">
+
+<i class="bi bi-file-earmark-text"></i>
+
+Constancia de Situación Fiscal
+
+</div>
+
+
+<div class="documento">
+
+<i class="bi bi-file-earmark-check"></i>
+
+Opinión de Cumplimiento
+
+</div>
+
+
+<div class="documento">
+
+<i class="bi bi-file-earmark-code"></i>
+
+XML
+
+</div>
+
+
+<div class="documento">
+
+<i class="bi bi-key"></i>
+
+e.firma
+
+</div>
+
+
+<hr>
+
+
+<h4>
+📝 Notas
+</h4>
+
+
+<textarea 
+class="form-control"
+placeholder="Notas del cliente">
+</textarea>
+
+
+</div>
+
+
+</section>
+
+    
 <!-- REPORTES -->
 
 <section id="reportes" class="pagina d-none">
