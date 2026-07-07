@@ -1,51 +1,60 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal del Cliente | GHEZTORIX</title>
-    <link rel="stylesheet" href="css/style.css">
+
+<meta charset="UTF-8">
+
+<title>Portal Cliente</title>
+
+<link rel="stylesheet" href="css/style.css">
+
 </head>
+
+
 <body>
 
-<header>
-    <h1>Portal del Cliente</h1>
-</header>
 
-<main>
+<div class="login-container">
 
-    <h2>Bienvenido a GHEZTORIX</h2>
 
-    <p>Desde este portal podrás consultar la información de tu empresa.</p>
+<div class="login-card">
 
-    <div class="menu">
 
-        <button onclick="location.href='mis_documentos.html'">
-            📂 Mis Documentos
-        </button>
+<h1>
+Cliente
+</h1>
 
-        <button onclick="location.href='mis_facturas.html'">
-            🧾 Mis Facturas
-        </button>
 
-        <button onclick="location.href='mi_perfil.html'">
-            👤 Mi Perfil
-        </button>
+<input
+id="rfc"
+placeholder="RFC">
 
-        <button onclick="cerrarSesion()">
-            🚪 Cerrar sesión
-        </button>
 
-    </div>
+<input
+id="password"
+type="password"
+placeholder="Contraseña">
 
-</main>
 
-<script>
-function cerrarSesion() {
-    localStorage.removeItem("clienteActivo");
-    window.location.href = "index.html";
-}
-</script>
+<button onclick="loginCliente()">
+
+Ingresar
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+<script src="js/login-cliente.js"></script>
+
 
 </body>
+
+
 </html>
