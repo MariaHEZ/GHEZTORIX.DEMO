@@ -16,103 +16,95 @@
 <body>
 
 
-<div class="contenedor">
+<div class="container">
 
 
-<div class="marca">
+<header>
 
 <h1>GHEZTORIX</h1>
 
-<h2>
+<p>
 Sistema digital para la gestión de despachos
-</h2>
+</p>
+
+</header>
+
+
+
+<section class="login-box">
+
+
+<h2>Acceso al sistema</h2>
+
+
+<div class="portales">
+
+
+<div 
+class="portal"
+onclick="seleccionarPortal('admin',this)"
+>
+
+<h3>👨‍💼 Administrador / Usuario</h3>
 
 <p>
-Administra clientes, documentos y procesos fiscales
-desde una plataforma segura.
+Ingreso con correo y contraseña
 </p>
 
 </div>
 
 
 
-<div class="login-box">
+<div 
+class="portal"
+onclick="seleccionarPortal('cliente',this)"
+>
 
+<h3>🏢 Cliente</h3>
 
-<h3>Acceso al portal</h3>
+<p>
+Ingreso con RFC y contraseña
+</p>
 
-
-
-<div class="opciones">
-
-
-<button 
-onclick="seleccionarPortal('admin')"
-id="btnAdmin">
-
-Usuario / Administrador
-
-</button>
-
-
-
-<button
-onclick="seleccionarPortal('cliente')"
-id="btnCliente">
-
-Cliente
-
-</button>
+</div>
 
 
 </div>
 
 
 
-
-<form onsubmit="iniciarSesion(event)">
-
-
-
-<label id="labelUsuario">
-Correo electrónico
-</label>
+<form id="formLogin">
 
 
 <input 
-type="text"
 id="usuario"
-placeholder="Ingrese correo">
-
-
-
-<label>
-Contraseña
-</label>
+type="text"
+placeholder="Correo o RFC"
+required
+>
 
 
 <input 
-type="password"
 id="password"
-placeholder="Ingrese contraseña">
+type="password"
+placeholder="Contraseña"
+required
+>
 
 
-
-<button class="entrar">
-
+<button type="submit">
 Ingresar
-
 </button>
-
 
 
 </form>
 
 
+
 <p id="mensaje"></p>
 
 
-</div>
+</section>
 
 
 </div>
@@ -120,6 +112,7 @@ Ingresar
 
 
 <script src="js/login.js"></script>
+
 
 </body>
 
