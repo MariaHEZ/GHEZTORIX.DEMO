@@ -2,19 +2,12 @@
 <html lang="es">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Login | GHEZTORIX</title>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
+<title>GHEZTORIX Login</title>
 
 <link rel="stylesheet" href="css/style.css">
-
 
 </head>
 
@@ -25,232 +18,31 @@
 <div class="login-container">
 
 
-<div class="login-card">
+<h1>GHEZTORIX</h1>
+
+<p>Portal Administrativo</p>
 
 
-
-<div class="logo-login">
-
-<h1>
-GHEZTORIX
-</h1>
-
-<p>
-Sistema Digital Para La Gestión De Despachos
-</p>
-
-</div>
+<div class="accesos">
 
 
-
-<form id="loginForm">
-
-
-
-<h3>
-Selecciona tu portal
-</h3>
-
-
-<div class="tipo-acceso">
-
-
-<div 
-class="acceso-card"
-onclick="seleccionarAcceso('usuario',this)"
->
-
-
-<div class="icono-acceso">
-🔐
-</div>
-
-
-<h3>
-Portal Administrativo
-</h3>
-
-
-<p>
+<button onclick="entrar('admin')">
 Administrador
-</p>
-
-
-<span>
-Gestión de clientes,
-documentos y reportes
-</span>
-
-
-</div>
-
-
-
-
-
-<div 
-class="acceso-card"
-onclick="seleccionarAcceso('cliente',this)"
->
-
-
-<div class="icono-acceso">
-👤
-</div>
-
-
-<h3>
-Portal Cliente
-</h3>
-
-
-<p>
-Cliente registrado
-</p>
-
-
-<span>
-Consulta documentos y obligaciones
-</span>
-
-
-</div>
-
-
-
-</div>
-
-
-
-<input 
-type="hidden"
-id="role"
-required
->
-
-
-
-
-
-<!-- LOGIN USUARIO -->
-
-<div id="loginUsuario" class="bloque-login">
-
-
-<label>
-Correo electrónico
-</label>
-
-
-<input
-
-type="email"
-
-id="email"
-
-placeholder="usuario@gheztorix.com"
-
->
-
-
-
-<label>
-Contraseña
-</label>
-
-
-<input
-
-type="password"
-
-id="passwordUsuario"
-
-placeholder="********"
-
->
-
-
-</div>
-
-
-
-
-
-
-<!-- LOGIN CLIENTE -->
-
-<div id="loginCliente" class="bloque-login">
-
-
-<label>
-RFC
-</label>
-
-
-<input
-
-type="text"
-
-id="rfc"
-
-maxlength="13"
-
-placeholder="ABC123456XXX"
-
-style="text-transform:uppercase"
-
->
-
-
-<label>
-Contraseña
-</label>
-
-
-<input
-
-type="password"
-
-id="passwordCliente"
-
-placeholder="********"
-
->
-
-
-</div>
-
-
-
-
-
-<button type="submit">
-
-🔐 Ingresar
-
 </button>
 
 
-
-<p id="mensajeLogin"></p>
-
-
-
-</form>
-
+<button onclick="entrar('cliente')">
+Cliente
+</button>
 
 
 </div>
 
 
 </div>
-
-
-
 
 
 <script src="js/login.js"></script>
-
 
 </body>
 
