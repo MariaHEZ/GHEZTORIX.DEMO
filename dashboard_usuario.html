@@ -6,9 +6,9 @@
 
 <meta charset="UTF-8">
 
-<title>Dashboard GHEZTORIX</title>
+<title>Administrador</title>
 
-<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/style.css">
 
 </head>
 
@@ -16,54 +16,43 @@
 <body>
 
 
-<header>
+<div class="login-container">
+
+
+<div class="login-card">
+
 
 <h1>
-GHEZTORIX
+Administrador
 </h1>
 
 
-<button onclick="cerrar()">
-Cerrar sesión
+<input 
+id="usuario"
+placeholder="Usuario">
+
+
+<input
+id="password"
+type="password"
+placeholder="Contraseña">
+
+
+<button onclick="loginAdmin()">
+
+Ingresar
+
 </button>
 
-</header>
 
-
-
-<main>
-
-
-<div class="card"
-onclick="location.href='clientes.html'">
-
-📁
-
-<h2>
-Clientes
-</h2>
+</div>
 
 
 </div>
 
 
 
-<div class="card">
-
-📄
-
-<h2>
-Documentos
-</h2>
-
-</div>
-
-
-
-</main>
-
-
-<script src="js/dashboard.js"></script>
+<script src="js/login-admin.js"></script>
 
 
 </body>
