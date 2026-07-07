@@ -1,57 +1,16 @@
-function loginCliente(){
-
-
-let rfc =
-document.getElementById("rfc").value;
-
-
-let password =
-document.getElementById("password").value;
-
-
-
-let clientes =
+let cliente = 
 JSON.parse(
-localStorage.getItem("clientes")
-) || [];
-
-
-
-let cliente =
-clientes.find(c=>
-
-c.rfc === rfc &&
-c.password === password
-
+localStorage.getItem("clienteActivo")
 );
-
 
 
 if(cliente){
 
 
-localStorage.setItem(
-"clienteActivo",
-JSON.stringify(cliente)
+console.log(
+"Cliente:",
+cliente
 );
-
-
-
-window.location.href=
-"portal-cliente.html";
-
-
-}
-
-else{
-
-
-alert(
-"Datos incorrectos"
-);
-
-
-}
 
 
 }
