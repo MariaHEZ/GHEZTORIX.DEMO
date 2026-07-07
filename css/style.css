@@ -1,201 +1,61 @@
-*{
-
-box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
-
+/* Estilo general */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #333;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-body{
-
-margin:0;
-height:100vh;
-
-background:
-linear-gradient(
-135deg,
-#0f172a,
-#1e3a8a
-);
-
-display:flex;
-justify-content:center;
-align-items:center;
-
+/* Contenedor del formulario */
+form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  width: 300px;
+  text-align: center;
 }
 
-
-
-.container{
-
-width:100%;
-max-width:450px;
-
+/* Título */
+h1 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-
-
-header{
-
-text-align:center;
-color:white;
-margin-bottom:25px;
-
+/* Inputs y select */
+input, select {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-
-header h1{
-
-font-size:48px;
-margin:0;
-
+/* Botón */
+button {
+  width: 95%;
+  padding: 10px;
+  background: #2a5298;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-
-header p{
-
-font-size:18px;
-
+button:hover {
+  background: #1e3c72;
 }
 
-
-
-.login-box{
-
-background:white;
-
-padding:30px;
-
-border-radius:20px;
-
-box-shadow:
-0 15px 35px #0005;
-
-}
-
-
-
-.login-box h2{
-
-text-align:center;
-
-color:#1e3a8a;
-
-}
-
-
-
-.portales{
-
-display:flex;
-gap:15px;
-
-}
-
-
-
-.portal{
-
-flex:1;
-
-padding:15px;
-
-border:2px solid #ddd;
-
-border-radius:15px;
-
-cursor:pointer;
-
-text-align:center;
-
-transition:.3s;
-
-}
-
-
-
-.portal:hover{
-
-transform:translateY(-5px);
-
-}
-
-
-
-.portal.seleccionado{
-
-border-color:#2563eb;
-
-background:#eff6ff;
-
-}
-
-
-
-.portal h3{
-
-font-size:16px;
-
-}
-
-
-
-input{
-
-width:100%;
-
-padding:14px;
-
-margin-top:15px;
-
-border-radius:10px;
-
-border:1px solid #ccc;
-
-font-size:15px;
-
-}
-
-
-
-button{
-
-width:100%;
-
-margin-top:20px;
-
-padding:14px;
-
-border:none;
-
-border-radius:10px;
-
-background:#2563eb;
-
-color:white;
-
-font-size:17px;
-
-cursor:pointer;
-
-}
-
-
-
-button:hover{
-
-background:#1d4ed8;
-
-}
-
-
-
-#mensaje{
-
-text-align:center;
-
-margin-top:15px;
-
-font-weight:bold;
-
+/* Mensaje de error */
+#mensaje {
+  margin-top: 10px;
+  font-size: 14px;
+  color: red;
 }
