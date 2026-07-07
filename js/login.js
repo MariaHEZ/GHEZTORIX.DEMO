@@ -1,185 +1,56 @@
-let tipoPortal="";
-
+let tipoPortal = "";
 
 // seleccionar portal
+function seleccionarPortal(tipo, elemento) {
+  tipoPortal = tipo;
 
-function seleccionarPortal(tipo, elemento){
+  document.querySelectorAll(".portal").forEach(card => {
+    card.classList.remove("seleccionado");
+  });
 
-
-tipoPortal=tipo;
-
-
-document
-.querySelectorAll(".portal")
-.forEach(card=>{
-
-card.classList.remove("seleccionado");
-
-});
-
-
-elemento.classList.add("seleccionado");
-
-
+  elemento.classList.add("seleccionado");
 }
-
-
 
 // usuarios demo
-
-const usuariosAdmin=[
-
-{
-correo:"admin@ghez torix.com",
-password:"123456"
-}
-
+const usuariosAdmin = [
+  {
+    correo: "admin@gheztorix.com",
+    password: "admin123"
+  },
+  {
+    correo: "usuario@gheztorix.com",
+    password: "usuario123"
+  }
 ];
 
-
-
-const clientes=[
-
-{
-
-rfc:"ABC123456789",
-password:"123456"
-
-}
-
+const usuariosCliente = [
+  {
+    rfc: "XAXX010101000",
+    password: "cliente123"
+  },
+  {
+    rfc: "ABC123456789",
+    password: "cliente456"
+  }
 ];
 
-
-
-
-
-document
-.getElementById("formLogin")
-.addEventListener("submit",function(e){
-
-
-e.preventDefault();
-
-
-
-let usuario=
-document.getElementById("usuario").value.trim();
-
-
-
-let password=
-document.getElementById("password").value.trim();
-
-
-
-let mensaje=
-document.getElementById("mensaje");
-
-
-
-if(tipoPortal===""){
-
-
-mensaje.innerHTML=
-"Seleccione un portal";
-
-return;
-
-}
-
-
-
-
-// ADMIN
-
-
-if(tipoPortal==="admin"){
-
-
-let acceso=
-usuariosAdmin.find(
-u=>
-u.correo===usuario &&
-u.password===password
-);
-
-
-
-if(acceso){
-
-
-localStorage.setItem(
-"sesion",
-"administrador"
-);
-
-
-
-window.location.href=
-"dashboard-admin.html";
-
-
-}
-
-else{
-
-
-mensaje.innerHTML=
-"Datos incorrectos";
-
-}
-
-
-
-}
-
-
-
-
-
-// CLIENTE
-
-
-if(tipoPortal==="cliente"){
-
-
-let acceso=
-clientes.find(
-c=>
-c.rfc===usuario &&
-c.password===password
-);
-
-
-
-if(acceso){
-
-
-localStorage.setItem(
-"sesion",
-"cliente"
-);
-
-
-
-window.location.href=
-"dashboard-cliente.html";
-
-
-}
-
-else{
-
-
-mensaje.innerHTML=
-"RFC o contraseña incorrectos";
-
-}
-
-
-
-}
-
-
-
+// validar login
+document.getElementById("formLogin").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const usuario = document.getElementById("usuario").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const mensaje = document.getElementById("mensaje");
+
+  let acceso = false;
+
+  if (tipoPortal === "admin") {
+    acceso = usuariosAdmin.some(u => u.correo === usuario && u.password === password);
+    mensaje.textContent = acceso ? "Acceso concedido como Administrador ✅" : "Correo o contraseña incorrectos ❌";
+  } else if (tipoPortal === "cliente") {
+    acceso = usuariosCliente.some(u => u.rfc === usuario && u.password === password);
+    mensaje.textContent = acceso ? "Acceso concedido como Cliente ✅" : "RFC o contraseña incorrectos ❌";
+  } else {
+    mensaje.textContent = "Selecciona un portal antes de ingresar ⚠️";
+  }
 });
