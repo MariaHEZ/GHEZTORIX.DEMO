@@ -1,72 +1,158 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Clientes | GHEZTORIX</title>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+Clientes GHEZTORIX
+</title>
 
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/dashboard.css">
+
 </head>
+
 
 <body>
 
-<div class="dashboard">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
+<div class="layout">
 
-    <div class="logo">
-      <h2>GHEZTORIX</h2>
-      <small>Panel administrativo</small>
-    </div>
 
-    <nav class="menu">
-      <a href="dashboard.html">🏠 Panel</a>
-      <a href="clientes.html" class="active">👥 Clientes</a>
-      <a href="registro_cliente.html">➕ Agregar cliente</a>
-      <a href="documentos.html">📂 Documentos</a>
-      <a href="#" onclick="cerrarSesion()">🚪 Cerrar sesión</a>
-    </nav>
+<aside class="sidebar">
 
-  </aside>
 
-  <!-- CONTENIDO -->
-  <main class="contenido">
+<h2>
+GHEZTORIX
+</h2>
 
-    <h1>👥 Clientes registrados</h1>
+
+<a href="dashboard-admin.html">
+🏠 Inicio
+</a>
+
+
+<a class="active">
+👥 Clientes
+</a>
+
+
+</aside>
+
+
+
+
+<div class="contenido">
+
+
+<div class="header">
+
+
+<h1>
+Gestión de Clientes
+</h1>
+
+
+</div>
+
+
+
+<div class="formulario">
+
+
+<h2>
+Nuevo Cliente
+</h2>
+
+
+
+<label>
+Razón Social
+</label>
+
+<input id="razon">
+
+
+
+<label>
+RFC
+</label>
+
+<input id="rfc">
+
+
+
+<label>
+Correo
+</label>
+
+<input id="correo">
+
+
+
+<label>
+Teléfono
+</label>
+
+<input id="telefono">
+
+
+
+<button onclick="crearCliente()">
+
+Guardar Cliente
+
+</button>
+
+
+</div>
+
+
+
+
+<div class="panel">
+
+
+<h2>
+Buscar Cliente
+</h2>
 
 
 <div class="busqueda">
 
-    <input
-        type="text"
-        id="buscador"
-        placeholder="Buscar por RFC o razón social..."
-      onkeyup="buscarCliente()"
-    >
 
-    <button type="button" onclick="buscarCliente()">
-        🔍 Buscar
-    </button>
+<input 
+id="buscador"
+placeholder="Buscar RFC o Razón Social"
+onkeyup="buscarCliente()">
+
+
 
 </div>
 
-<div id="listaClientes"></div>
 
-</main>
+
+<div id="listaClientes">
 
 </div>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
 
 <script src="js/clientes.js"></script>
 
-<script>
-function cerrarSesion(){
-    localStorage.removeItem("usuarioActivo");
-    location.href = "index.html";
-}
-</script>
 
 </body>
+
 </html>
