@@ -63,106 +63,57 @@ color:var(--texto);
 
 
 
-/* ===============================
-        LOGIN
-================================ */
+
+/* =================================================
+   LOGIN PORTAL PROFESIONAL
+================================================= */
 
 
-.login-container{
-
-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-background:
-
-linear-gradient(
-135deg,
-var(--azul),
-var(--azul2)
-);
-
-}
-
-
-
-.login-box,
 .login-card{
 
-width:400px;
+width:430px;
 
 background:white;
 
 padding:45px;
 
-border-radius:25px;
+border-radius:28px;
 
 box-shadow:
-
-0 20px 40px rgba(0,0,0,.3);
+0 25px 50px rgba(0,0,0,.25);
 
 text-align:center;
 
 }
 
 
+.logo-login h1{
 
-.login-box h1{
+font-size:42px;
+
+margin:0;
 
 color:var(--azul);
 
-font-size:38px;
-
-margin-bottom:10px;
+letter-spacing:2px;
 
 }
 
 
-.login-box p{
+.logo-login p{
 
 color:var(--gris);
 
-margin-bottom:30px;
-
 }
 
 
+/* MOSTRAR FORMULARIOS SEGÚN PORTAL */
 
-.login-box input,
-.login-box select{
+.bloque-login{
 
-width:100%;
-
-padding:15px;
-
-margin-bottom:15px;
-
-border:
-
-1px solid #ddd;
-
-border-radius:12px;
-
-font-size:15px;
-
-outline:none;
+display:none;
 
 }
-
-
-
-.login-box input:focus,
-.login-box select:focus{
-
-border-color:var(--azul2);
-
-}
-
-
 
 /* BOTONES */
 
@@ -812,9 +763,7 @@ flex-direction:column;
 
 @media(max-width:600px){
 
-
-.login-card,
-.login-box{
+.login-card{
 
 width:90%;
 
@@ -836,73 +785,7 @@ grid-template-columns:1fr;
 
 }
 
-
 }
-
-
-
-/* =================================================
-   LOGIN PORTAL PROFESIONAL
-================================================= */
-
-
-.login-card{
-
-width:430px;
-
-background:white;
-
-padding:45px;
-
-border-radius:28px;
-
-box-shadow:
-
-0 25px 50px rgba(0,0,0,.25);
-
-text-align:center;
-
-}
-
-
-.logo-login h1{
-
-font-size:42px;
-
-margin:0;
-
-color:var(--azul);
-
-letter-spacing:2px;
-
-}
-
-
-.logo-login p{
-
-color:var(--gris);
-
-}
-
-
-
-
-
-/* SELECCION DE PORTAL */
-
-
-.tipo-acceso{
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:18px;
-
-margin:25px 0;
-
-}
-
 
 
 .acceso-card{
