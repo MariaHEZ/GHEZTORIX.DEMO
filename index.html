@@ -2,10 +2,10 @@
 <html lang="es">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GHEZTORIX Login</title>
+<meta charset="UTF-8">
+
+<title>GHEZTORIX</title>
 
 <link rel="stylesheet" href="css/style.css">
 
@@ -18,22 +18,75 @@
 <div class="login-container">
 
 
+<div class="login-card">
+
+
+<div class="logo-login">
+
 <h1>GHEZTORIX</h1>
 
-<p>Portal Administrativo</p>
+<p>
+Sistema Digital Para La Gestión De Despachos
+</p>
+
+</div>
 
 
-<div class="accesos">
+
+<div class="tipo-acceso">
 
 
-<button onclick="entrar('admin')">
+<div class="acceso-card"
+onclick="location.href='login-admin.html'">
+
+
+<div class="icono-acceso">
+👨‍💼
+</div>
+
+
+<h3>
 Administrador
-</button>
+</h3>
 
 
-<button onclick="entrar('cliente')">
+<p>
+Acceso interno
+</p>
+
+
+<span>
+Gestión completa del sistema
+</span>
+
+
+</div>
+
+
+
+
+<div class="acceso-card"
+onclick="location.href='login-cliente.html'">
+
+
+<div class="icono-acceso">
+👤
+</div>
+
+
+<h3>
 Cliente
-</button>
+</h3>
+
+
+<p>
+Portal cliente
+</p>
+
+
+<span>
+Consulta documentos fiscales
+</span>
 
 
 </div>
@@ -42,7 +95,11 @@ Cliente
 </div>
 
 
-<script src="js/login.js"></script>
+</div>
+
+
+</div>
+
 
 </body>
 
