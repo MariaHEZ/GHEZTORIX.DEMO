@@ -26,63 +26,35 @@ align-items:center;
 
 
 
-.contenedor{
+.container{
 
-width:900px;
-
-display:flex;
-
-background:white;
-
-border-radius:25px;
-
-overflow:hidden;
-
-box-shadow:0 20px 50px #0005;
+width:100%;
+max-width:450px;
 
 }
 
 
 
-.marca{
+header{
 
-width:50%;
-
-padding:50px;
-
-background:
-linear-gradient(
-135deg,
-#2563eb,
-#0f172a
-);
-
+text-align:center;
 color:white;
+margin-bottom:25px;
 
 }
 
 
+header h1{
 
-.marca h1{
-
-font-size:45px;
-margin-bottom:10px;
-
-}
-
-
-.marca h2{
-
-font-size:22px;
-font-weight:400;
+font-size:48px;
+margin:0;
 
 }
 
 
-.marca p{
+header p{
 
-margin-top:30px;
-line-height:1.6;
+font-size:18px;
 
 }
 
@@ -90,69 +62,79 @@ line-height:1.6;
 
 .login-box{
 
-width:50%;
+background:white;
 
-padding:45px;
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:
+0 15px 35px #0005;
 
 }
 
 
 
-.login-box h3{
+.login-box h2{
 
 text-align:center;
 
-font-size:25px;
+color:#1e3a8a;
 
 }
 
 
 
-.opciones{
+.portales{
 
 display:flex;
-
 gap:15px;
-
-margin-bottom:25px;
 
 }
 
 
-.opciones button{
+
+.portal{
 
 flex:1;
 
 padding:15px;
 
-border:none;
+border:2px solid #ddd;
 
-border-radius:10px;
+border-radius:15px;
 
 cursor:pointer;
 
-background:#e5e7eb;
+text-align:center;
+
+transition:.3s;
 
 }
 
 
 
-.opciones button:hover{
+.portal:hover{
 
-background:#2563eb;
-color:white;
+transform:translateY(-5px);
 
 }
 
 
 
-form{
+.portal.seleccionado{
 
-display:flex;
+border-color:#2563eb;
 
-flex-direction:column;
+background:#eff6ff;
 
-gap:10px;
+}
+
+
+
+.portal h3{
+
+font-size:16px;
 
 }
 
@@ -160,7 +142,11 @@ gap:10px;
 
 input{
 
+width:100%;
+
 padding:14px;
+
+margin-top:15px;
 
 border-radius:10px;
 
@@ -172,11 +158,13 @@ font-size:15px;
 
 
 
-.entrar{
+button{
+
+width:100%;
 
 margin-top:20px;
 
-padding:15px;
+padding:14px;
 
 border:none;
 
@@ -186,7 +174,7 @@ background:#2563eb;
 
 color:white;
 
-font-size:16px;
+font-size:17px;
 
 cursor:pointer;
 
@@ -194,7 +182,7 @@ cursor:pointer;
 
 
 
-.entrar:hover{
+button:hover{
 
 background:#1d4ed8;
 
@@ -206,16 +194,8 @@ background:#1d4ed8;
 
 text-align:center;
 
-color:red;
+margin-top:15px;
 
-}
-
-
-
-.seleccionado{
-
-background:#2563eb!important;
-
-color:white;
+font-weight:bold;
 
 }
