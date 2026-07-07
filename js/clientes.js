@@ -63,6 +63,8 @@ function mostrarClientes(lista){
 
 // Buscar por RFC o Razón Social
 
+if(buscador){
+
 buscador.addEventListener("input", function(){
 
 
@@ -71,11 +73,15 @@ buscador.addEventListener("input", function(){
 
     let filtrados = clientes.filter(cliente =>
 
-        cliente.rfc.toLowerCase().includes(texto)
+        (cliente.rfc || "")
+        .toLowerCase()
+        .includes(texto)
 
         ||
 
-        cliente.razon.toLowerCase().includes(texto)
+        (cliente.razon || "")
+        .toLowerCase()
+        .includes(texto)
 
     );
 
@@ -85,24 +91,4 @@ buscador.addEventListener("input", function(){
 
 });
 
-
-
-// Abrir expediente del cliente
-
-function abrirCliente(id){
-
-    localStorage.setItem(
-        "clienteSeleccionado",
-        id
-    );
-
-
-    window.location.href="expediente.html";
-
 }
-
-
-
-// Cargar clientes al entrar
-
-mostrarClientes(clientes);
