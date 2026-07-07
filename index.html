@@ -2,35 +2,99 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Login GHEZTORIX</title>
+  <title>GHEZTORIX DEMO</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; }
+    .login, .portal { display: none; padding: 20px; }
+    .active { display: block; }
+    .sidebar {
+      width: 200px; background: #333; color: white; height: 100vh;
+      position: fixed; top: 0; left: 0; padding-top: 20px;
+    }
+    .sidebar a {
+      display: block; padding: 10px; color: white; text-decoration: none;
+    }
+    .sidebar a:hover { background: #444; }
+    .content { margin-left: 220px; padding: 20px; }
+    input, button { margin: 5px; padding: 8px; }
+  </style>
 </head>
 <body>
-  <h2>Acceso al sistema</h2>
-  <form id="loginForm">
-    <input type="text" id="usuario" placeholder="Usuario" required>
+  <!-- Login -->
+  <div id="login" class="login active">
+    <h2>Acceso al sistema</h2>
+    <input type="email" id="correo" placeholder="Correo electrónico" required>
     <input type="password" id="clave" placeholder="Contraseña" required>
-    <button type="submit">Entrar</button>
-  </form>
+    <button onclick="login()">Entrar</button>
+    <p id="mensaje"></p>
+  </div>
 
-  <p id="mensaje"></p>
+  <!-- Portal -->
+  <div id="portal" class="portal">
+    <div class="sidebar">
+      <a href="#" onclick="mostrar('clientes')">Clientes</a>
+      <a href="#" onclick="mostrar('nuevo')">Nuevo Cliente</a>
+      <a href="#" onclick="mostrar('reportes')">Reportes</a>
+      <a href="#" onclick="mostrar('config')">Configuración</a>
+      <a href="#" onclick="cerrarSesion()">Cerrar Sesión</a>
+    </div>
+    <div class="content">
+      <div id="clientes" class="section">
+        <h3>Clientes existentes</h3>
+        <input type="text" placeholder="Buscar por RFC o razón social">
+        <ul>
+          <li>Cliente Alfa - RFC123</li>
+          <li>Cliente Beta - RFC456</li>
+        </ul>
+      </div>
+      <div id="nuevo" class="section" style="display:none;">
+        <h3>Registrar nuevo cliente</h3>
+        <form>
+          <input type="text" placeholder="Razón social" required><br>
+          <input type="text" placeholder="RFC" required><br>
+          <input type="text" placeholder="Código postal"><br>
+          <input type="tel" placeholder="Teléfono"><br>
+          <input type="email" placeholder="Correo electrónico"><br>
+          <input type="password" placeholder="Contraseña"><br>
+          <button>Guardar</button>
+        </form>
+      </div>
+      <div id="reportes" class="section" style="display:none;">
+        <h3>Reportes</h3>
+        <p>Mensuales y anuales (simulación).</p>
+      </div>
+      <div id="config" class="section" style="display:none;">
+        <h3>Configuración</h3>
+        <p>Opciones de usuario.</p>
+      </div>
+    </div>
+  </div>
 
   <script>
-    const form = document.getElementById("loginForm");
-    const mensaje = document.getElementById("mensaje");
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const usuario = document.getElementById("usuario").value;
+    function login() {
+      const correo = document.getElementById("correo").value;
       const clave = document.getElementById("clave").value;
+      const mensaje = document.getElementById("mensaje");
 
-      if (usuario === "admin" && clave === "1234") {
-        mensaje.textContent = "Bienvenido al sistema GHEZTORIX 🚀";
-        mensaje.style.color = "green";
+      // Simulación de login
+      if (correo === "admin@ghez.com" && clave === "1234") {
+        document.getElementById("login").classList.remove("active");
+        document.getElementById("portal").classList.add("active");
       } else {
         mensaje.textContent = "Credenciales incorrectas ❌";
         mensaje.style.color = "red";
       }
-    });
+    }
+
+    function mostrar(seccion) {
+      document.querySelectorAll(".section").forEach(s => s.style.display = "none");
+      document.getElementById(seccion).style.display = "block";
+    }
+
+    function cerrarSesion() {
+      document.getElementById("portal").classList.remove("active");
+      document.getElementById("login").classList.add("active");
+    }
   </script>
 </body>
 </html>
