@@ -2,98 +2,121 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>GHEZTORIX DEMO</title>
+  <title>Portal GHEZTORIX</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; }
-    .login, .portal { display: none; padding: 20px; }
-    .active { display: block; }
+    body { font-family: 'Segoe UI', sans-serif; }
     .sidebar {
-      width: 200px; background: #333; color: white; height: 100vh;
-      position: fixed; top: 0; left: 0; padding-top: 20px;
+      height: 100vh;
+      background-color: #343a40;
+      color: white;
+      padding-top: 20px;
     }
     .sidebar a {
-      display: block; padding: 10px; color: white; text-decoration: none;
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      display: block;
+      border-radius: 5px;
     }
-    .sidebar a:hover { background: #444; }
-    .content { margin-left: 220px; padding: 20px; }
-    input, button { margin: 5px; padding: 8px; }
+    .sidebar a:hover {
+      background-color: #495057;
+    }
+    .content {
+      padding: 20px;
+    }
   </style>
 </head>
 <body>
   <!-- Login -->
-  <div id="login" class="login active">
-    <h2>Acceso al sistema</h2>
-    <input type="email" id="correo" placeholder="Correo electrónico" required>
-    <input type="password" id="clave" placeholder="Contraseña" required>
-    <button onclick="login()">Entrar</button>
-    <p id="mensaje"></p>
+  <div id="login" class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h3 class="text-center mb-4">Acceso al sistema</h3>
+            <input type="email" id="correo" class="form-control mb-3" placeholder="Correo electrónico" required>
+            <input type="password" id="clave" class="form-control mb-3" placeholder="Contraseña" required>
+            <button class="btn btn-primary w-100" onclick="login()">Entrar</button>
+            <p id="mensaje" class="mt-3 text-center"></p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Portal -->
-  <div id="portal" class="portal">
-    <div class="sidebar">
-      <a href="#" onclick="mostrar('clientes')">Clientes</a>
-      <a href="#" onclick="mostrar('nuevo')">Nuevo Cliente</a>
-      <a href="#" onclick="mostrar('reportes')">Reportes</a>
-      <a href="#" onclick="mostrar('config')">Configuración</a>
-      <a href="#" onclick="cerrarSesion()">Cerrar Sesión</a>
-    </div>
-    <div class="content">
-      <div id="clientes" class="section">
-        <h3>Clientes existentes</h3>
-        <input type="text" placeholder="Buscar por RFC o razón social">
-        <ul>
-          <li>Cliente Alfa - RFC123</li>
-          <li>Cliente Beta - RFC456</li>
-        </ul>
+  <div id="portal" class="d-none">
+    <div class="row g-0">
+      <!-- Sidebar -->
+      <div class="col-md-2 sidebar">
+        <h4 class="text-center mb-4">GHEZTORIX</h4>
+        <a href="#" onclick="mostrar('clientes')">📂 Clientes</a>
+        <a href="#" onclick="mostrar('nuevo')">➕ Nuevo Cliente</a>
+        <a href="#" onclick="mostrar('reportes')">📊 Reportes</a>
+        <a href="#" onclick="mostrar('config')">⚙️ Configuración</a>
+        <a href="#" onclick="cerrarSesion()">🚪 Cerrar Sesión</a>
       </div>
-      <div id="nuevo" class="section" style="display:none;">
-        <h3>Registrar nuevo cliente</h3>
-        <form>
-          <input type="text" placeholder="Razón social" required><br>
-          <input type="text" placeholder="RFC" required><br>
-          <input type="text" placeholder="Código postal"><br>
-          <input type="tel" placeholder="Teléfono"><br>
-          <input type="email" placeholder="Correo electrónico"><br>
-          <input type="password" placeholder="Contraseña"><br>
-          <button>Guardar</button>
-        </form>
-      </div>
-      <div id="reportes" class="section" style="display:none;">
-        <h3>Reportes</h3>
-        <p>Mensuales y anuales (simulación).</p>
-      </div>
-      <div id="config" class="section" style="display:none;">
-        <h3>Configuración</h3>
-        <p>Opciones de usuario.</p>
+      <!-- Content -->
+      <div class="col-md-10 content">
+        <div id="clientes" class="section">
+          <h3>Clientes existentes</h3>
+          <input type="text" class="form-control mb-3" placeholder="Buscar por RFC o razón social">
+          <ul class="list-group">
+            <li class="list-group-item">Cliente Alfa - RFC123</li>
+            <li class="list-group-item">Cliente Beta - RFC456</li>
+          </ul>
+        </div>
+        <div id="nuevo" class="section d-none">
+          <h3>Registrar nuevo cliente</h3>
+          <form class="mt-3">
+            <input type="text" class="form-control mb-2" placeholder="Razón social" required>
+            <input type="text" class="form-control mb-2" placeholder="RFC" required>
+            <input type="text" class="form-control mb-2" placeholder="Código postal">
+            <input type="tel" class="form-control mb-2" placeholder="Teléfono">
+            <input type="email" class="form-control mb-2" placeholder="Correo electrónico">
+            <input type="password" class="form-control mb-2" placeholder="Contraseña">
+            <button class="btn btn-success">Guardar</button>
+          </form>
+        </div>
+        <div id="reportes" class="section d-none">
+          <h3>Reportes</h3>
+          <p>Mensuales y anuales (simulación).</p>
+        </div>
+        <div id="config" class="section d-none">
+          <h3>Configuración</h3>
+          <p>Opciones de usuario.</p>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     function login() {
       const correo = document.getElementById("correo").value;
       const clave = document.getElementById("clave").value;
       const mensaje = document.getElementById("mensaje");
 
-      // Simulación de login
       if (correo === "admin@ghez.com" && clave === "1234") {
-        document.getElementById("login").classList.remove("active");
-        document.getElementById("portal").classList.add("active");
+        document.getElementById("login").classList.add("d-none");
+        document.getElementById("portal").classList.remove("d-none");
       } else {
         mensaje.textContent = "Credenciales incorrectas ❌";
-        mensaje.style.color = "red";
+        mensaje.classList.add("text-danger");
       }
     }
 
     function mostrar(seccion) {
-      document.querySelectorAll(".section").forEach(s => s.style.display = "none");
-      document.getElementById(seccion).style.display = "block";
+      document.querySelectorAll(".section").forEach(s => s.classList.add("d-none"));
+      document.getElementById(seccion).classList.remove("d-none");
     }
 
     function cerrarSesion() {
-      document.getElementById("portal").classList.remove("active");
-      document.getElementById("login").classList.add("active");
+      document.getElementById("portal").classList.add("d-none");
+      document.getElementById("login").classList.remove("d-none");
     }
   </script>
 </body>
