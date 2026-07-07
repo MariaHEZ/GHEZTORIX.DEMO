@@ -1,13 +1,18 @@
-function loginAdmin(){
+let tipoPortal="";
 
 
-let usuario =alet tipoAcceso="";
+
+function seleccionarPortal(tipo){
+
+tipoPortal=tipo;
+
+mostrarFormulario();
+
+}
 
 
-function mostrarLogin(tipo){
 
-
-tipoAcceso = tipo;
+function mostrarFormulario(){
 
 
 let formulario =
@@ -15,23 +20,22 @@ document.getElementById("loginForm");
 
 
 
-if(tipo==="admin"){
+if(tipoPortal==="admin"){
 
 
-formulario.innerHTML = `
+formulario.innerHTML=`
 
-
-<h3>
-Acceso Administrador
-</h3>
+<h2>
+Portal Administrativo
+</h2>
 
 
 <input 
-id="usuario"
-placeholder="Usuario">
+id="correo"
+placeholder="Correo electrónico">
 
 
-<input
+<input 
 id="password"
 type="password"
 placeholder="Contraseña">
@@ -39,35 +43,32 @@ placeholder="Contraseña">
 
 <button onclick="ingresar()">
 
-Ingresar
+Entrar
 
 </button>
 
-
 `;
-
 
 }
 
 
 
-if(tipo==="cliente"){
+if(tipoPortal==="cliente"){
 
 
-formulario.innerHTML = `
+formulario.innerHTML=`
+
+<h2>
+Portal Cliente
+</h2>
 
 
-<h3>
-Acceso Cliente
-</h3>
-
-
-<input
+<input 
 id="rfc"
 placeholder="RFC">
 
 
-<input
+<input 
 id="password"
 type="password"
 placeholder="Contraseña">
@@ -75,18 +76,17 @@ placeholder="Contraseña">
 
 <button onclick="ingresar()">
 
-Ingresar
+Entrar
 
 </button>
 
-
 `;
 
-
 }
 
 
 }
+
 
 
 
@@ -94,11 +94,11 @@ function ingresar(){
 
 
 
-if(tipoAcceso==="admin"){
+if(tipoPortal==="admin"){
 
 
-let usuario =
-document.getElementById("usuario").value;
+let correo =
+document.getElementById("correo").value;
 
 
 let password =
@@ -106,17 +106,26 @@ document.getElementById("password").value;
 
 
 
-if(
-usuario==="admin"
-&&
-password==="12345"
+let admin =
+administradores.find(a=>
 
-){
+a.correo===correo
+&&
+a.password===password
+
+);
+
+
+
+if(admin){
 
 
 localStorage.setItem(
-"rol",
-"admin"
+
+"usuarioActivo",
+
+JSON.stringify(admin)
+
 );
 
 
@@ -129,12 +138,10 @@ location.href=
 
 else{
 
-
 alert(
-"Datos incorrectos"
+"Correo o contraseña incorrectos"
 );
 
-
 }
 
 
@@ -143,7 +150,8 @@ alert(
 
 
 
-if(tipoAcceso==="cliente"){
+if(tipoPortal==="cliente"){
+
 
 
 let rfc =
@@ -178,15 +186,11 @@ if(cliente){
 
 
 localStorage.setItem(
+
 "clienteActivo",
+
 JSON.stringify(cliente)
-);
 
-
-
-localStorage.setItem(
-"rol",
-"cliente"
 );
 
 
@@ -201,49 +205,11 @@ else{
 
 
 alert(
-"Cliente no encontrado"
+"RFC o contraseña incorrectos"
 );
 
 
 }
-
-
-}
-
-
-}
-document.getElementById("usuario").value;
-
-
-let password =
-document.getElementById("password").value;
-
-
-
-if(
-usuario==="admin" &&
-password==="12345"
-){
-
-
-localStorage.setItem(
-"tipo",
-"administrador"
-);
-
-
-window.location.href=
-"dashboard.html";
-
-
-}
-
-else{
-
-
-alert(
-"Usuario o contraseña incorrectos"
-);
 
 
 }
