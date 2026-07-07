@@ -1,23 +1,38 @@
-function entrar(tipo){
+function loginAdmin(){
+
+
+let usuario =
+document.getElementById("usuario").value;
+
+
+let password =
+document.getElementById("password").value;
+
+
+
+if(
+usuario==="admin" &&
+password==="12345"
+){
 
 
 localStorage.setItem(
-"tipoUsuario",
-tipo
+"tipo",
+"administrador"
 );
 
 
-if(tipo==="admin"){
+window.location.href=
+"dashboard.html";
 
 
-window.location.href="dashboard.html";
+}
 
-
-}else{
+else{
 
 
 alert(
-"Acceso cliente próximamente"
+"Usuario o contraseña incorrectos"
 );
 
 
