@@ -5,6 +5,8 @@
 
 <meta charset="UTF-8">
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>GHEZTORIX</title>
 
 <link rel="stylesheet" href="css/style.css">
@@ -23,13 +25,17 @@
 
 <div class="logo-login">
 
-<h1>GHEZTORIX</h1>
+<h1>
+GHEZTORIX
+</h1>
+
 
 <p>
 Sistema Digital Para La Gestión De Despachos
 </p>
 
 </div>
+
 
 
 <h3>
@@ -42,7 +48,7 @@ Selecciona tu portal
 
 
 <div class="acceso-card"
-onclick="abrirAdministrador()">
+onclick="mostrarLogin('admin')">
 
 
 <div class="icono-acceso">
@@ -66,25 +72,18 @@ documentos y reportes
 </span>
 
 
-<button>
-Ingresar
-</button>
-
-
 </div>
 
 
 
 
-<div class="acceso-card"
-onclick="abrirCliente()">
 
+<div class="acceso-card"
+onclick="mostrarLogin('cliente')">
 
 
 <div class="icono-acceso">
-
 👤
-
 </div>
 
 
@@ -103,9 +102,16 @@ Consulta documentos y obligaciones
 </span>
 
 
-<button>
-Ingresar
-</button>
+</div>
+
+
+</div>
+
+
+
+
+
+<div id="loginForm">
 
 
 </div>
@@ -117,11 +123,7 @@ Ingresar
 </div>
 
 
-</div>
-
-
-
-<script src="js/acceso.js"></script>
+<script src="js/login.js"></script>
 
 
 </body>
