@@ -1,98 +1,122 @@
-
-let portal="admin";
-
+let tipoPortal="";
 
 
-function seleccionarPortal(tipo){
+// seleccionar portal
+
+function seleccionarPortal(tipo, elemento){
 
 
-portal=tipo;
-
-
-document
-.getElementById("btnAdmin")
-.classList.remove("seleccionado");
+tipoPortal=tipo;
 
 
 document
-.getElementById("btnCliente")
-.classList.remove("seleccionado");
+.querySelectorAll(".portal")
+.forEach(card=>{
+
+card.classList.remove("seleccionado");
+
+});
 
 
-
-if(tipo==="admin"){
-
-
-document
-.getElementById("btnAdmin")
-.classList.add("seleccionado");
-
-
-document.getElementById("labelUsuario")
-.innerHTML="Correo electrónico";
-
-
-document.getElementById("usuario")
-.placeholder="ejemplo@correo.com";
-
-
-}
-else{
-
-
-document
-.getElementById("btnCliente")
-.classList.add("seleccionado");
-
-
-document.getElementById("labelUsuario")
-.innerHTML="RFC";
-
-
-document.getElementById("usuario")
-.placeholder="Ingrese RFC";
-
-
-}
+elemento.classList.add("seleccionado");
 
 
 }
 
 
 
+// usuarios demo
 
-function iniciarSesion(event){
+const usuariosAdmin=[
+
+{
+correo:"admin@ghez torix.com",
+password:"123456"
+}
+
+];
 
 
-event.preventDefault();
+
+const clientes=[
+
+{
+
+rfc:"ABC123456789",
+password:"123456"
+
+}
+
+];
+
+
+
+
+
+document
+.getElementById("formLogin")
+.addEventListener("submit",function(e){
+
+
+e.preventDefault();
 
 
 
 let usuario=
-document.getElementById("usuario").value;
+document.getElementById("usuario").value.trim();
+
 
 
 let password=
-document.getElementById("password").value;
+document.getElementById("password").value.trim();
 
 
 
-// Usuarios de prueba
-
-
-if(portal==="admin"){
+let mensaje=
+document.getElementById("mensaje");
 
 
 
-if(
-usuario==="admin@gheztorix.com"
-&&
-password==="123456"
-
-){
+if(tipoPortal===""){
 
 
-window.location.href="dashboard-admin.html";
+mensaje.innerHTML=
+"Seleccione un portal";
+
+return;
+
+}
+
+
+
+
+// ADMIN
+
+
+if(tipoPortal==="admin"){
+
+
+let acceso=
+usuariosAdmin.find(
+u=>
+u.correo===usuario &&
+u.password===password
+);
+
+
+
+if(acceso){
+
+
+localStorage.setItem(
+"sesion",
+"administrador"
+);
+
+
+
+window.location.href=
+"dashboard-admin.html";
 
 
 }
@@ -100,39 +124,55 @@ window.location.href="dashboard-admin.html";
 else{
 
 
-mostrarError();
+mensaje.innerHTML=
+"Datos incorrectos";
 
 }
 
 
+
 }
 
 
+
+
+
+// CLIENTE
+
+
+if(tipoPortal==="cliente"){
+
+
+let acceso=
+clientes.find(
+c=>
+c.rfc===usuario &&
+c.password===password
+);
+
+
+
+if(acceso){
+
+
+localStorage.setItem(
+"sesion",
+"cliente"
+);
+
+
+
+window.location.href=
+"dashboard-cliente.html";
+
+
+}
 
 else{
 
 
-if(
-
-usuario==="GHE010101AAA"
-
-&&
-
-password==="123456"
-
-){
-
-
-window.location.href="dashboard-cliente.html";
-
-
-}
-
-else{
-
-
-mostrarError();
-
+mensaje.innerHTML=
+"RFC o contraseña incorrectos";
 
 }
 
@@ -142,15 +182,4 @@ mostrarError();
 
 
 
-}
-
-
-
-
-function mostrarError(){
-
-document.getElementById("mensaje")
-.innerHTML=
-"Usuario o contraseña incorrectos";
-
-}
+});
