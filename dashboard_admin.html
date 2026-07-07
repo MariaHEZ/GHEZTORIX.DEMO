@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Administrador GHEZTORIX</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f0f0f0; }
+    button { margin: 2px; }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>GHEZTORIX Admin</h2>
+    <a href="#">🏠 Inicio</a>
+    <a href="#">📦 Despachos</a>
+    <a href="#">👥 Clientes</a>
+    <a href="#">📊 Reportes</a>
+    <a href="#">⚙️ Configuración</a>
+    <a href="index.html">🚪 Cerrar sesión</a>
+  </div>
+
+  <div class="main">
+    <h1>Panel de Administración</h1>
+
+    <!-- CRUD Clientes -->
+    <h2>Gestión de Clientes</h2>
+    <form id="formCliente">
+      <input type="text" id="nombre" placeholder="Nombre" required>
+      <input type="email" id="correo" placeholder="Correo" required>
+      <button type="submit">Agregar Cliente</button>
+    </form>
+    <table id="tablaClientes">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <!-- CRUD Despachos -->
+    <h2>Gestión de Despachos</h2>
+    <form id="formDespacho">
+      <input type="text" id="folio" placeholder="Folio" required>
+      <input type="text" id="destino" placeholder="Destino" required>
+      <button type="submit">Agregar Despacho</button>
+    </form>
+    <table id="tablaDespachos">
+      <thead>
+        <tr>
+          <th>Folio</th>
+          <th>Destino</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    // --- CRUD Clientes ---
+    const clientes = [];
+    const form = document.getElementById("formCliente");
+    const tabla = document.getElementById("tablaClientes").querySelector("tbody");
+
+    function renderTablaClientes() {
+      tabla.innerHTML = "";
+      clientes.forEach((c, i) => {
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+          <td>${c.nombre}</td>
+          <td>${c.correo}</td>
+          <td>
+            <button onclick="editarCliente(${i})">Editar</button>
+            <button onclick="eliminarCliente(${i})">Eliminar</button>
+          </td>
+        `;
+        tabla.appendChild(fila);
+      });
+    }
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const nombre = document.getElementById("nombre").value;
+      const correo = document.getElementById("correo").value;
+      clientes.push({ nombre, correo });
+      renderTablaClientes();
+      form.reset();
+    });
+
+    window.eliminarCliente = function(i) {
+      clientes.splice(i, 1);
+      renderTablaClientes();
+    }
+
+    window.editarCliente = function(i) {
+      const nuevoNombre = prompt("Nuevo nombre:", clientes[i].nombre);
+      const nuevoCorreo = prompt("Nuevo correo:", clientes[i].correo);
+      if (nuevoNombre && nuevoCorreo) {
+        clientes[i] = { nombre: nuevoNombre, correo: nuevoCorreo };
+        renderTablaClientes();
+      }
+    }
+
+    // --- CRUD Despachos ---
+    const despachos = [];
+    const formDespacho = document.getElementById("formDespacho");
+    const tablaDespachos = document.getElementById("tablaDespachos").querySelector("tbody");
+
+    function renderTablaDespachos() {
+      tablaDespachos.innerHTML = "";
+      despachos.forEach((d, i) => {
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+          <td>${d.folio}</td>
+          <td>${d.destino}</td>
+          <td>
+            <button onclick="editarDespacho(${i})">Editar</button>
+            <button onclick="eliminarDespacho(${i})">Eliminar</button>
+          </td>
+        `;
+        tablaDespachos.appendChild(fila);
+      });
+    }
+
+    formDespacho.addEventListener("submit", e => {
+      e.preventDefault();
+      const folio = document.getElementById("folio").value;
+      const destino = document.getElementById("destino").value;
+      despachos.push({ folio, destino });
+      renderTablaDespachos();
+      formDespacho.reset();
+    });
+
+    window.eliminarDespacho = function(i) {
+      despachos.splice(i, 1);
+      renderTablaDespachos();
+    }
+
+    window.editarDespacho = function(i) {
+      const nuevoFolio = prompt("Nuevo folio:", despachos[i].folio);
+      const nuevoDestino = prompt("Nuevo destino:", despachos[i].destino);
+      if (nuevoFolio && nuevoDestino) {
+        despachos[i] = { folio: nuevoFolio, destino: nuevoDestino };
+        renderTablaDespachos();
+      }
+    }
+  </script>
+</body>
+</html>
