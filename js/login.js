@@ -7,115 +7,94 @@
 let tipoAcceso = "";
 
 
-// Seleccionar portal
+// Selección de portal
 
 function seleccionarAcceso(tipo, elemento){
 
-
-tipoAcceso = tipo;
-
-
-// quitar selección anterior
-
-document.querySelectorAll(".acceso-card")
-.forEach(card=>{
-card.classList.remove("seleccionado");
-});
+    // Guardar tipo seleccionado
+    document.getElementById("role").value = tipo;
 
 
-// marcar seleccionado
-
-elemento.classList.add("seleccionado");
-
-
-// ocultar formularios
-
-document.getElementById("loginUsuario").style.display="none";
-
-document.getElementById("loginCliente").style.display="none";
+    // quitar selección anterior
+    document.querySelectorAll(".acceso-card")
+    .forEach(card=>{
+        card.classList.remove("seleccionado");
+    });
 
 
-
-// mostrar formulario correspondiente
-
-
-if(tipo=="usuario"){
-
-document.getElementById("loginUsuario")
-.style.display="block";
-
-document.getElementById("role").value="administrador";
-
-}
+    // marcar seleccionado
+    elemento.classList.add("seleccionado");
 
 
-if(tipo=="cliente"){
+    // ocultar formularios
+    document.getElementById("loginUsuario")
+    .style.display="none";
 
-document.getElementById("loginCliente")
-.style.display="block";
+    document.getElementById("loginCliente")
+    .style.display="none";
 
-document.getElementById("role").value="cliente";
 
-}
+    // mostrar formulario correcto
 
+    if(tipo==="usuario"){
+
+        document.getElementById("loginUsuario")
+        .style.display="block";
+
+    }
+
+
+    if(tipo==="cliente"){
+
+        document.getElementById("loginCliente")
+        .style.display="block";
+
+    }
 
 }
 
 
 
-// Validación login
+// Validación Login
 
 document
 .getElementById("loginForm")
 .addEventListener("submit",function(e){
 
-
 e.preventDefault();
 
 
-let mensaje=document.getElementById("mensajeLogin");
+let tipo=document.getElementById("role").value;
 
 
 
-// ADMINISTRADOR
-
-if(tipoAcceso=="usuario"){
+if(tipo==="usuario"){
 
 
-let correo =
+let correo=
 document.getElementById("email").value;
 
 
-let password =
+let password=
 document.getElementById("passwordUsuario").value;
 
 
 
-// licencia administrativa
+// Licencia administrador
 
 if(
-correo=="admin@gheztorix.com" &&
-password=="123456"
+correo==="admin@gheztorix.com" &&
+password==="123456"
 ){
 
-
-localStorage.setItem(
-"sesion",
-"administrador"
-);
-
-
-window.location.href="dashboard.html";
-
+window.location.href=
+"dashboard_usuario.html";
 
 }
 
 else{
 
-
-mensaje.innerHTML=
-"❌ Licencia administrativa incorrecta";
-
+mensaje("Datos incorrectos de administrador");
 
 }
 
@@ -125,47 +104,34 @@ mensaje.innerHTML=
 
 
 
-// CLIENTE
+if(tipo==="cliente"){
 
 
-else if(tipoAcceso=="cliente"){
+let rfc=
+document.getElementById("rfc").value
+.toUpperCase();
 
 
-let rfc =
-document.getElementById("rfc").value.toUpperCase();
-
-
-let password =
+let password=
 document.getElementById("passwordCliente").value;
 
 
 
-// licencia cliente ejemplo
+// Licencia cliente ejemplo
 
 if(
-rfc=="ABC123456XXX" &&
-password=="123456"
+rfc==="CHE890512HJ4" &&
+password==="123456"
 ){
 
-
-localStorage.setItem(
-"sesion",
-"cliente"
-);
-
-
-
-window.location.href="portal-cliente.html";
-
+window.location.href=
+"dashboard_cliente.html";
 
 }
 
 else{
 
-
-mensaje.innerHTML=
-"❌ RFC o licencia incorrecta";
-
+mensaje("RFC o contraseña incorrectos");
 
 }
 
@@ -174,12 +140,18 @@ mensaje.innerHTML=
 
 
 
-else{
+});
 
 
-mensaje.innerHTML=
-"⚠️ Selecciona un portal";
 
+
+// Mensajes
+
+function mensaje(texto){
+
+document.getElementById("mensajeLogin")
+.innerHTML=
+texto;
 
 }
 
