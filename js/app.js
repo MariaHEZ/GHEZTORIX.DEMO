@@ -155,27 +155,40 @@ function cargarClientes(){
 
         <td>${cliente.telefono}</td>
 
-        <td>
+      <td>
 
-        <button class="btn btn-warning btn-sm me-2"
 
-        onclick="editarCliente(${index})">
+<button class="btn btn-primary btn-sm me-2"
 
-        Editar
+onclick="abrirExpediente(${index})">
 
-        </button>
+<i class="bi bi-folder2-open"></i>
 
-        <button class="btn btn-danger btn-sm"
+Expediente
 
-        onclick="eliminarCliente(${index})">
+</button>
 
-        Eliminar
 
-        </button>
+<button class="btn btn-warning btn-sm me-2"
 
-        </td>
+onclick="editarCliente(${index})">
 
-        </tr>
+Editar
+
+</button>
+
+
+<button class="btn btn-danger btn-sm"
+
+onclick="eliminarCliente(${index})">
+
+Eliminar
+
+</button>
+
+
+</td>
+ </tr>
 
         `;
 
@@ -183,46 +196,6 @@ function cargarClientes(){
 
 }
 
-// =============================
-// ELIMINAR
-// =============================
-
-function eliminarCliente(indice){
-
-    if(confirm("¿Eliminar cliente?")){
-
-        clientes.splice(indice,1);
-
-        localStorage.setItem("clientes",JSON.stringify(clientes));
-
-        cargarClientes();
-
-        actualizarIndicadores();
-
-    }
-
-}
-
-// =============================
-// EDITAR
-// =============================
-
-function editarCliente(indice){
-
-    const c=clientes[indice];
-
-    document.getElementById("rfc").value=c.rfc;
-    document.getElementById("razon").value=c.razon;
-    document.getElementById("correoCliente").value=c.correo;
-    document.getElementById("telefono").value=c.telefono;
-
-    clientes.splice(indice,1);
-
-    localStorage.setItem("clientes",JSON.stringify(clientes));
-
-    mostrarSeccion("nuevoCliente");
-
-}
 
 // =============================
 // BUSCADOR
@@ -257,5 +230,34 @@ document.addEventListener("DOMContentLoaded",()=>{
 function actualizarIndicadores(){
 
     document.getElementById("totalClientes").innerHTML=clientes.length;
+
+}
+
+// =============================
+// ABRIR EXPEDIENTE CLIENTE
+// =============================
+
+function abrirExpediente(index){
+
+    const cliente = clientes[index];
+
+
+    mostrarSeccion("expediente");
+
+
+    document.getElementById("expNombre").innerHTML =
+    cliente.razon;
+
+
+    document.getElementById("expRFC").innerHTML =
+    cliente.rfc;
+
+
+    document.getElementById("expCorreo").innerHTML =
+    cliente.correo;
+
+
+    document.getElementById("expTelefono").innerHTML =
+    cliente.telefono;
 
 }
