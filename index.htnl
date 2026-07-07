@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GHEZTORIX | Sistema Digital</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="contenedor">
+
+
+<div class="marca">
+
+<h1>GHEZTORIX</h1>
+
+<h2>
+Sistema digital para la gestión de despachos
+</h2>
+
+<p>
+Administra clientes, documentos y procesos fiscales
+desde una plataforma segura.
+</p>
+
+</div>
+
+
+
+<div class="login-box">
+
+
+<h3>Acceso al portal</h3>
+
+
+
+<div class="opciones">
+
+
+<button 
+onclick="seleccionarPortal('admin')"
+id="btnAdmin">
+
+Usuario / Administrador
+
+</button>
+
+
+
+<button
+onclick="seleccionarPortal('cliente')"
+id="btnCliente">
+
+Cliente
+
+</button>
+
+
+</div>
+
+
+
+
+<form onsubmit="iniciarSesion(event)">
+
+
+
+<label id="labelUsuario">
+Correo electrónico
+</label>
+
+
+<input 
+type="text"
+id="usuario"
+placeholder="Ingrese correo">
+
+
+
+<label>
+Contraseña
+</label>
+
+
+<input 
+type="password"
+id="password"
+placeholder="Ingrese contraseña">
+
+
+
+<button class="entrar">
+
+Ingresar
+
+</button>
+
+
+
+</form>
+
+
+<p id="mensaje"></p>
+
+
+</div>
+
+
+</div>
+
+
+
+<script src="js/login.js"></script>
+
+</body>
+
+</html>
