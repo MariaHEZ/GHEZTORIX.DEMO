@@ -1,1 +1,375 @@
+/*=================================================
+            GHEZTORIX
+ Sistema Digital para la Gestión de Despachos
+=================================================*/
 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    overflow-x:hidden;
+}
+
+/*=========================
+      LOGIN
+=========================*/
+
+#loginPage{
+
+    width:100%;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    linear-gradient(135deg,#0D47A1,#001B44);
+
+}
+
+.login-box{
+
+    width:420px;
+    background:white;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+    animation:aparecer .7s;
+
+}
+
+@keyframes aparecer{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+.logo{
+
+text-align:center;
+
+margin-bottom:25px;
+
+}
+
+.logo-circle{
+
+width:90px;
+
+height:90px;
+
+background:#0D47A1;
+
+border-radius:50%;
+
+margin:auto;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:40px;
+
+color:#FFD700;
+
+box-shadow:0 5px 20px rgba(0,0,0,.2);
+
+}
+
+.logo h1{
+
+margin-top:15px;
+
+font-weight:bold;
+
+color:#0D47A1;
+
+}
+
+.logo p{
+
+color:#666;
+
+}
+
+.form-control{
+
+height:48px;
+
+}
+
+.btn-primary{
+
+height:48px;
+
+font-size:17px;
+
+font-weight:bold;
+
+border-radius:10px;
+
+}
+
+#mensajeLogin{
+
+margin-top:20px;
+
+text-align:center;
+
+font-weight:bold;
+
+}
+
+/*=========================
+      DASHBOARD
+=========================*/
+
+.sidebar{
+
+background:#0b1b33;
+
+min-height:100vh;
+
+padding:20px;
+
+color:white;
+
+}
+
+.sidebar h3{
+
+font-weight:bold;
+
+color:#FFD700;
+
+}
+
+.menu-btn{
+
+width:100%;
+
+padding:14px;
+
+margin-bottom:10px;
+
+background:none;
+
+border:none;
+
+color:white;
+
+text-align:left;
+
+border-radius:10px;
+
+transition:.3s;
+
+font-size:16px;
+
+}
+
+.menu-btn i{
+
+margin-right:10px;
+
+}
+
+.menu-btn:hover{
+
+background:#1565C0;
+
+}
+
+.salir{
+
+margin-top:30px;
+
+background:#b71c1c;
+
+}
+
+.salir:hover{
+
+background:#8e0000;
+
+}
+
+/*=========================
+      CONTENIDO
+=========================*/
+
+.contenido{
+
+padding:35px;
+
+}
+
+.contenido h2{
+
+font-weight:bold;
+
+color:#0D47A1;
+
+margin-bottom:20px;
+
+}
+
+/*=========================
+      TARJETAS
+=========================*/
+
+.indicador{
+
+padding:25px;
+
+text-align:center;
+
+border:none;
+
+border-radius:18px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+.indicador:hover{
+
+transform:translateY(-5px);
+
+}
+
+.indicador h3{
+
+font-size:45px;
+
+font-weight:bold;
+
+color:#0D47A1;
+
+}
+
+.indicador p{
+
+margin-top:10px;
+
+font-size:18px;
+
+}
+
+/*=========================
+      TABLAS
+=========================*/
+
+table{
+
+background:white;
+
+border-radius:15px;
+
+overflow:hidden;
+
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+thead{
+
+background:#0D47A1;
+
+color:white;
+
+}
+
+table td{
+
+vertical-align:middle;
+
+}
+
+/*=========================
+      FORMULARIOS
+=========================*/
+
+.card{
+
+border:none;
+
+border-radius:15px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+.btn-success{
+
+background:#198754;
+
+border:none;
+
+}
+
+.btn-success:hover{
+
+background:#157347;
+
+}
+
+/*=========================
+      RESPONSIVE
+=========================*/
+
+@media(max-width:992px){
+
+.sidebar{
+
+min-height:auto;
+
+}
+
+.menu-btn{
+
+font-size:15px;
+
+}
+
+.login-box{
+
+width:95%;
+
+}
+
+.contenido{
+
+padding:20px;
+
+}
+
+}
