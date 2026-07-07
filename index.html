@@ -253,13 +253,10 @@ placeholder="Buscar por RFC o Razón Social">
 
 <tr>
 
-<th>Razón Social</th>    
 
 <th>RFC</th>
-
-<th>Regimen Fiscal</th>
-
-<th>Codigo postal</th>    
+    
+<th>Razón Social</th>    
 
 <th>Correo</th>
 
@@ -364,6 +361,15 @@ Guardar Cliente
 📁 Expediente del Cliente
 </h2>
 
+    <button 
+class="btn btn-secondary mb-3"
+onclick="mostrarSeccion('clientes')">
+
+<i class="bi bi-arrow-left"></i>
+
+Regresar a Clientes
+
+</button>
 
 <div class="card p-4 mt-3 expediente-card">
 
@@ -451,8 +457,15 @@ class="form-control"
 placeholder="Notas del cliente">
 </textarea>
 
+<div class="documento">
+
+<i class="bi bi-key"></i>
+
+e.firma
 
 </div>
+
+
 
 
 </section>
