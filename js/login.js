@@ -4,8 +4,7 @@
 // ======================================
 
 
-let tipoSeleccionado = "";
-
+let tipoAcceso = "";
 
 
 // Seleccionar portal
@@ -13,71 +12,58 @@ let tipoSeleccionado = "";
 function seleccionarAcceso(tipo, elemento){
 
 
-    tipoSeleccionado = tipo;
+tipoAcceso = tipo;
 
 
-    // Guardar valor oculto
-    document.getElementById("role").value = tipo;
+// quitar selección anterior
+
+document.querySelectorAll(".acceso-card")
+.forEach(card=>{
+card.classList.remove("seleccionado");
+});
 
 
+// marcar seleccionado
 
-    // quitar selección anterior
-
-    document
-    .querySelectorAll(".acceso-card")
-    .forEach(card=>{
-
-        card.classList.remove("seleccionado");
-
-    });
+elemento.classList.add("seleccionado");
 
 
+// ocultar formularios
 
-    // activar tarjeta seleccionada
+document.getElementById("loginUsuario").style.display="none";
 
-    elemento.classList.add("seleccionado");
-
-
-
-    // Mostrar formulario correspondiente
-
-
-    if(tipo==="usuario"){
-
-
-        document.getElementById("loginUsuario")
-        .style.display="block";
-
-
-        document.getElementById("loginCliente")
-        .style.display="none";
-
-
-    }
+document.getElementById("loginCliente").style.display="none";
 
 
 
-
-    if(tipo==="cliente"){
-
-
-        document.getElementById("loginUsuario")
-        .style.display="none";
+// mostrar formulario correspondiente
 
 
-        document.getElementById("loginCliente")
-        .style.display="block";
+if(tipo=="usuario"){
+
+document.getElementById("loginUsuario")
+.style.display="block";
+
+document.getElementById("role").value="administrador";
+
+}
 
 
-    }
+if(tipo=="cliente"){
+
+document.getElementById("loginCliente")
+.style.display="block";
+
+document.getElementById("role").value="cliente";
+
+}
 
 
 }
 
 
 
-
-// LOGIN
+// Validación login
 
 document
 .getElementById("loginForm")
@@ -87,20 +73,13 @@ document
 e.preventDefault();
 
 
-
-let mensaje =
-document.getElementById("mensajeLogin");
+let mensaje=document.getElementById("mensajeLogin");
 
 
 
+// ADMINISTRADOR
 
-
-// =============================
-// PORTAL ADMINISTRADOR
-// =============================
-
-
-if(tipoSeleccionado==="usuario"){
+if(tipoAcceso=="usuario"){
 
 
 let correo =
@@ -112,31 +91,21 @@ document.getElementById("passwordUsuario").value;
 
 
 
-// LICENCIA ADMINISTRADOR
+// licencia administrativa
 
 if(
-correo==="admin@gheztorix.com"
-&&
-password==="123456"
+correo=="admin@gheztorix.com" &&
+password=="123456"
 ){
 
 
 localStorage.setItem(
-"usuarioActivo",
-JSON.stringify({
-
-nombre:"Administrador",
-
-tipo:"usuario"
-
-})
-
+"sesion",
+"administrador"
 );
 
 
-
-window.location.href=
-"dashboard_usuario.html";
+window.location.href="dashboard.html";
 
 
 }
@@ -156,77 +125,37 @@ mensaje.innerHTML=
 
 
 
+// CLIENTE
 
 
-
-// =============================
-// PORTAL CLIENTE
-// =============================
-
-
-else if(tipoSeleccionado==="cliente"){
-
+else if(tipoAcceso=="cliente"){
 
 
 let rfc =
-document
-.getElementById("rfc")
-.value
-.toUpperCase();
-
+document.getElementById("rfc").value.toUpperCase();
 
 
 let password =
-document
-.getElementById("passwordCliente")
-.value;
+document.getElementById("passwordCliente").value;
 
 
 
+// licencia cliente ejemplo
 
-
-// Buscar clientes registrados
-
-let clientes =
-JSON.parse(
-localStorage.getItem("clientes")
-)
-|| [];
-
-
-
-
-
-let cliente =
-clientes.find(c =>
-
-c.rfc.toUpperCase()===rfc
-&&
-c.password===password
-
-);
-
-
-
-
-
-if(cliente){
-
+if(
+rfc=="ABC123456XXX" &&
+password=="123456"
+){
 
 
 localStorage.setItem(
-
-"clienteActivo",
-
-JSON.stringify(cliente)
-
+"sesion",
+"cliente"
 );
 
 
 
-window.location.href=
-"dashboard_cliente.html";
-
+window.location.href="portal-cliente.html";
 
 
 }
@@ -235,16 +164,13 @@ else{
 
 
 mensaje.innerHTML=
-"❌ RFC o contraseña incorrectos";
+"❌ RFC o licencia incorrecta";
 
 
 }
 
 
-
 }
-
-
 
 
 
@@ -252,11 +178,10 @@ else{
 
 
 mensaje.innerHTML=
-"⚠ Selecciona un portal";
+"⚠️ Selecciona un portal";
 
 
 }
-
 
 
 });
