@@ -1,14 +1,33 @@
-let tipoPortal="";
+let tipoPortal = "";
 
 
+// seleccionar portal
 
 function seleccionarPortal(tipo){
 
-tipoPortal=tipo;
+
+tipoPortal = tipo;
+
+
+// marcar selección visual
+
+document.querySelectorAll(".acceso-card")
+.forEach(card=>{
+
+card.classList.remove("seleccionado");
+
+});
+
+
+event.currentTarget.classList.add("seleccionado");
+
+
 
 mostrarFormulario();
 
+
 }
+
 
 
 
@@ -25,31 +44,32 @@ if(tipoPortal==="admin"){
 
 formulario.innerHTML=`
 
-<h2>
-Portal Administrativo
-</h2>
+<h3>
+Acceso Administrativo
+</h3>
 
 
 <input 
 id="correo"
-placeholder="Correo electrónico">
+type="email"
+placeholder="Correo administrativo">
 
 
-<input 
+<input
 id="password"
 type="password"
 placeholder="Contraseña">
 
 
 <button onclick="ingresar()">
-
-Entrar
-
+Ingresar
 </button>
 
 `;
 
+
 }
+
 
 
 
@@ -58,31 +78,30 @@ if(tipoPortal==="cliente"){
 
 formulario.innerHTML=`
 
-<h2>
-Portal Cliente
-</h2>
+<h3>
+Acceso Cliente
+</h3>
 
 
-<input 
+<input
 id="rfc"
 placeholder="RFC">
 
 
-<input 
+<input
 id="password"
 type="password"
 placeholder="Contraseña">
 
 
 <button onclick="ingresar()">
-
-Entrar
-
+Ingresar
 </button>
 
 `;
 
 }
+
 
 
 }
@@ -93,6 +112,8 @@ Entrar
 function ingresar(){
 
 
+
+// ADMIN
 
 if(tipoPortal==="admin"){
 
@@ -106,31 +127,22 @@ document.getElementById("password").value;
 
 
 
-let admin =
-administradores.find(a=>
-
-a.correo===correo
+if(
+correo==="admin@gheztorix.com"
 &&
-a.password===password
+password==="123456"
 
-);
-
-
-
-if(admin){
+){
 
 
 localStorage.setItem(
-
-"usuarioActivo",
-
-JSON.stringify(admin)
-
+"rol",
+"admin"
 );
 
 
 
-location.href=
+window.location.href =
 "dashboard-admin.html";
 
 
@@ -138,17 +150,22 @@ location.href=
 
 else{
 
+
 alert(
 "Correo o contraseña incorrectos"
 );
 
-}
-
 
 }
 
 
+}
 
+
+
+
+
+// CLIENTE
 
 if(tipoPortal==="cliente"){
 
@@ -186,16 +203,13 @@ if(cliente){
 
 
 localStorage.setItem(
-
 "clienteActivo",
-
 JSON.stringify(cliente)
-
 );
 
 
 
-location.href=
+window.location.href =
 "dashboard-cliente.html";
 
 
@@ -213,6 +227,7 @@ alert(
 
 
 }
+
 
 
 }
