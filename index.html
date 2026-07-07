@@ -32,32 +32,43 @@ Sistema Digital Para La Gestión De Despachos
 </div>
 
 
+<h3>
+Selecciona tu portal
+</h3>
+
+
 
 <div class="tipo-acceso">
 
 
 <div class="acceso-card"
-onclick="location.href='login-admin.html'">
+onclick="abrirAdministrador()">
 
 
 <div class="icono-acceso">
-👨‍💼
+🔐
 </div>
 
 
 <h3>
-Administrador
+Portal Administrativo
 </h3>
 
 
 <p>
-Acceso interno
+Administrador
 </p>
 
 
 <span>
-Gestión completa del sistema
+Gestión de clientes,
+documentos y reportes
 </span>
+
+
+<button>
+Ingresar
+</button>
 
 
 </div>
@@ -66,30 +77,35 @@ Gestión completa del sistema
 
 
 <div class="acceso-card"
-onclick="location.href='login-cliente.html'">
+onclick="abrirCliente()">
+
 
 
 <div class="icono-acceso">
+
 👤
+
 </div>
 
 
 <h3>
-Cliente
+Portal Cliente
 </h3>
 
 
 <p>
-Portal cliente
+Cliente registrado
 </p>
 
 
 <span>
-Consulta documentos fiscales
+Consulta documentos y obligaciones
 </span>
 
 
-</div>
+<button>
+Ingresar
+</button>
 
 
 </div>
@@ -99,6 +115,13 @@ Consulta documentos fiscales
 
 
 </div>
+
+
+</div>
+
+
+
+<script src="js/acceso.js"></script>
 
 
 </body>
